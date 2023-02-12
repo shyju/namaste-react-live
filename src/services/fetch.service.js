@@ -2,6 +2,20 @@ import * as _ from 'lodash';
 
 const BASE_URL = process.env.BASE_URL;
 
+
+export const getRestaurants = async() => {
+    const data = await fetch(`${BASE_URL}allRestraunts`);
+    const json = await data.json();
+    const restaurantList = json.restaurants;
+    return restaurantList;
+}
+
+export const getRestaurantById =  async(id) => {
+    const data = await fetch(`${BASE_URL}restraunt/${id}/getRestraunt`);
+    const json = await data.json();
+    return json.restaurants_by_pk;
+}
+
 export const getCartItems = async() => {
     const response = await fetch(`${BASE_URL}getCartItems`);
     const {cart} =  await response.json();
@@ -18,12 +32,12 @@ export const getCartItems = async() => {
 }
 
 export const getAddresses = async(userId) => {
-    const response = await fetch(`http://localhost:8080/api/rest/user/${userId}/getAddresses`);
+    const response = await fetch(`${BASE_URL}user/${userId}/getAddresses`);
     return await response.json();
 }
 
 export const addToCart = async(payload) => {
-    const response = await fetch('http://localhost:8080/api/rest/addToCart', {
+    const response = await fetch('${BASE_URL}addToCart', {
         method: 'POST',
         body: JSON.stringify(payload)
     });

@@ -9,6 +9,7 @@ import { Widget } from "../Widget/Widget";
 import {MiniCart} from '../MiniCart/MiniCart';
 import { useDispatch, useSelector } from "react-redux";
 import { updateRestrauntDetails } from "../../redux/restrauntSlice";
+import { getRestaurantById } from "../../services/fetch.service";
 
 export const RestrauntMenu = () => {
 
@@ -42,11 +43,8 @@ export const RestrauntMenu = () => {
       }, []);
 
     async function getRestrauntDetails() {
-        // const data = await fetch("https://www.swiggy.com/dapi/menu/v4/full?lat=9.1397975&lng=76.49679189999999&menuId=" + id);
-        const data = await fetch(`http://localhost:8080/api/rest/restraunt/${id}/getRestraunt`);
-        const json = await data.json();
-        console.log(json.restaurants_by_pk);
-        dispatch(updateRestrauntDetails(json.restaurants_by_pk));
+        const restaurant = await getRestaurantById(id);
+        dispatch(updateRestrauntDetails(restaurant));
     }
 
     const onWidgetClicked = (index) => {

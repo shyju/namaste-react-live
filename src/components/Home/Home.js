@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as _ from 'lodash';
 import { Shimmer } from '../Shimmer/Shimmer';
 import { updateRestrauntList } from '../../redux/restrauntSlice';
+import { getRestaurants } from '../../services/fetch.service';
 
 const filterData = (searchText, restaurants) => restaurants.filter((restraunt) => restraunt?.data?.name.includes(searchText));
 
@@ -17,16 +18,11 @@ export const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getRestraunts();
+        getAllRestraunts();
     }, []);
 
-    async function getRestraunts() {
-        const data = await fetch("http://localhost:8080/api/rest/allRestraunts");
-        const json = await data.json();
-        const restaurantList = json.restaurants;
-        // const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=8.579181&lng=76.877685&page_type=DESKTOP_WEB_LISTING");
-        // const json = await data.json();
-        // const restrauntList = json?.data.cards[2]?.data?.data?.cards;
+    async function getAllRestraunts() {
+        const restaurantList = await getRestaurants();
         setFilteredRestraunts(restaurantList);
         dispatch(updateRestrauntList(restaurantList));
     }
