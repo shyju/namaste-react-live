@@ -49,7 +49,8 @@ export const getAddresses = async(userId) => {
     const response = await fetch(`${BASE_URL}user/${userId}/getAddresses`, {
         headers: {
             'content-type': 'application/json',
-            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'x-hasura-user-id': '0612f2b7-e254-4255-baed-c4cc34590564'
         }
     });
     return await response.json();
