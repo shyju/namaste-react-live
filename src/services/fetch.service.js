@@ -50,7 +50,7 @@ export const getAddresses = async(userId) => {
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
-            'x-hasura-user-id': '0612f2b7-e254-4255-baed-c4cc34590564'
+            'x-hasura-user-id': process.env.HASURA_USER_ID
         }
     });
     return await response.json();
