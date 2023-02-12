@@ -59,7 +59,11 @@ export const getAddresses = async(userId) => {
 export const addMenuItemToCart = async(payload) => {
     const response = await fetch(`${BASE_URL}addToCart`, {
         method: 'POST',
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
+        }
     });
     return await response.json();
 }

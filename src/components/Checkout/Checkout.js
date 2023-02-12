@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 
 export const Checkout = () => {
 
+    const userId = process.env.HASURA_USER_ID;
     const [nocdOpted, setNocdOpted] = useState(false);
     const cartItems = useSelector(store => store.cart.items);
     const itemTotal = _
@@ -29,7 +30,7 @@ export const Checkout = () => {
     },[])
 
     const getMyAddress = async() => {
-        const response = await getAddresses("0612f2b7-e254-4255-baed-c4cc34590564");
+        const response = await getAddresses(userId);
         dispatch(populateAddress(response.addresses));
     }
     return (
