@@ -1,0 +1,11 @@
+table:
+  name: cuisines
+  schema: public
+array_relationships:
+  - name: restraunt_cuisines
+    using:
+      foreign_key_constraint_on:
+        column: cuisine_id
+        table:
+          name: restraunt_cuisine
+          schema: public

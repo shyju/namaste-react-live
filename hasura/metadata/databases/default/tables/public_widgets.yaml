@@ -1,0 +1,18 @@
+table:
+  name: widgets
+  schema: public
+array_relationships:
+  - name: restaurant_widgets
+    using:
+      foreign_key_constraint_on:
+        column: widget_id
+        table:
+          name: restaurant_widget
+          schema: public
+  - name: widget_menus
+    using:
+      foreign_key_constraint_on:
+        column: widget_id
+        table:
+          name: widget_menu
+          schema: public

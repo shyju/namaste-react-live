@@ -1,0 +1,32 @@
+table:
+  name: restaurants
+  schema: public
+array_relationships:
+  - name: restaurant_menus
+    using:
+      foreign_key_constraint_on:
+        column: restaurant_id
+        table:
+          name: restaurant_menu
+          schema: public
+  - name: restaurant_offers
+    using:
+      foreign_key_constraint_on:
+        column: restaurant_id
+        table:
+          name: restaurant_offer
+          schema: public
+  - name: restaurant_widgets
+    using:
+      foreign_key_constraint_on:
+        column: restaurant_id
+        table:
+          name: restaurant_widget
+          schema: public
+  - name: restraunt_cuisines
+    using:
+      foreign_key_constraint_on:
+        column: restaurant_id
+        table:
+          name: restraunt_cuisine
+          schema: public

@@ -1,0 +1,10 @@
+table:
+  name: restaurant_widget
+  schema: public
+object_relationships:
+  - name: restaurant
+    using:
+      foreign_key_constraint_on: restaurant_id
+  - name: widget
+    using:
+      foreign_key_constraint_on: widget_id

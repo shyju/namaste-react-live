@@ -1,0 +1,10 @@
+table:
+  name: restraunt_cuisine
+  schema: public
+object_relationships:
+  - name: cuisine
+    using:
+      foreign_key_constraint_on: cuisine_id
+  - name: restaurant
+    using:
+      foreign_key_constraint_on: restaurant_id

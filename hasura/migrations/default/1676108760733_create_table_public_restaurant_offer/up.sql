@@ -1,0 +1,2 @@
+CREATE TABLE "public"."restaurant_offer" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "offer_id" uuid NOT NULL, "restaurant_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("offer_id") REFERENCES "public"."offers"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("restaurant_id") REFERENCES "public"."restaurants"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

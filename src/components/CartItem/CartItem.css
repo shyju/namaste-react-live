@@ -1,0 +1,27 @@
+.cart-list {
+    display: flex;
+    justify-content: space-between;
+    /* margin: 30px 0; */
+    margin: 5px;
+    padding: 15px;
+}
+
+.cart-list > div:first-child {
+    display: flex;
+    flex-grow: 1;
+    /* margin-right: 55px; */
+    max-width: 155px;
+}
+.cart-list > .quantity {
+    /* flex-grow: 1; */
+    width: 40px;
+    text-align: center;
+}
+.cart-list > div > img {
+    height: 15px;
+    margin-right: 5px;
+}
+.cart-list > div > span {
+    max-width: 150px;
+    text-overflow: ellipsis;
+}

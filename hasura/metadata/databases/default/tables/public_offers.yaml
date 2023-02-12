@@ -1,0 +1,11 @@
+table:
+  name: offers
+  schema: public
+array_relationships:
+  - name: restaurant_offers
+    using:
+      foreign_key_constraint_on:
+        column: offer_id
+        table:
+          name: restaurant_offer
+          schema: public

@@ -1,0 +1,137 @@
+- name: allowed-queries
+  definition:
+    queries:
+      - name: getRestraunts
+        query: |
+          query getRestraunts {
+            restaurants {
+              id
+              image_id
+              name
+              rating
+              price
+              delivery_time
+              veg
+              promoted
+              restraunt_cuisines {
+                cuisine {
+                  name
+                }
+              }
+            }
+          }
+      - name: getRestraunt
+        query: |
+          query getRestraunt ($id: uuid!) {
+            restaurants_by_pk(id: $id) {
+              id
+              image_id
+              name
+              area
+              rating
+              price
+              delivery_time
+              veg
+              promoted
+              total_rating
+              restraunt_cuisines {
+                cuisine {
+                  name
+                }
+              }
+              restaurant_menus {
+                menu {
+                  id
+                  name
+                  image_id
+                  price
+                  veg
+                }
+              }
+              restaurant_offers {
+                offer {
+                  id
+                  description
+                  coupon_code
+                }
+              }
+              restaurant_widgets {
+                widget {
+                  id
+                  name
+                  widget_menus {
+                    menu {
+                      image_id
+                      name
+                      price
+                      veg
+                    }
+                    id
+                  }
+                }
+              }
+            }
+          }
+      - name: getCartItems
+        query: |
+          query getCartItems {
+            cart {
+              id
+              menu {
+                name
+                id
+                image_id
+                veg
+              }
+              price
+              quantity
+              total
+            }
+          }
+      - name: updateCartById
+        query: |
+          mutation updateCartById ($id: uuid!, $quantity: Int!, $total: float8!) {
+            update_cart_by_pk(pk_columns: {id:$id}, _set: {quantity:$quantity,total:$total}) {
+              id
+              quantity
+              total
+            }
+          }
+      - name: addToCart
+        query: |
+          mutation addToCart ($user_id: uuid!, $menu_id: uuid!, $quantity: Int!, $price: float8!, $total: float8!) {
+            insert_cart(objects: [{user_id:$user_id,menu_id:$menu_id,quantity:$quantity,price:$price,total:$total}]) {
+              returning {
+                id
+                menu {
+                  name
+                  id
+                  image_id
+                  veg
+                }
+                price
+                quantity
+                total
+              }
+            }
+          }
+      - name: deleteCartById
+        query: |
+          mutation deleteCartById ($id: uuid!) {
+            delete_cart_by_pk(id: $id) {
+              id
+            }
+          }
+      - name: getAddresses
+        query: |
+          query getAddresses ($userId: uuid) {
+            addresses(where: {user_id:{_eq:$userId}}) {
+              address_line_1
+              address_line_2
+              city
+              id
+              pincode
+              primary
+              state
+            }
+          }

@@ -1,0 +1,31 @@
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 210px;
+}
+.nav-items > ul {
+    list-style-type:none;
+    display: flex;
+    /* justify-content: space-between; */
+    /* margin-right: 300px; */
+    flex: 1;
+    height: 100%;
+    align-items: center;
+}
+
+.nav-items > ul > li {
+    margin-left: 50px;
+    color: #3d4152;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.nav-items > ul > li:hover {
+    color: #fc8019;
+}
+
+.logo {
+    width: 100px;
+}

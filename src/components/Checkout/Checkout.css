@@ -1,0 +1,37 @@
+.restraunt-info {
+    display: flex;
+    padding: 20px;
+}
+
+.restraunt-info > img {
+    height: 50px;
+}
+
+.restraunt-info > div {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    padding: 0 10px;
+}
+
+.restraunt-info > div::after {
+    content: "";
+    position: relative;
+    left: 0;
+    bottom: 0;
+    background: #282c3f;
+    width: 40px;
+    height: 2px;
+
+}
+
+.restraunt-info > div > span {
+    font-size: 18px;
+    font-weight: bold;
+}
+.restraunt-info > div > span:last-child {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: .7;
+    padding-bottom: 10px;
+}
