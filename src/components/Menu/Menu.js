@@ -10,7 +10,7 @@ import { addMenuItemToCart, deleteCartById, getCartItems, updateCartById } from 
 
 export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
 
-    
+    const userId = process.env.HASURA_USER_ID;
     const cartItems = useSelector(store => store.cart.items);
     const { quantity, id: cartId } = _.find(cartItems, { menu_id: id }) ?? {quantity: 0};
     const {name: restrauntName, area, image_id: restaurant_image_id} = useSelector(store => store.restraunt.restrauntDetails);
@@ -43,7 +43,7 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
             // cartDetail = {id, veg ,name, quantity, price}
             // dispatch(addItem(cartItems?.length ? [...cartItems, cartDetail] : [cartDetail]));
             const payload = {
-                user_id: '0612f2b7-e254-4255-baed-c4cc34590564',
+                user_id: userId,
                 menu_id: id,
                 quantity,
                 price,
