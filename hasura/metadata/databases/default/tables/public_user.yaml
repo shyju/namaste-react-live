@@ -2,6 +2,13 @@ table:
   name: user
   schema: public
 array_relationships:
+  - name: addresses
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: addresses
+          schema: public
   - name: carts
     using:
       foreign_key_constraint_on:
