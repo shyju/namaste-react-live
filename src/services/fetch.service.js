@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-const BASE_URL = 'http://localhost:8080/api/rest/';
+const BASE_URL = process.env.BASE_URL;
 
 export const getCartItems = async() => {
     const response = await fetch(`${BASE_URL}getCartItems`);
