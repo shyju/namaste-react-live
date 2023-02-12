@@ -56,8 +56,8 @@ export const getAddresses = async(userId) => {
     return await response.json();
 }
 
-export const addToCart = async(payload) => {
-    const response = await fetch('${BASE_URL}addToCart', {
+export const addMenuItemToCart = async(payload) => {
+    const response = await fetch(`${BASE_URL}addToCart`, {
         method: 'POST',
         body: JSON.stringify(payload)
     });

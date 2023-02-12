@@ -698,6 +698,7 @@ a {
 .checkout-right-section > .top-section {
     min-height: 500px;
     margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .checkout-right-section > .bottom-section {

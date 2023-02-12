@@ -6,7 +6,7 @@ import VegLogo from '../../assets/img/veg.png'
 import NonVegLogo from '../../assets/img/non-veg.png'
 import {IMG_CDN_URL} from '../../constants';
 import { addItem, populateCart, updateItem, updateRestrauntInfo } from '../../redux/cartSlice';
-import { deleteCartById, getCartItems, updateCartById } from '../../services/fetch.service';
+import { addMenuItemToCart, deleteCartById, getCartItems, updateCartById } from '../../services/fetch.service';
 
 export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
 
@@ -50,7 +50,7 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
                 total: (price / 100) * quantity
             }  
 
-            const response = await addToCart(payload);
+            const response = await addMenuItemToCart(payload);
             const newCartList = await getCartItems();
             dispatch(populateCart(newCartList));
         } else {
