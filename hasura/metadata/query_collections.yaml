@@ -72,22 +72,6 @@
               }
             }
           }
-      - name: getCartItems
-        query: |
-          query getCartItems {
-            cart {
-              id
-              menu {
-                name
-                id
-                image_id
-                veg
-              }
-              price
-              quantity
-              total
-            }
-          }
       - name: updateCartById
         query: |
           mutation updateCartById ($id: uuid!, $quantity: Int!, $total: float8!) {
@@ -95,24 +79,6 @@
               id
               quantity
               total
-            }
-          }
-      - name: addToCart
-        query: |
-          mutation addToCart ($user_id: uuid!, $menu_id: uuid!, $quantity: Int!, $price: float8!, $total: float8!) {
-            insert_cart(objects: [{user_id:$user_id,menu_id:$menu_id,quantity:$quantity,price:$price,total:$total}]) {
-              returning {
-                id
-                menu {
-                  name
-                  id
-                  image_id
-                  veg
-                }
-                price
-                quantity
-                total
-              }
             }
           }
       - name: deleteCartById
@@ -133,5 +99,42 @@
               pincode
               primary
               state
+            }
+          }
+      - name: addToCart
+        query: |
+          mutation addToCart ($user_id: uuid!, $menu_id: uuid!, $restaurant_id: uuid!, $restaurant_name: String!, $restaurant_image_id: String!, $quantity: Int!, $price: float8!, $total: float8!) {
+            insert_cart(objects: [{user_id:$user_id,menu_id:$menu_id,restaurant_id:$restaurant_id,restaurant_name:$restaurant_name,restaurant_image_id:$restaurant_image_id,quantity:$quantity,price:$price,total:$total}]) {
+              returning {
+                id
+                menu {
+                  name
+                  id
+                  image_id
+                  veg
+                }
+                price
+                quantity
+                total
+              }
+            }
+          }
+      - name: getCartItems
+        query: |
+          query getCartItems {
+            cart {
+              id
+              restaurant_id
+              restaurant_name
+              restaurant_image_id
+              menu {
+                name
+                id
+                image_id
+                veg
+              }
+              price
+              quantity
+              total
             }
           }

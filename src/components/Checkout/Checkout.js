@@ -22,7 +22,7 @@ export const Checkout = () => {
         .sum()
         .value();
     const grandTotal = itemTotal + 33 + 11.45
-    const {name, area, restrauntImageId} = useSelector(store => store.cart.restraunt);
+    const {name, area, restaurantImageId} = useSelector(store => store.cart.restraunt);
     const {addresses} = useSelector(store => store.address);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -78,7 +78,7 @@ export const Checkout = () => {
             <div className="checkout-right-section">
                 <div className='top-section'>
                     <div className='restraunt-info'>
-                        <img src={IMG_CDN_URL + restrauntImageId}></img>
+                        <img src={IMG_CDN_URL + restaurantImageId}></img>
                         <div>
                             <span>{name}</span>
                             <span>{area}</span>

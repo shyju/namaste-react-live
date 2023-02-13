@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import VegLogo from '../../assets/img/veg.png'
 import NonVegLogo from '../../assets/img/non-veg.png'
 import {IMG_CDN_URL} from '../../constants';
-import { addItem, populateCart, updateItem, updateRestrauntInfo } from '../../redux/cartSlice';
+import { addItem, populateCart, populateRestaurant, updateItem, updateRestrauntInfo } from '../../redux/cartSlice';
 import { addMenuItemToCart, deleteCartById, getCartItems, updateCartById } from '../../services/fetch.service';
 
 export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
@@ -13,7 +13,7 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
     const userId = process.env.HASURA_USER_ID;
     const cartItems = useSelector(store => store.cart.items);
     const { quantity, id: cartId } = _.find(cartItems, { menu_id: id }) ?? {quantity: 0};
-    const {name: restrauntName, area, image_id: restaurant_image_id} = useSelector(store => store.restraunt.restrauntDetails);
+    const {id: restaurant_id, name: restaurant_name, area, image_id: restaurant_image_id} = useSelector(store => store.restraunt.restrauntDetails);
     const dispatch = useDispatch();
     
 
@@ -45,14 +45,18 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
             const payload = {
                 user_id: userId,
                 menu_id: id,
+                restaurant_id,
+                restaurant_name,
+                restaurant_image_id,
                 quantity,
                 price,
                 total: (price / 100) * quantity
             }  
 
             const response = await addMenuItemToCart(payload);
-            const newCartList = await getCartItems();
-            dispatch(populateCart(newCartList));
+            const {restaurant, cart} = await getCartItems();
+            dispatch(populateCart(cart));
+            dispatch(populateRestaurant(restaurant));
         } else {
             const payload = {
                 quantity,
@@ -62,8 +66,9 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
             const response =  quantity === 0 
                 ? await deleteCartById(cartId)
                 : await updateCartById(cartId, payload)
-            const newCartList = await getCartItems();
-            dispatch(populateCart(newCartList));   
+            const {restaurant, cart} = await getCartItems();
+            dispatch(populateCart(cart));
+            dispatch(populateRestaurant(restaurant));
         }
     }
 

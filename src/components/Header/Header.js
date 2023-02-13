@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 
 import Logo from '../../assets/img/foodvilla.png'
 import './Header.css'
-import { populateCart } from '../../redux/cartSlice';
+import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getCartItems} from '../../services/fetch.service';
 
 const Title = () => (
@@ -28,8 +28,9 @@ export const HeaderComponent = ({name}) => {
     }, []);
 
     const getCartList = async () => {
-        const cart = await getCartItems();
+        const {restaurant, cart} = await getCartItems();
         dispatch(populateCart(cart));
+        dispatch(populateRestaurant(restaurant));
     }
    return (
     <div className="header">

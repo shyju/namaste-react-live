@@ -33,7 +33,9 @@ export const getCartItems = async() => {
         }
     });
     const {cart} =  await response.json();
-    return _.map(cart, ({id, price, quantity, total, menu}) => ({
+    const {restaurant_id, restaurant_name, restaurant_image_id} = cart.length && _.head(cart);
+
+    const cartItems = _.map(cart, ({id, price, quantity, total, menu}) => ({
             id,
             price,
             quantity,
@@ -43,6 +45,15 @@ export const getCartItems = async() => {
             image_id: menu.image_id,
             veg: menu.veg
         }));
+
+    return {
+        cart: cartItems,
+        restaurant: {
+            id: restaurant_id,
+            name: restaurant_name,
+            restaurantImageId: restaurant_image_id
+        },
+    }
 }
 
 export const getAddresses = async(userId) => {
