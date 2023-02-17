@@ -1,3 +1,160 @@
+.checkout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100vw;
+    background-color: #e9ecee;
+}
+.checkout {
+    /* max-width: 1400px;
+    min-width: 1400px; */
+    position: relative;
+    margin: 0 210px;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 31px;
+    margin-bottom: 150px;
+}
+.checkout-left-section {
+    /* margin-right: 40px; */
+    /* max-width: 1400px;
+    min-width: 1000px; */
+    flex: 1;
+    position: relative;
+    /* background-color: #fff; */
+    /* margin-left: 25px; */
+    /* width: 60%; */
+}
+
+.checkout-right-section {
+    /* margin-right: 172px; */
+    width: 400px;
+    margin-left: 40px;
+    margin-right: -10px;
+}
+
+.checkout-left-section:hover {
+    position: relative;
+}
+
+.address-section {
+    padding: 35px 40px 39px;
+    background-color: #fff;
+}
+
+.payment-section {
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 35px 60px 39px;
+}
+
+.payment-section > span {
+    color: #93959f;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.address-header {
+    margin-left: 20px;
+    margin-bottom: 40px;   
+    font-size: 24px; 
+}
+
+.address-header > span {
+    display: block;
+    font-size: 20px;
+    color: #7e808c;
+    font-weight: 400;
+    margin-bottom: 36px;
+    margin-top: -10px;
+}
+
+.address-list {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 20px;
+}
+
+.address, .add-new-address {
+    min-width: 200px;
+}
+
+.address:hover, .add-new-address:hover {
+    box-shadow: 0 2px 8px #d4d5d9;
+}
+
+.address, .add-new-address {
+    display: flex;
+    border: 3px solid #e9e9eb;
+    padding: 30px 20px;
+    margin: 0 20px;
+}
+
+.address > .icon > img, .add-new-address > .icon > img {
+    margin-top: 25px;
+    margin-right: 20px;
+    width: 20px;
+}
+
+
+.address > .description, .add-new-address > .description {
+    display: flex;
+    flex-direction: column;
+}
+
+.address > .description > button , .add-new-address > .description > button{
+    /* margin-top: 40px; */
+    background: #60b246;
+    width: 150px;
+    padding: 9px 0;
+    color: #fff;
+    height: 40px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.add-new-address > .description > button {
+    border: 1px solid #60b246;
+    color: #60b246;
+    background: #fff;
+    margin-top: 20px;
+}
+
+.address > .description > .address-info , .add-new-address > .description > .address-info{
+    color: #93959f;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 16px;
+    height: 54px;
+    overflow: hidden;
+    /* margin-bottom: 8px; */
+}
+
+.address > .description > .delivery-time {
+    font-size: 14px;
+    color: #282c3f;
+    font-weight: bold;
+}
+
+.checkout-right-section > .top-section {
+    min-height: 500px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.checkout-right-section > .bottom-section {
+    min-height: 200px;
+}
+.checkout-right-section > .top-section, .checkout-right-section > .bottom-section {
+    background-color: #fff;
+    /* height: 1200px; */
+}
+
 .restraunt-info {
     display: flex;
     padding: 20px;
@@ -141,6 +298,13 @@
     width: fit-content;
     font-weight: 600;
     padding: 10px 0;
+}
+
+.empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
 }
 
 

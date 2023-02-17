@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import EmptyCart from '../../assets/img/EmptyCart.jpeg';
 import { CartItem } from '../CartItem/CartItem';
+import StripeCheckout from 'react-stripe-checkout';
 
 export const MiniCart = ({name}) => {
 
@@ -17,6 +18,15 @@ export const MiniCart = ({name}) => {
         }, 0)
         setSubTotal(calculatedTotal.toFixed(2));
     }, [cartItems])
+
+    const onToken = token => {
+        fetch('http://localhost:4242/payment', {
+            method: 'POST',
+            body: JSON.stringify(token)
+        }).then((response) => {
+            console.log(response);
+        }).catch(err => console.log(err));
+    }
     return (
         <>
             <div className="mini-cart">
@@ -45,6 +55,15 @@ export const MiniCart = ({name}) => {
                             </div>
                             <div className='cart-footer'>
                                 <span>Extra charges may apply</span>
+                                {/* <StripeCheckout 
+                                token={onToken} 
+                                stripeKey={process.env.STRIPE_PUBLIC_KEY} 
+                                amount={1000}
+                                name="Example Company"
+                                description="Example Product"
+                                currency="USD">
+                                    <button className="checkout-btn">Checkout</button>
+                                </StripeCheckout> */}
                                 <button className="checkout-btn">
                                     <Link to="/checkout" className='text-link'>Checkout</Link>
                                 </button>

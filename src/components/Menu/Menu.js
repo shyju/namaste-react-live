@@ -1,15 +1,15 @@
 import * as _ from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {toast, ToastContainer} from 'react-toastify';
 
 import VegLogo from '../../assets/img/veg.png'
 import NonVegLogo from '../../assets/img/non-veg.png'
 import {IMG_CDN_URL} from '../../constants';
-import { addItem, populateCart, populateRestaurant, updateItem, updateRestrauntInfo } from '../../redux/cartSlice';
+import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import { addMenuItemToCart, deleteCartById, getCartItems, updateCartById } from '../../services/fetch.service';
 
 export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
-
     const userId = process.env.HASURA_USER_ID;
     const cartItems = useSelector(store => store.cart.items);
     const { quantity, id: cartId } = _.find(cartItems, { menu_id: id }) ?? {quantity: 0};
@@ -54,6 +54,7 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
             }  
 
             const response = await addMenuItemToCart(payload);
+            // toast.success('Menu added to cart')
             const {restaurant, cart} = await getCartItems();
             dispatch(populateCart(cart));
             dispatch(populateRestaurant(restaurant));
@@ -66,6 +67,7 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
             const response =  quantity === 0 
                 ? await deleteCartById(cartId)
                 : await updateCartById(cartId, payload)
+                // toast.success('Cart Updated')
             const {restaurant, cart} = await getCartItems();
             dispatch(populateCart(cart));
             dispatch(populateRestaurant(restaurant));
@@ -74,6 +76,8 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
 
     return (
         <>
+        
+            <ToastContainer position="top-center" />
             <div className="menu-items">
                     <div className="description">
                         {

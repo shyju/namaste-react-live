@@ -15,6 +15,7 @@ export const Checkout = () => {
 
     const userId = process.env.HASURA_USER_ID;
     const [nocdOpted, setNocdOpted] = useState(false);
+    const [addressSelected, setAddressSelected] = useState(false);
     const cartItems = useSelector(store => store.cart.items);
     const itemTotal = _
         .chain(cartItems)
@@ -38,14 +39,14 @@ export const Checkout = () => {
             <div className='checkout'>
             <div className="checkout-left-section">
                 <div className="address-section">
-                    <div className="address-header">
+                    <div className="address-header" style={{display: addressSelected ? 'none' : ''}}>
                         <h3>Select delivery address</h3>
                         <span>You have a saved address in this location</span>
                     </div>
                     <div className="address-list">
                         {
                             addresses?.map(({address_line_1, address_line_2, city, state, pincode}) => (
-                            <div className="address">
+                            <div className="address" style={{width: addressSelected ? '100%' : ''}}>
                                 <div className='icon'>
                                     <img src={WorkIcon}></img>
                                 </div>
@@ -53,13 +54,14 @@ export const Checkout = () => {
                                     <h3>Work</h3>
                                     <span className='address-info'>{address_line_1}, {address_line_2},{city},{state}, {pincode}, India</span>
                                     <span className='delivery-time'>47 MINS</span>
-                                    <button>DELIVER HERE</button>
+                                    <button onClick={() => setAddressSelected(true)} style={{display: addressSelected ? 'none' : ''}}>DELIVER HERE</button>
+                                    <button onClick={() => setAddressSelected(false)} style={{display: addressSelected ? '' : 'none'}}>CHANGE</button>
                                 </div>
                             </div>
                             ))
                         }
                         
-                        <div className="add-new-address">
+                        <div className="add-new-address" style={{display: addressSelected ? 'none' : 'flex'}}>
                             <div className='icon'>
                                 <img src={AddressIcon}></img>
                             </div>

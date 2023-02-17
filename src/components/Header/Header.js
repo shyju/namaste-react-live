@@ -8,6 +8,8 @@ import Logo from '../../assets/img/foodvilla.png'
 import './Header.css'
 import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getCartItems} from '../../services/fetch.service';
+import { logout } from '../../redux/userSlice';
+import { AuthLogout } from '../../auth/auth-config';
 
 const Title = () => (
     <Link to='/'>
@@ -32,6 +34,11 @@ export const HeaderComponent = ({name}) => {
         dispatch(populateCart(cart));
         dispatch(populateRestaurant(restaurant));
     }
+
+    const handleLogout = async() => {
+        const response = await AuthLogout();
+        dispatch(logout())
+    }
    return (
     <div className="header">
         <Title/>
@@ -48,6 +55,11 @@ export const HeaderComponent = ({name}) => {
                 </li>
                 <li>
                     <Link to="/checkout" className='text-link'>Cart</Link>
+                </li>
+                <li>
+                    <Link to="/" className='text-link' onClick={handleLogout}>
+                        Logout
+                    </Link>
                 </li>
             </ul>
         </div>

@@ -1,10 +1,10 @@
 // import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom';
-import { Provider, useDispatch } from 'react-redux';
+import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from 'react-router-dom';
+import { Provider, useSelector } from 'react-redux';
 
 import {HeaderComponent} from './components/Header/Header';
 import {Home} from './components/Home/Home';
@@ -17,20 +17,42 @@ import { Error } from './components/Error/Error';
 import { RestrauntMenu } from './components/RestrauntDetails/RestrauntDetails';
 import { Checkout } from './components/Checkout/Checkout';
 import store from './redux/store';
-import { populateCart } from './redux/cartSlice';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Login } from './components/Login/Login';
+import { PersistGate } from 'redux-persist/integration/react';
+import persistStore from 'redux-persist/es/persistStore';
+import { useEffect } from 'react';
 
+let persistor = persistStore(store)
 const AppLayout = () => {
 
+    // const isLoggedIn = useSelector(store => store.user.user.isLoggedIn);
+    const navigate = useNavigate();
+    const isLoggedIn = useSelector(store => store.user.user.isLoggedIn);
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        }
+    }, [])
+
     return (
-        <Provider store={store}>
+
+       <>
+            <ToastContainer position='top-left' className='toast-message' />
             <HeaderComponent />
             <Outlet />
             <Footer />
-        </Provider>
+       </>
     )
 }
 
 const appRouter = createBrowserRouter([
+    {
+        path: '/login',
+        element: <Login/>
+    },
     {
         path: '/',
         element: <AppLayout />,
@@ -38,7 +60,7 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home />
+                element: <Home />,
             },
             {
                 path: '/about',
@@ -62,4 +84,10 @@ const appRouter = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<RouterProvider router={appRouter} />)
+root.render(
+    <Provider store={store}>
+        <PersistGate persistor={persistor}>
+            <RouterProvider router={appRouter}/>
+        </PersistGate>
+    </Provider>
+)

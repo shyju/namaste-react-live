@@ -18,7 +18,7 @@ export const RestrauntCard = (restaurant) => {
                 <div className="restraunt-name">{name}</div>
                 <div className="restraunt-cuisines">{cuisines.join(', ')}</div>
                 <div className="details">
-                    <div className="rating" style={rating >= 4 ? {backgroundColor: "#48c479"} : {}}>{rating}</div>
+                    <div className="rating" style={rating >= 4 ? {backgroundColor: "#48c479"} : {}}>{rating} *</div>
                     <div>{delivery_time + ' MINS'}</div>
                     <div>{price}</div>
                 </div>
