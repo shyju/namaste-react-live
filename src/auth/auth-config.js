@@ -1,9 +1,13 @@
 import auth0 from 'auth0-js';
 import { toast } from 'react-toastify';
 
-const domain = "dev-bitgs785.us.auth0.com";
-const clientId = "H2gTbJluqTTPIaPVnkMxlgKom3Uu8wry";
-const redirectUri = "http://localhost:1234"
+// const domain = "dev-bitgs785.us.auth0.com";
+// const clientId = "H2gTbJluqTTPIaPVnkMxlgKom3Uu8wry";
+// const redirectUri = "http://localhost:1234"
+const domain = process.env.AUTH_DOMAIN;
+const clientId = process.env.AUTH_CLIENT_ID;
+const redirectUri = process.env.AUTH_REDIRECT_URI
+const logoutRedirectUri = process.env.AUTH_LOGOUT_REDIRECT_URI;
 
 const auth = new auth0.WebAuth({
   clientID: clientId,
@@ -45,7 +49,7 @@ export const AuthSignUp = (email, password) => {
 export const AuthLogout = () => {
   auth.logout({
       clientID: clientId,
-      returnTo: "http://localhost:1234/login"
+      returnTo: logoutRedirectUri
     }, (err, response) => {
       if (err) {
         toast.warn('Logout unsuccessful')
