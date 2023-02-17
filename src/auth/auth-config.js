@@ -40,8 +40,7 @@ export const AuthSignUp = (email, password) => {
     } 
 
     if (response) {
-      toast.success('Login with the newly created credentials');
-      window.location.href = '/checkout'
+      toast.success('Done!! Now you can Login');
     }
   })
 }
