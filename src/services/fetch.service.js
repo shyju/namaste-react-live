@@ -12,7 +12,7 @@ export const getUser = async (auth_id) => {
         }
     })
     const json = await data.json();
-    return json.user[0].id;
+    return json.user[0]?.id;
 }
 
 export const getRestaurants = async() => {

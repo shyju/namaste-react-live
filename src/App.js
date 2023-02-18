@@ -32,13 +32,12 @@ const AppLayout = () => {
     
     const dispatch = useDispatch();
     const navigate =  useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState();
+    
     useEffect(() => {
         const getAuthDetails = async () => {
           const response = await handleAuthentication();
           const { sub: auth_id, nickname, picture, email } = response;
           const id = await getUser(auth_id);
-          setIsLoggedIn(true);
           console.log("Header:", JSON.stringify(response));
           const user = {
             id,
