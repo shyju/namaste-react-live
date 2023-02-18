@@ -1,2 +1,2 @@
-alter table "public"."user" add column "auth_id" text
- null;
+ALTER TABLE public."user"
+ADD COLUMN IF NOT EXISTS auth_id TEXT NULL;
