@@ -7,6 +7,7 @@ export const getUser = async (auth_id) => {
     const data = await fetch(`${BASE_URL}getUser`, {
         headers: {
             'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'x-hasura-user-role': 'user',
             'x-hasura-user-id': auth_id
         }
@@ -42,6 +43,7 @@ export const getCartItems = async(user_id) => {
     const response = await fetch(`${BASE_URL}getCartItems`, {
         headers: {
             'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'x-hasura-role': 'user',
             'x-hasura-user-id': user_id
         }
