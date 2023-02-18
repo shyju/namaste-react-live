@@ -138,3 +138,17 @@
               total
             }
           }
+      - name: getUser
+        query: |
+          query getUser {
+            user {
+              id
+            }
+          }
+      - name: addUser
+        query: |
+          mutation addUser ($id: uuid!, $auth_id: String!, $lastname: String!, $firstname: String!) {
+            insert_user(objects: {auth_id:$auth_id,lastname:$lastname,id:$id,firstname:$firstname}) {
+              affected_rows
+            }
+          }

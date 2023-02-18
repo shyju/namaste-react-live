@@ -16,3 +16,14 @@ array_relationships:
         table:
           name: cart
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - auth_id
+        - firstname
+        - lastname
+        - id
+      filter:
+        auth_id:
+          _eq: X-Hasura-User-Id

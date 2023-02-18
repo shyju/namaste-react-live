@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import * as _ from 'lodash';
 
-import { login } from "../../redux/userSlice";
 import Logo from '../../assets/img/foodvilla.png'
 import './Login.css';
 import { Authlogin, AuthSignUp } from "../../auth/auth-config";
@@ -135,7 +134,7 @@ export const Login = () => {
         
         
         const loginResponse = await Authlogin(username, password);
-        dispatch(login());
+        // dispatch(login());
 
     }
 
@@ -166,7 +165,7 @@ export const Login = () => {
             </Particles>
             <div className="login">
                 <img src={Logo} />
-                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+                <input type="text" placeholder="Email" value={username} onChange={(e) => setUsername(e.target.value)}></input>
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 <div style={{display: isSignUp ? 'none' : ''}}>
                     <button className="login-btn" type="submit" onClick={handleLogin}>LOGIN</button>

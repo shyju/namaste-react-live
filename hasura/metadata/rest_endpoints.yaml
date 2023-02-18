@@ -11,6 +11,15 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: addUser
+  methods:
+    - POST
+  name: addUser
+  url: addUser
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: getRestraunts
   methods:
     - GET
@@ -43,6 +52,15 @@
     - GET
   name: getCartItems
   url: getCartItems
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getUser
+  methods:
+    - GET
+  name: getUser
+  url: getUser
 - comment: ""
   definition:
     query:

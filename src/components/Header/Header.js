@@ -1,6 +1,6 @@
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as _ from 'lodash';
 
@@ -8,8 +8,8 @@ import Logo from '../../assets/img/foodvilla.png'
 import './Header.css'
 import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getCartItems} from '../../services/fetch.service';
-import { logout } from '../../redux/userSlice';
-import { AuthLogout } from '../../auth/auth-config';
+import { Logout, User } from '../../redux/userSlice';
+import { AuthLogout, handleAuthentication } from '../../auth/auth-config';
 
 const Title = () => (
     <Link to='/'>
@@ -24,20 +24,22 @@ const Title = () => (
 export const HeaderComponent = ({name}) => {
 
     const dispatch = useDispatch();
+    const user_id = useSelector(store => store.user?.user?.id);
 
     useEffect(() => {
         getCartList();
-    }, []);
+    }, [user_id]);
+
 
     const getCartList = async () => {
-        const {restaurant, cart} = await getCartItems();
+        const {restaurant, cart} = await getCartItems(user_id);
         dispatch(populateCart(cart));
         dispatch(populateRestaurant(restaurant));
     }
 
     const handleLogout = async() => {
         const response = await AuthLogout();
-        dispatch(logout())
+        dispatch(Logout())
     }
    return (
     <div className="header">

@@ -10,7 +10,7 @@ import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import { addMenuItemToCart, deleteCartById, getCartItems, updateCartById } from '../../services/fetch.service';
 
 export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
-    const userId = process.env.HASURA_USER_ID;
+    const userId = useSelector(store => store.user.user.id);
     const cartItems = useSelector(store => store.cart.items);
     const { quantity, id: cartId } = _.find(cartItems, { menu_id: id }) ?? {quantity: 0};
     const {id: restaurant_id, name: restaurant_name, area, image_id: restaurant_image_id} = useSelector(store => store.restraunt.restrauntDetails);
@@ -55,7 +55,7 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
 
             const response = await addMenuItemToCart(payload);
             // toast.success('Menu added to cart')
-            const {restaurant, cart} = await getCartItems();
+            const {restaurant, cart} = await getCartItems(userId);
             dispatch(populateCart(cart));
             dispatch(populateRestaurant(restaurant));
         } else {
@@ -68,7 +68,7 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
                 ? await deleteCartById(cartId)
                 : await updateCartById(cartId, payload)
                 // toast.success('Cart Updated')
-            const {restaurant, cart} = await getCartItems();
+            const {restaurant, cart} = await getCartItems(userId);
             dispatch(populateCart(cart));
             dispatch(populateRestaurant(restaurant));
         }

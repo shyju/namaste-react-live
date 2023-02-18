@@ -57,3 +57,23 @@ export const AuthLogout = () => {
       }
     })
 }
+
+export const handleAuthentication = () => {
+  return new Promise((resolve, reject) => {
+    auth.parseHash((err, authResult) => {
+      console.log('Result:', authResult);
+      if (authResult && authResult.accessToken && authResult.idTokenPayload) {
+        // window.location.hash = '';
+        // this.user$.next(authResult.idTokenPayload);
+        // this.token.next(authResult.idToken);
+        // this.setSession(authResult);
+        // this.router.navigate(['/home']);
+        resolve(authResult.idTokenPayload);
+      } else if (err) {
+        // this.router.navigate(['/login']);
+        console.log(err);
+        reject(err);
+      }
+    })
+  })
+}

@@ -2,6 +2,19 @@ import * as _ from 'lodash';
 
 const BASE_URL = process.env.BASE_URL;
 
+
+export const getUser = async (auth_id) => {
+    const data = await fetch(`${BASE_URL}getUser`, {
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-user-role': 'user',
+            'x-hasura-user-id': auth_id
+        }
+    })
+    const json = await data.json();
+    return json.user[0].id;
+}
+
 export const getRestaurants = async() => {
     const data = await fetch(`${BASE_URL}allRestraunts`, {
         headers: {
@@ -25,15 +38,16 @@ export const getRestaurantById =  async(id) => {
     return json.restaurants_by_pk;
 }
 
-export const getCartItems = async() => {
+export const getCartItems = async(user_id) => {
     const response = await fetch(`${BASE_URL}getCartItems`, {
         headers: {
             'content-type': 'application/json',
-            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
+            'x-hasura-role': 'user',
+            'x-hasura-user-id': user_id
         }
     });
     const {cart} =  await response.json();
-    const {restaurant_id, restaurant_name, restaurant_image_id} = cart.length && _.head(cart);
+    const {restaurant_id, restaurant_name, restaurant_image_id} = (cart?.length && _.head(cart)) ?? {};
 
     const cartItems = _.map(cart, ({id, price, quantity, total, menu}) => ({
             id,
