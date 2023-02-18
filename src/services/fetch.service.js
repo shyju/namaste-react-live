@@ -8,8 +8,8 @@ export const getUser = async (auth_id) => {
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
-            'x-hasura-user-role': 'user',
-            'x-hasura-user-id': auth_id
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': auth_id
         }
     })
     const json = await data.json();
@@ -45,7 +45,7 @@ export const getCartItems = async(user_id) => {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'x-hasura-role': 'user',
-            'x-hasura-user-id': user_id
+            'X-Hasura-User-Id': user_id
         }
     });
     const {cart} =  await response.json();
@@ -77,7 +77,7 @@ export const getAddresses = async(userId) => {
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
-            'x-hasura-user-id': process.env.HASURA_USER_ID
+            'X-Hasura-User-Id': process.env.HASURA_USER_ID
         }
     });
     return await response.json();
