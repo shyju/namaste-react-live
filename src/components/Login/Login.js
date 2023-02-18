@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 
 import Logo from '../../assets/img/foodvilla.png'
 import './Login.css';
-import { Authlogin, AuthSignUp } from "../../auth/auth-config";
+import { Authlogin, AuthSignUp, FacebookLogin, GoogleLogin } from "../../auth/auth-config";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
@@ -138,6 +138,14 @@ export const Login = () => {
 
     }
 
+    const handleGoogleLogin = () => {
+        GoogleLogin();
+    }
+
+    const handleFacebookLogin = () => {
+        FacebookLogin()
+    }
+
     const handleSignUp = async() => {
         const response = await AuthSignUp(username, password);
         // dispatch(login())
@@ -176,9 +184,10 @@ export const Login = () => {
                     <button className="signup-btn" type="submit" onClick={handleSignUp}>SIGN UP</button>
                     <div className="sign-in">Existing User? <span onClick={() => setIsSignUp(false)}>Sign In</span></div>
                 </div>
-                {/* <div className="google-signin">
-                    <button className="google-signin-btn" onClick={handleLogin}>Sign in with Google</button>
-                </div> */}
+                <div className="social-signin">
+                    <button className="google-signin-btn" onClick={handleGoogleLogin}>Sign in with Google</button>
+                    <button className="facebook-signin-btn" onClick={handleFacebookLogin}>Sign in with Facebook</button>
+                </div>
                 
                 
             </div>

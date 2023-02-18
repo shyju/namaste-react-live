@@ -8,3 +8,11 @@ object_relationships:
   - name: restaurant
     using:
       foreign_key_constraint_on: restaurant_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - cuisine_id
+        - id
+        - restaurant_id
+      filter: {}

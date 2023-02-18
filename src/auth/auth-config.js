@@ -28,6 +28,18 @@ export const Authlogin = (username, password) => {
   })
 }
 
+export const GoogleLogin = () => {
+  auth.authorize({
+    connection: 'google-oauth2'
+  })
+}
+
+export const FacebookLogin = () => {
+  auth.authorize({
+    connection: 'facebook'
+  })
+}
+
 export const AuthSignUp = (email, password) => {
   auth.signup({
     email,
@@ -63,14 +75,8 @@ export const handleAuthentication = () => {
     auth.parseHash((err, authResult) => {
       console.log('Result:', authResult);
       if (authResult && authResult.accessToken && authResult.idTokenPayload) {
-        // window.location.hash = '';
-        // this.user$.next(authResult.idTokenPayload);
-        // this.token.next(authResult.idToken);
-        // this.setSession(authResult);
-        // this.router.navigate(['/home']);
         resolve(authResult.idTokenPayload);
       } else if (err) {
-        // this.router.navigate(['/login']);
         console.log(err);
         reject(err);
       }

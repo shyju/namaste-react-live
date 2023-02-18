@@ -29,20 +29,20 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: updateCartById
+  methods:
+    - PUT
+  name: updateCartById
+  url: cart/:cartId/updateCartById
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: deleteCartById
   methods:
     - DELETE
   name: deleteCartById
   url: cart/:id/deleteCartById
-- comment: ""
-  definition:
-    query:
-      collection_name: allowed-queries
-      query_name: updateCartById
-  methods:
-    - PUT
-  name: updateCartById
-  url: cart/:id/updateCartById
 - comment: ""
   definition:
     query:

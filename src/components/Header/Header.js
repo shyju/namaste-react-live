@@ -25,6 +25,7 @@ export const HeaderComponent = ({name}) => {
 
     const dispatch = useDispatch();
     const user_id = useSelector(store => store.user?.user?.id);
+    const picture = useSelector(store => store.user?.user?.picture);
 
     useEffect(() => {
         getCartList();
@@ -62,6 +63,9 @@ export const HeaderComponent = ({name}) => {
                     <Link to="/" className='text-link' onClick={handleLogout}>
                         Logout
                     </Link>
+                </li>
+                <li>
+                    <img className='profile-pic' src={picture} alt="" />
                 </li>
             </ul>
         </div>

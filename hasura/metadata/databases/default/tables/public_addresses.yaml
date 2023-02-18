@@ -8,5 +8,15 @@ object_relationships:
 select_permissions:
   - role: user
     permission:
-      columns: []
-      filter: {}
+      columns:
+        - pincode
+        - primary
+        - address_line_1
+        - address_line_2
+        - city
+        - state
+        - id
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
