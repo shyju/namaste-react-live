@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 const BASE_URL = process.env.BASE_URL;
-
+const NODE_BASE_URL = process.env.NODE_URL;
 
 export const getUser = async (auth_id) => {
     const data = await fetch(`${BASE_URL}getUser`, {
@@ -139,7 +139,9 @@ export const clearCart = async (userId) => {
 
 
 export const createPaymentIntent = async options => {
-    const response = await fetch('http://localhost:4242/create-payment-intent', {
+    console.log('NODE_BASE_URL', NODE_BASE_URL)
+    console.log('BASE_URL', BASE_URL)
+    const response = await fetch(`${NODE_BASE_URL}create-payment-intent`, {
         method: 'POST',
         headers: {
             "content-type": "application/json"
