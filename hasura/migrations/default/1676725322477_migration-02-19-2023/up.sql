@@ -1,3 +1,68 @@
+
+CREATE TABLE "public"."user" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "firstname" text NOT NULL, "lastname" text NOT NULL, PRIMARY KEY ("id") );
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."restaurants" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text NOT NULL, "image_id" text NOT NULL, "rating" float8 NOT NULL, "delivery_time" numeric NOT NULL, "price" float8 NOT NULL, "veg" boolean NOT NULL, "promoted" boolean NOT NULL, "area" text NOT NULL, "total_rating" float8 NOT NULL, PRIMARY KEY ("id") );
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."cuisines" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text NOT NULL, PRIMARY KEY ("id") );
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."restraunt_cuisine" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "restaurant_id" uuid NOT NULL, "cuisine_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("restaurant_id") REFERENCES "public"."restaurants"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("cuisine_id") REFERENCES "public"."cuisines"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."menus" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text NOT NULL, "image_id" text NOT NULL, "price" float8 NOT NULL, "veg" boolean NOT NULL, PRIMARY KEY ("id") );
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."restaurant_menu" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "menu_id" uuid NOT NULL, "restaurant_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("menu_id") REFERENCES "public"."menus"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("restaurant_id") REFERENCES "public"."restaurants"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."offers" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "description" text NOT NULL, "coupon_code" text NOT NULL, PRIMARY KEY ("id") );
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."restaurant_offer" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "offer_id" uuid NOT NULL, "restaurant_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("offer_id") REFERENCES "public"."offers"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("restaurant_id") REFERENCES "public"."restaurants"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+alter table "public"."cuisines" add constraint "cuisines_name_key" unique ("name");
+
+alter table "public"."menus" alter column "image_id" drop not null;
+
+CREATE TABLE "public"."widgets" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text NOT NULL, PRIMARY KEY ("id") );
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."restaurant_widget" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "restaurant_id" uuid NOT NULL, "widget_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("widget_id") REFERENCES "public"."widgets"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("restaurant_id") REFERENCES "public"."restaurants"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."widget_menu" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "widget_id" uuid NOT NULL, "menu_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("widget_id") REFERENCES "public"."widgets"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("menu_id") REFERENCES "public"."menus"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE "public"."cart" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "user_id" uuid NOT NULL, "menu_id" UUID NOT NULL, "quantity" integer NOT NULL, "price" float8 NOT NULL, "total" float8 NOT NULL, PRIMARY KEY ("price","id") , FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("menu_id") REFERENCES "public"."menus"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+BEGIN TRANSACTION;
+ALTER TABLE "public"."cart" DROP CONSTRAINT "cart_pkey";
+
+ALTER TABLE "public"."cart"
+    ADD CONSTRAINT "cart_pkey" PRIMARY KEY ("id");
+COMMIT TRANSACTION;
+
+CREATE TABLE "public"."addresses" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "address_line_1" text NOT NULL, "address_line_2" text, "city" text NOT NULL, "state" text NOT NULL, "pincode" bigint NOT NULL, "user_id" uuid NOT NULL, "primary" boolean NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+alter table "public"."cart" add column "restaurant_id" uuid
+ not null;
+
+alter table "public"."cart" add column "restaurant_name" text
+ not null;
+
+alter table "public"."cart" add column "restaurant_image_id" text
+ not null;
+
+ALTER TABLE "public"."user" ALTER COLUMN "id" drop default;
+
+ALTER TABLE public."user"
+ADD COLUMN IF NOT EXISTS auth_id TEXT NULL;
+
 SET check_function_bodies = false;
 CREATE TABLE public.addresses (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
