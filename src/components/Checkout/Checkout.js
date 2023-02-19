@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 
 export const Checkout = () => {
 
-    const userId = process.env.HASURA_USER_ID;
+    const userId = useSelector(store => store.user.user?.id);
     const [nocdOpted, setNocdOpted] = useState(false);
     const [addressSelected, setAddressSelected] = useState(false);
     const cartItems = useSelector(store => store.cart.items);

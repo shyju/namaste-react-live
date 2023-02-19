@@ -77,7 +77,8 @@ export const getAddresses = async(userId) => {
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
-            'X-Hasura-User-Id': process.env.HASURA_USER_ID
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
         }
     });
     return await response.json();
@@ -95,24 +96,28 @@ export const addMenuItemToCart = async(payload) => {
     return await response.json();
 }
 
-export const updateCartById = async(cartId, payload) => {
+export const updateCartById = async(cartId, userId, payload) => {
     const response = await fetch(`${BASE_URL}cart/${cartId}/updateCartById`, {
         method: 'PUT',
         body: JSON.stringify(payload),
         headers: {
             'content-type': 'application/json',
-            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
         }
     });
     return await response.json();
 }
 
-export const deleteCartById = async(cartId) => {
+export const deleteCartById = async(cartId, userId) => {
     const response = await fetch(`${BASE_URL}cart/${cartId}/deleteCartById`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json',
-            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
         }
     });
     return await response.json();

@@ -65,8 +65,8 @@ export const Menu = ({menu: {id, name, image_id, veg, price}}) => {
             }  
             
             const response =  quantity === 0 
-                ? await deleteCartById(cartId)
-                : await updateCartById(cartId, payload)
+                ? await deleteCartById(cartId, userId)
+                : await updateCartById(cartId, userId, payload)
                 // toast.success('Cart Updated')
             const {restaurant, cart} = await getCartItems(userId);
             dispatch(populateCart(cart));
