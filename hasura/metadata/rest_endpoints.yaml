@@ -20,6 +20,24 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: updateAddress
+  methods:
+    - PUT
+  name: updateAddress
+  url: address/:addressId/updateAddress
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: addNewAddress
+  methods:
+    - POST
+  name: addNewAddress
+  url: address/:userId/newAddress
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: getRestraunts
   methods:
     - GET

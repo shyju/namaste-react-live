@@ -54,13 +54,6 @@
               total
             }
           }
-      - name: deleteCartById
-        query: |
-          mutation deleteCartById ($id: uuid!) {
-            delete_cart_by_pk(id: $id) {
-              id
-            }
-          }
       - name: clearCart
         query: |
           mutation clearCart ($userId: uuid!) {
@@ -146,12 +139,41 @@
               }
             }
           }
+      - name: addNewAddress
+        query: |
+          mutation addNewAddress ($addressType: String!, $houseName: String!, $locality: String!, $city: String!, $state: String!, $pincode: bigint!, $isPrimary: Boolean!, $userId: uuid!) {
+            insert_addresses(objects: {address_type:$addressType,address_line_1:$houseName,address_line_2:$locality,city:$city,state:$state,pincode:$pincode,primary:$isPrimary,user_id:$userId}) {
+              affected_rows
+            }
+          }
       - name: getAddresses
         query: |
           query getAddresses ($userId: uuid) {
             addresses(where: {user_id:{_eq:$userId}}) {
               address_line_1
               address_line_2
+              address_type
+              city
+              id
+              pincode
+              primary
+              state
+            }
+          }
+      - name: deleteCartById
+        query: |
+          mutation deleteCartById ($cartId: uuid!) {
+            delete_cart_by_pk(id: $cartId) {
+              id
+            }
+          }
+      - name: updateAddress
+        query: |
+          mutation updateAddress ($addressId: uuid!, $addressType: String!, $houseName: String!, $locality: String!, $city: String!, $state: String!, $pincode: bigint!, $isPrimary: Boolean!) {
+            update_addresses_by_pk(pk_columns: {id:$addressId}, _set: {address_line_1:$houseName,address_line_2:$locality,address_type:$addressType,city:$city,pincode:$pincode,primary:$isPrimary,state:$state}) {
+              address_line_1
+              address_line_2
+              address_type
               city
               id
               pincode

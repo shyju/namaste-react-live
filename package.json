@@ -22,15 +22,17 @@
     "@stripe/react-stripe-js": "^1.16.4",
     "@stripe/stripe-js": "^1.46.0",
     "auth0-js": "^9.20.1",
+    "bootstrap": "^5.2.3",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
     "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^9.1.1",
     "react-tsparticles": "^2.9.3",
+    "reactjs-popup": "^2.0.5",
     "redux-persist": "^6.0.0",
     "tsparticles": "^2.9.3"
   }

@@ -3,15 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        isModalOpen: false
+        isPaymentSuccessModalOpen: false,
+        isAddressModalOpen: false
     },
     reducers: {
-        ToggleModal: (state, action) => {
-            state.isModalOpen = !state.isModalOpen;
+        TogglePaymentSuccessModal: (state, action) => {
+            state.isPaymentSuccessModalOpen = !state.isPaymentSuccessModalOpen;
+        },
+        ToggleAddresssModal: (state, action) => {
+            state.isAddressModalOpen = !state.isAddressModalOpen;
         }
     }
 });
 
-export const {ToggleModal} = uiSlice.actions;
+export const {TogglePaymentSuccessModal, ToggleAddresssModal} = uiSlice.actions;
 
 export default uiSlice.reducer;

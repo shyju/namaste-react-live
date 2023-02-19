@@ -124,7 +124,7 @@ export const deleteCartById = async(cartId, userId) => {
 }
 
 export const clearCart = async (userId) => {
-    const response = await fetch(`${BASE_URL}/cart/${userId}/clearCart`, {
+    const response = await fetch(`${BASE_URL}cart/${userId}/clearCart`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json',
@@ -133,6 +133,34 @@ export const clearCart = async (userId) => {
             'X-Hasura-User-Id': userId
         }
     });
+    return await response.json();
+}
+
+export const addNewAddress = async(userId, payload) => {
+    const response = await fetch(`${BASE_URL}address/${userId}/newAddress`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    })
+    return await response.json();
+}
+
+export const editAddress = async(addressId, userId, payload) => {
+    const response = await fetch(`${BASE_URL}address/${addressId}/updateAddress`, {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    })
     return await response.json();
 }
 

@@ -20,14 +20,6 @@ export const MiniCart = ({name}) => {
         setSubTotal(calculatedTotal.toFixed(2));
     }, [cartItems])
 
-    const onToken = token => {
-        fetch('http://localhost:4242/payment', {
-            method: 'POST',
-            body: JSON.stringify(token)
-        }).then((response) => {
-            console.log(response);
-        }).catch(err => console.log(err));
-    }
     return (
         <>
             <div className="mini-cart">
@@ -41,7 +33,7 @@ export const MiniCart = ({name}) => {
                     : <div className='non-empty-cart'>
                         <div className="cart-header">
                             <span>Cart</span>
-                        <span>from <strong style={{color: '#5d8ed5', fontSize: '18px'}}>{name}</strong></span>
+                            <span>from <strong style={{color: '#5d8ed5', fontSize: '18px'}}>{name}</strong></span>
                             <span>{cartItems?.length} ITEM</span>
                         </div>
                         <div className="cart-details">
@@ -56,15 +48,6 @@ export const MiniCart = ({name}) => {
                             </div>
                             <div className='cart-footer'>
                                 <span>Extra charges may apply</span>
-                                {/* <StripeCheckout 
-                                token={onToken} 
-                                stripeKey={process.env.STRIPE_PUBLIC_KEY} 
-                                amount={1000}
-                                name="Example Company"
-                                description="Example Product"
-                                currency="USD">
-                                    <button className="checkout-btn">Checkout</button>
-                                </StripeCheckout> */}
                                 <button className="checkout-btn" onClick={() => navigate('/checkout')}>Checkout</button>
                             </div>
                         </div>

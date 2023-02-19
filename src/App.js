@@ -4,8 +4,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from 'react-router-dom';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import Modal from 'react-modal';
+import { Provider, useDispatch} from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {HeaderComponent} from './components/Header/Header';
 import {Home} from './components/Home/Home';
@@ -27,15 +27,13 @@ import { useEffect } from 'react';
 import { handleAuthentication } from './auth/auth-config';
 import { User } from './redux/userSlice';
 import { getUser } from './services/fetch.service';
+import { Completion } from './components/Modals/Completion/Completion';
 
 const persistor = persistStore(store)
 const AppLayout = () => {
     
     const dispatch = useDispatch();
-    const navigate =  useNavigate();
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    
     useEffect(() => {
         const getAuthDetails = async () => {
           const response = await handleAuthentication();
@@ -113,6 +111,10 @@ const appRouter = createBrowserRouter([
             {
                 path: '/checkout',
                 element: <Checkout />
+            },
+            {
+                path: '/completion',
+                element: <Completion />
             }
         ]
     }

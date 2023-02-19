@@ -1,12 +1,12 @@
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import Modal from 'react-modal';
 
 import { populateCart, populateRestaurant } from "../../redux/cartSlice";
 import { clearCart, getCartItems } from "../../services/fetch.service";
 import './Payment.css';
-import { ToggleModal } from "../../redux/uiSlice";
+import { TogglePaymentSuccessModal } from "../../redux/uiSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Payment = () => {
 
@@ -16,6 +16,7 @@ export const Payment = () => {
     const elements = useElements();
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const userId = useSelector(store => store.user?.user?.id);
 
@@ -33,7 +34,7 @@ export const Payment = () => {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: `${window.location.origin}/`,
+                return_url: `${window.location.origin}/completion`,
             },
             redirect: 'if_required'
         });
@@ -44,9 +45,10 @@ export const Payment = () => {
             setMessage(`Payment status: ${paymentIntent.status}`);
             await clearCart(userId);
             const {restaurant, cart} = await getCartItems(userId);
-            dispatch(ToggleModal());
+            dispatch(TogglePaymentSuccessModal());
             dispatch(populateCart(cart));
             dispatch(populateRestaurant(restaurant));
+            navigate('/completion');
         }
 
         setIsProcessing(false);

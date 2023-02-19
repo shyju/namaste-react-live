@@ -139,7 +139,7 @@
     flex-direction: column;
 }
 
-.address > .description > button , .add-new-address > .description > button{
+.address > .description > div > button , .add-new-address > .description > button{
     /* margin-top: 40px; */
     background: #60b246;
     width: 150px;
@@ -153,6 +153,7 @@
     letter-spacing: .5px;
     cursor: pointer;
     margin-top: 10px;
+    margin-right: 10px;
 }
 
 .add-new-address > .description > button {

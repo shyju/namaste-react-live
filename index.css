@@ -5,7 +5,9 @@
     --form-width: 343px;
   }
   * {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
+    /* color: initial; */
+    text-decoration: inherit !important;
   }
 body {
     margin: 0;
