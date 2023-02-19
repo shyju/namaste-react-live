@@ -17,7 +17,8 @@ import { populateAddress } from '../../redux/addressSlice';
 
 import { Payment } from '../Payment/Payment';
 
-const stripePromise = loadStripe(`${process.env.STRIPE_PUBLIC_KEY}`);
+const stripe_pk = process.env.STRIPE_PUBLIC_KEY
+const stripePromise = loadStripe(`${stripe_pk}`);
 export const Checkout = () => {
 
     
