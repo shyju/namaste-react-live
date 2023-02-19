@@ -45,11 +45,27 @@
               }
             }
           }
+      - name: updateCartById
+        query: |
+          mutation updateCartById ($cartId: uuid!, $quantity: Int!, $total: float8!) {
+            update_cart_by_pk(pk_columns: {id:$cartId}, _set: {quantity:$quantity,total:$total}) {
+              id
+              quantity
+              total
+            }
+          }
       - name: deleteCartById
         query: |
           mutation deleteCartById ($id: uuid!) {
             delete_cart_by_pk(id: $id) {
               id
+            }
+          }
+      - name: clearCart
+        query: |
+          mutation clearCart ($userId: uuid!) {
+            delete_cart(where: {user_id:{_eq:$userId}}) {
+              affected_rows
             }
           }
       - name: getCartItems
@@ -141,21 +157,5 @@
               pincode
               primary
               state
-            }
-          }
-      - name: clearCart
-        query: |
-          mutation clearCart ($userId: uuid!) {
-            delete_cart(where: {user_id:{_eq:$userId}}) {
-              affected_rows
-            }
-          }
-      - name: updateCartById
-        query: |
-          mutation updateCartById ($cartId: uuid!, $quantity: Int!, $total: float8!) {
-            update_cart_by_pk(pk_columns: {id:$cartId}, _set: {quantity:$quantity,total:$total}) {
-              id
-              quantity
-              total
             }
           }
