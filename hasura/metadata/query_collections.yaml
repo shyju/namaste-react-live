@@ -1,10 +1,10 @@
-- name:allowed-queries
+- name: allowed-queries
   definition:
     queries:
-      - name:addToCart
-        query:|
-          mutation addToCart ($user_id:uuid!, $menu_id:uuid!, $restaurant_id:uuid!, $restaurant_name:String!, $restaurant_image_id:String!, $quantity:Int!, $price:float8!, $total:float8!) {
-            insert_cart(objects:[{user_id:$user_id,menu_id:$menu_id,restaurant_id:$restaurant_id,restaurant_name:$restaurant_name,restaurant_image_id:$restaurant_image_id,quantity:$quantity,price:$price,total:$total}]) {
+      - name: addToCart
+        query: |
+          mutation addToCart ($user_id: uuid!, $menu_id: uuid!, $restaurant_id: uuid!, $restaurant_name: String!, $restaurant_image_id: String!, $quantity: Int!, $price: float8!, $total: float8!) {
+            insert_cart(objects: [{user_id:$user_id,menu_id:$menu_id,restaurant_id:$restaurant_id,restaurant_name:$restaurant_name,restaurant_image_id:$restaurant_image_id,quantity:$quantity,price:$price,total:$total}]) {
               returning {
                 id
                 menu {
@@ -19,15 +19,15 @@
               }
             }
           }
-      - name:addUser
-        query:|
-          mutation addUser ($id:uuid!, $auth_id:String!, $lastname:String!, $firstname:String!) {
-            insert_user(objects:{auth_id:$auth_id,lastname:$lastname,id:$id,firstname:$firstname}) {
+      - name: addUser
+        query: |
+          mutation addUser ($id: uuid!, $auth_id: String!, $lastname: String!, $firstname: String!) {
+            insert_user(objects: {auth_id:$auth_id,lastname:$lastname,id:$id,firstname:$firstname}) {
               affected_rows
             }
           }
-      - name:getRestraunts
-        query:|
+      - name: getRestraunts
+        query: |
           query getRestraunts {
             restaurants {
               id
@@ -45,15 +45,15 @@
               }
             }
           }
-      - name:deleteCartById
-        query:|
-          mutation deleteCartById ($id:uuid!) {
-            delete_cart_by_pk(id:$id) {
+      - name: deleteCartById
+        query: |
+          mutation deleteCartById ($id: uuid!) {
+            delete_cart_by_pk(id: $id) {
               id
             }
           }
-      - name:getCartItems
-        query:|
+      - name: getCartItems
+        query: |
           query getCartItems {
             cart {
               id
@@ -71,17 +71,17 @@
               total
             }
           }
-      - name:getUser
-        query:|
+      - name: getUser
+        query: |
           query getUser {
             user {
               id
             }
           }
-      - name:getRestraunt
-        query:|
-          query getRestraunt ($id:uuid!) {
-            restaurants_by_pk(id:$id) {
+      - name: getRestraunt
+        query: |
+          query getRestraunt ($id: uuid!) {
+            restaurants_by_pk(id: $id) {
               id
               image_id
               name
@@ -130,10 +130,10 @@
               }
             }
           }
-      - name:getAddresses
-        query:|
-          query getAddresses ($userId:uuid) {
-            addresses(where:{user_id:{_eq:$userId}}) {
+      - name: getAddresses
+        query: |
+          query getAddresses ($userId: uuid) {
+            addresses(where: {user_id:{_eq:$userId}}) {
               address_line_1
               address_line_2
               city
@@ -143,17 +143,17 @@
               state
             }
           }
-      - name:clearCart
-        query:|
-          mutation clearCart ($userId:uuid!) {
-            delete_cart(where:{user_id:{_eq:$userId}}) {
+      - name: clearCart
+        query: |
+          mutation clearCart ($userId: uuid!) {
+            delete_cart(where: {user_id:{_eq:$userId}}) {
               affected_rows
             }
           }
-      - name:updateCartById
-        query:|
-          mutation updateCartById ($cartId:uuid!, $quantity:Int!, $total:float8!) {
-            update_cart_by_pk(pk_columns:{id:$cartId}, _set:{quantity:$quantity,total:$total}) {
+      - name: updateCartById
+        query: |
+          mutation updateCartById ($cartId: uuid!, $quantity: Int!, $total: float8!) {
+            update_cart_by_pk(pk_columns: {id:$cartId}, _set: {quantity:$quantity,total:$total}) {
               id
               quantity
               total
