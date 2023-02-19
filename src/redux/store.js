@@ -9,6 +9,7 @@ import restrauntSlice from "./restrauntSlice";
 import userSlice from "./userSlice";
 import persistReducer from 'redux-persist/es/persistReducer';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import uiSlice from './uiSlice';
 
 
 const persistConfig = {
@@ -18,6 +19,7 @@ const persistConfig = {
 }
 
 export const rootReducers = combineReducers({
+    ui: uiSlice,
     user: userSlice,
     restraunt: restrauntSlice,
     cart: cartSlice,

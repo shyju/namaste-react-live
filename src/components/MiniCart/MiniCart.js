@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import * as _ from 'lodash';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +10,7 @@ import StripeCheckout from 'react-stripe-checkout';
 export const MiniCart = ({name}) => {
 
     const [subTotal, setSubTotal] = useState(0);
+    const navigate = useNavigate();
     const cartItems = useSelector(store => store.cart.items);
     useEffect(() => {
         const calculatedTotal =  _.reduce(cartItems, (sum, {price, quantity}) => {
@@ -64,9 +65,7 @@ export const MiniCart = ({name}) => {
                                 currency="USD">
                                     <button className="checkout-btn">Checkout</button>
                                 </StripeCheckout> */}
-                                <button className="checkout-btn">
-                                    <Link to="/checkout" className='text-link'>Checkout</Link>
-                                </button>
+                                <button className="checkout-btn" onClick={() => navigate('/checkout')}>Checkout</button>
                             </div>
                         </div>
                     </div>

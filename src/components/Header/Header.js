@@ -50,12 +50,12 @@ export const HeaderComponent = ({name}) => {
                 <li>
                     <Link to="/" className='text-link'>Home</Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link to="/about" className='text-link'>About</Link>
                 </li>
                 <li>
                     <Link to="/contact" className='text-link'>Contact</Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to="/checkout" className='text-link'>Cart</Link>
                 </li>

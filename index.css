@@ -1,9 +1,20 @@
+:root {
 
+    --body-font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius: 6px;
+    --form-width: 343px;
+  }
+  * {
+    box-sizing: border-box;
+  }
 body {
     margin: 0;
     overflow: smooth;
     display: flex;
     flex-direction: column;
+    font-family: var(--body-font-family);
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
 }
 
 a {

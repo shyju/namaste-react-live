@@ -52,15 +52,6 @@
               id
             }
           }
-      - name: updateCartById
-        query: |
-          mutation updateCartById ($id: uuid!, $quantity: Int!, $total: float8!) {
-            update_cart_by_pk(pk_columns: {id:$id}, _set: {quantity:$quantity,total:$total}) {
-              id
-              quantity
-              total
-            }
-          }
       - name: getCartItems
         query: |
           query getCartItems {
@@ -150,5 +141,21 @@
               pincode
               primary
               state
+            }
+          }
+      - name: clearCart
+        query: |
+          mutation clearCart ($userId: uuid!) {
+            delete_cart(where: {user_id:{_eq:$userId}}) {
+              affected_rows
+            }
+          }
+      - name: updateCartById
+        query: |
+          mutation updateCartById ($cartId: uuid!, $quantity: Int!, $total: float8!) {
+            update_cart_by_pk(pk_columns: {id:$cartId}, _set: {quantity:$quantity,total:$total}) {
+              id
+              quantity
+              total
             }
           }

@@ -47,6 +47,15 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: clearCart
+  methods:
+    - DELETE
+  name: clearCart
+  url: cart/:userId/clearCart
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: getCartItems
   methods:
     - GET

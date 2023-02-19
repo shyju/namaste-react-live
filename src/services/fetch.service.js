@@ -123,3 +123,37 @@ export const deleteCartById = async(cartId, userId) => {
     return await response.json();
 }
 
+export const clearCart = async (userId) => {
+    const response = await fetch(`${BASE_URL}/cart/${userId}/clearCart`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    });
+    return await response.json();
+}
+
+
+
+export const createPaymentIntent = async options => {
+    const response = await fetch('http://localhost:4242/create-payment-intent', {
+        method: 'POST',
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(options)
+    })
+    if (!response || response.error) {
+        throw new Error('PaymentIntent API Error');
+    }
+    if (response.status === 200) {
+        const intent = await response.json()
+        console.log('intent', intent)
+        return intent;
+    } else {
+        return null;
+    }
+}
