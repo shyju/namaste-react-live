@@ -4,9 +4,9 @@ import { Button, Form } from "react-bootstrap";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
-import { ToggleAddresssModal, TogglePaymentSuccessModal } from '../../../redux/uiSlice';
+import { ToggleAddresssModal } from '../../../redux/uiSlice';
 import { addNewAddress, editAddress, getAddresses } from '../../../services/fetch.service';
 import { populateAddress } from '../../../redux/addressSlice';
 
@@ -15,10 +15,12 @@ export const Address = ({pageType, addressId}) => {
     const groupStyle = {display: 'flex', justifyContent: 'space-between', width: '90%', marginRight: '10px'};
     const labelStyle = {fontSize: '15px', marginRight: '10px', width: '300px', textAlign: 'center' , alignSelf: 'center'};
     const buttonStyle = {backgroundColor: '#60b246', fontSize: 'bold' , border: 'none', width: '200px'};
+    
     const isModalOpen = useSelector(store => store.ui.isAddressModalOpen);
     const userId = useSelector(store => store.user.user?.id);
     const {id, address_line_1, address_line_2, address_type, city: editCity, state: editState, pincode: editPincode} 
     = useSelector(store => _.find(store.address.addresses, {id: addressId})) ?? {};
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

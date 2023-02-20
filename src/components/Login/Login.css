@@ -46,7 +46,7 @@
     padding: 10px;
     border-radius: 3px;
     width: 165px;
-    cursor: pointer;
+    cursor: pointer !important;
     position: relative;
   }
   

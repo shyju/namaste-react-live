@@ -75,10 +75,24 @@ export const handleAuthentication = () => {
     auth.parseHash((err, authResult) => {
       console.log('Result:', authResult);
       if (authResult && authResult.accessToken && authResult.idTokenPayload) {
-        resolve(authResult.idTokenPayload);
-      } else if (err) {
+        return resolve(authResult.idTokenPayload);
+      } else {
         console.log(err);
-        reject(err);
+        return reject(err);
+      }
+    })
+  })
+}
+
+export const renewSession = () => {
+  return new Promise((resolve, reject) => {
+    auth.checkSession({}, (err, authResult) => {
+      console.log('Renew:', authResult);
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        return resolve({token: authResult.idToken});
+      } else if (err) {
+        // alert(`Could not get a new token (${err.error})`);
+        return reject();
       }
     })
   })

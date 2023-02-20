@@ -3,8 +3,12 @@
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from 'react-router-dom';
+import {createBrowserRouter, RouterProvider, Outlet, useNavigate, Navigate} from 'react-router-dom';
 import { Provider, useDispatch} from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import persistStore from 'redux-persist/es/persistStore';
+import { useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {HeaderComponent} from './components/Header/Header';
@@ -19,65 +23,67 @@ import { RestrauntMenu } from './components/RestrauntDetails/RestrauntDetails';
 import { Checkout } from './components/Checkout/Checkout';
 import store from './redux/store';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Login } from './components/Login/Login';
-import { PersistGate } from 'redux-persist/integration/react';
-import persistStore from 'redux-persist/es/persistStore';
-import { useEffect } from 'react';
-import { handleAuthentication } from './auth/auth-config';
-import { User } from './redux/userSlice';
+import { AuthLogout, handleAuthentication, renewSession, renewSession } from './auth/auth-config';
+import { Logout, User } from './redux/userSlice';
 import { getUser } from './services/fetch.service';
 import { Completion } from './components/Modals/Completion/Completion';
 
 const persistor = persistStore(store)
+
 const AppLayout = () => {
     
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const getAuthDetails = async () => {
-          const response = await handleAuthentication();
-          const { sub: auth_id, nickname, picture, email } = response;
-          const id = await getUser(auth_id);
-          console.log("Header:", JSON.stringify(response));
-          const user = {
-            id,
-            auth_id,
-            nickname,
-            picture,
-            email,
-            isLoggedIn: true,
-          };
-          
-          dispatch(User(user));
-          toast.success(`Welcome ${nickname}`);
-        //   checkIfLoggedIn();
+            try {
+                const response = await handleAuthentication();
+                const { sub: auth_id, nickname, picture, email } = response;
+                const id = await getUser(auth_id);
+                console.log("Header:", JSON.stringify(response));
+                setIsLoggedIn(true);
+                const user = {
+                    id,
+                    auth_id,
+                    nickname,
+                    picture,
+                    email,
+                    isLoggedIn: true,
+                };
+                
+                dispatch(User(user));
+                toast.success(`Welcome ${nickname}`);
+            } catch {
+                try {
+                    const renewSessionResponse = await renewSession();
+                    if (renewSessionResponse && renewSessionResponse.token) {
+                        setIsLoggedIn(true);
+                    }
+                    console.log('renewSession', renewSessionResponse);
+                } catch {
+                    setIsLoggedIn(false);
+                    const response = await AuthLogout();
+                    dispatch(Logout())
+                }
+            }
         };
         getAuthDetails();
       }, []);
-      
-    //   const checkIfLoggedIn = () => {
-    //     if (isLoggedIn) {
-    //         navigate("/");
-    //       } else {
-    //         navigate("/login");
-    //       }
-    //   }
-
-
-    // const isLoggedIn = useSelector(store => store.user.user.isLoggedIn);
-    // const navigate = useNavigate();
-    
-    // useEffect(() => {
-        
-    // }, [])
 
     return (
        <>
-            <ToastContainer position='top-center' className='toast-message' />
-            <HeaderComponent />
-            <Outlet />
-            <Footer />
+            {isLoggedIn && (
+                <>
+                    <ToastContainer position='top-center' className='toast-message' />
+                    <HeaderComponent />
+                    <Outlet />
+                    <Footer />
+                </>
+            )}
        </>
     )
 }

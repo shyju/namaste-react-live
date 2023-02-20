@@ -133,7 +133,7 @@ export const Login = () => {
         }
         
         
-        const loginResponse = await Authlogin(username, password);
+        const loginResponse = Authlogin(username, password);
         // dispatch(login());
 
     }
@@ -147,7 +147,7 @@ export const Login = () => {
     }
 
     const handleSignUp = async() => {
-        const response = await AuthSignUp(username, password);
+        AuthSignUp(username, password);
         // dispatch(login())
     }
 

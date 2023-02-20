@@ -10,6 +10,7 @@ import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getCartItems} from '../../services/fetch.service';
 import { Logout, User } from '../../redux/userSlice';
 import { AuthLogout, handleAuthentication } from '../../auth/auth-config';
+import MenuIcon from '../../assets/img/Hamburger.png';
 
 const Title = () => (
     <Link to='/'>
@@ -45,29 +46,34 @@ export const HeaderComponent = ({name}) => {
    return (
     <div className="header">
         <Title/>
-        <div className="nav-items">
-            <ul>
-                <li>
-                    <Link to="/" className='text-link'>Home</Link>
-                </li>
-                {/* <li>
-                    <Link to="/about" className='text-link'>About</Link>
-                </li>
-                <li>
-                    <Link to="/contact" className='text-link'>Contact</Link>
-                </li> */}
-                <li>
-                    <Link to="/checkout" className='text-link'>Cart</Link>
-                </li>
-                <li>
-                    <Link to="/" className='text-link' onClick={handleLogout}>
-                        Logout
-                    </Link>
-                </li>
-                <li>
-                    <img className='profile-pic' src={picture} alt="" />
-                </li>
-            </ul>
+        <div className='header-right'>
+            <div className="nav-items">
+                <ul>
+                    <li>
+                        <Link to="/" className='text-link'>Home</Link>
+                    </li>
+                    {/* <li>
+                        <Link to="/about" className='text-link'>About</Link>
+                    </li>
+                    <li>
+                        <Link to="/contact" className='text-link'>Contact</Link>
+                    </li> */}
+                    <li>
+                        <Link to="/checkout" className='text-link'>Cart</Link>
+                    </li>
+                    <li>
+                        <Link to="/" className='text-link' onClick={handleLogout}>
+                            Logout
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+            <div className='profile-pic'>
+                <img src={picture} alt="" />
+            </div>
+            {/* <div className='menu-icon'>
+                <img src={MenuIcon} />
+            </div> */}
         </div>
     </div>
    )

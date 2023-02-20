@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import './Widget.css'
 
 export const Widget = ({restaurant_widgets, widgetIndex, clickFunction}) => {
     const [widgetStyle, setWidgetStyle] = useState("widget");
@@ -28,7 +29,7 @@ export const Widget = ({restaurant_widgets, widgetIndex, clickFunction}) => {
                 restaurant_widgets?.map(({widget: {name}}, index) => 
                 <li 
                 key={index} 
-                style={widgetIndex === index ? {color: '#fc8019', fontWeight: 'bolder',borderRight: '3px solid #fc8019'} : {}}
+                className= {widgetIndex === index && 'widget-column'}
                 onClick={() =>clickFunction(index)}
                 >{name}</li>)
             }
