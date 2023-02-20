@@ -30,8 +30,8 @@
     border-width: 9px 0 0 9px;
 }
 
-.card {
-    width: 254px;
+.card-item {
+    width: 295px;
     padding: 20px;
     margin: 10px;
     display: flex;
@@ -41,13 +41,13 @@
     /* border: 1px solid black; */
 }
 
-.card > img {
+.card-item > img {
     width: 254px;
     height: 160px;
     margin-bottom: 15px;
 }
 
-.card > .quick-view {
+.card-item > .quick-view {
     visibility: hidden;
     width: 100%;
     padding-top: 10px;
@@ -60,35 +60,38 @@
     border-top: 0.5px solid rgb(218, 212, 212);
 }
 
-.card:hover {
+.card-item:hover {
     border: 0.5px solid rgb(211, 208, 208);
     box-shadow: 0 4px 7px 0 rgb(218 220 230 / 60%)#eee;
 }
 
-.card:hover .quick-view {
+.card-item:hover .quick-view {
     visibility: visible;
 }
 
-.card > .restraunt-name {
+.card-item > .restraunt-name {
     margin-bottom: 10px;
     font-weight: bolder;
+    color: #000;
 }
 
-.card > .restraunt-cuisines {
-    margin-bottom: 10px;
+.card-item > .restraunt-cuisines {
+    margin-bottom: 20px;
+    height: 40px;
     color: gray;
     font-size: smaller;
 }
 
-.card > .details {
+.card-item > .details {
     display: flex;
     justify-content: space-between;
     font-weight: lighter;
     font-size: smaller;
     padding-bottom: 15px;
+    color: #000;
 }
 
-.card > .details > .rating {
+.card-item > .details > .rating {
     background-color: rgb(236, 156, 5);
     padding: 0 5px;
     color: white;
@@ -133,4 +136,17 @@
     padding: 10px;
     outline:none;
     border: none;
+}
+@media (max-width: 1041px) {
+
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+    }
+    .search-container > .buttons {
+        display: flex;
+        justify-content: center;
+    }
 }

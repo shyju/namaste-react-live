@@ -1,6 +1,31 @@
 - name: allowed-queries
   definition:
     queries:
+      - name: addToCart
+        query: |
+          mutation addToCart ($user_id: uuid!, $menu_id: uuid!, $restaurant_id: uuid!, $restaurant_name: String!, $restaurant_image_id: String!, $quantity: Int!, $price: float8!, $total: float8!) {
+            insert_cart(objects: [{user_id:$user_id,menu_id:$menu_id,restaurant_id:$restaurant_id,restaurant_name:$restaurant_name,restaurant_image_id:$restaurant_image_id,quantity:$quantity,price:$price,total:$total}]) {
+              returning {
+                id
+                menu {
+                  name
+                  id
+                  image_id
+                  veg
+                }
+                price
+                quantity
+                total
+              }
+            }
+          }
+      - name: addUser
+        query: |
+          mutation addUser ($id: uuid!, $auth_id: String!, $lastname: String!, $firstname: String!) {
+            insert_user(objects: {auth_id:$auth_id,lastname:$lastname,id:$id,firstname:$firstname}) {
+              affected_rows
+            }
+          }
       - name: getRestraunts
         query: |
           query getRestraunts {
@@ -18,6 +43,48 @@
                   name
                 }
               }
+            }
+          }
+      - name: updateCartById
+        query: |
+          mutation updateCartById ($cartId: uuid!, $quantity: Int!, $total: float8!) {
+            update_cart_by_pk(pk_columns: {id:$cartId}, _set: {quantity:$quantity,total:$total}) {
+              id
+              quantity
+              total
+            }
+          }
+      - name: clearCart
+        query: |
+          mutation clearCart ($userId: uuid!) {
+            delete_cart(where: {user_id:{_eq:$userId}}) {
+              affected_rows
+            }
+          }
+      - name: getCartItems
+        query: |
+          query getCartItems {
+            cart {
+              id
+              restaurant_id
+              restaurant_name
+              restaurant_image_id
+              menu {
+                name
+                id
+                image_id
+                veg
+              }
+              price
+              quantity
+              total
+            }
+          }
+      - name: getUser
+        query: |
+          query getUser {
+            user {
+              id
             }
           }
       - name: getRestraunt
@@ -72,54 +139,11 @@
               }
             }
           }
-      - name: getCartItems
+      - name: addNewAddress
         query: |
-          query getCartItems {
-            cart {
-              id
-              menu {
-                name
-                id
-                image_id
-                veg
-              }
-              price
-              quantity
-              total
-            }
-          }
-      - name: updateCartById
-        query: |
-          mutation updateCartById ($id: uuid!, $quantity: Int!, $total: float8!) {
-            update_cart_by_pk(pk_columns: {id:$id}, _set: {quantity:$quantity,total:$total}) {
-              id
-              quantity
-              total
-            }
-          }
-      - name: addToCart
-        query: |
-          mutation addToCart ($user_id: uuid!, $menu_id: uuid!, $quantity: Int!, $price: float8!, $total: float8!) {
-            insert_cart(objects: [{user_id:$user_id,menu_id:$menu_id,quantity:$quantity,price:$price,total:$total}]) {
-              returning {
-                id
-                menu {
-                  name
-                  id
-                  image_id
-                  veg
-                }
-                price
-                quantity
-                total
-              }
-            }
-          }
-      - name: deleteCartById
-        query: |
-          mutation deleteCartById ($id: uuid!) {
-            delete_cart_by_pk(id: $id) {
-              id
+          mutation addNewAddress ($addressType: String!, $houseName: String!, $locality: String!, $city: String!, $state: String!, $pincode: bigint!, $isPrimary: Boolean!, $userId: uuid!) {
+            insert_addresses(objects: {address_type:$addressType,address_line_1:$houseName,address_line_2:$locality,city:$city,state:$state,pincode:$pincode,primary:$isPrimary,user_id:$userId}) {
+              affected_rows
             }
           }
       - name: getAddresses
@@ -128,6 +152,28 @@
             addresses(where: {user_id:{_eq:$userId}}) {
               address_line_1
               address_line_2
+              address_type
+              city
+              id
+              pincode
+              primary
+              state
+            }
+          }
+      - name: deleteCartById
+        query: |
+          mutation deleteCartById ($cartId: uuid!) {
+            delete_cart_by_pk(id: $cartId) {
+              id
+            }
+          }
+      - name: updateAddress
+        query: |
+          mutation updateAddress ($addressId: uuid!, $addressType: String!, $houseName: String!, $locality: String!, $city: String!, $state: String!, $pincode: bigint!, $isPrimary: Boolean!) {
+            update_addresses_by_pk(pk_columns: {id:$addressId}, _set: {address_line_1:$houseName,address_line_2:$locality,address_type:$addressType,city:$city,pincode:$pincode,primary:$isPrimary,state:$state}) {
+              address_line_1
+              address_line_2
+              address_type
               city
               id
               pincode

@@ -11,6 +11,33 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: addUser
+  methods:
+    - POST
+  name: addUser
+  url: addUser
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: updateAddress
+  methods:
+    - PUT
+  name: updateAddress
+  url: address/:addressId/updateAddress
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: addNewAddress
+  methods:
+    - POST
+  name: addNewAddress
+  url: address/:userId/newAddress
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: getRestraunts
   methods:
     - GET
@@ -24,7 +51,7 @@
   methods:
     - DELETE
   name: deleteCartById
-  url: cart/:id/deleteCartById
+  url: cart/:cartId/deleteCartById
 - comment: ""
   definition:
     query:
@@ -33,7 +60,16 @@
   methods:
     - PUT
   name: updateCartById
-  url: cart/:id/updateCartById
+  url: cart/:cartId/updateCartById
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: clearCart
+  methods:
+    - DELETE
+  name: clearCart
+  url: cart/:userId/clearCart
 - comment: ""
   definition:
     query:
@@ -43,6 +79,15 @@
     - GET
   name: getCartItems
   url: getCartItems
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getUser
+  methods:
+    - GET
+  name: getUser
+  url: getUser
 - comment: ""
   definition:
     query:

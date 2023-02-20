@@ -1,0 +1,12 @@
+.widget-column{
+    color: #fc8019;
+    font-weight: bolder;
+    border-right: 3px solid #fc8019
+}
+
+@media (max-width: 1410px) {
+    .widget-column {
+        border-right: 0;
+        border-bottom: 3px solid #fc8019;
+    }
+}

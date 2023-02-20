@@ -9,3 +9,10 @@ array_relationships:
         table:
           name: restraunt_cuisine
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+        - id
+      filter: {}

@@ -23,3 +23,13 @@ array_relationships:
         table:
           name: widget_menu
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - veg
+        - price
+        - image_id
+        - name
+        - id
+      filter: {}

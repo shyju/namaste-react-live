@@ -8,3 +8,11 @@ object_relationships:
   - name: widget
     using:
       foreign_key_constraint_on: widget_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - menu_id
+        - widget_id
+      filter: {}

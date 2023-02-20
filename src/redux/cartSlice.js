@@ -4,8 +4,8 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         restraunt: {
+            id: '',
             name: '',
-            area: '',
             restrauntImageId: ''
         },
         items: [],
@@ -18,6 +18,9 @@ const cartSlice = createSlice({
         },
         populateCart: (state, action) => {
             state.items = action.payload
+        },
+        populateRestaurant: (state, action) => {
+            state.restraunt = action.payload
         },
         addItem: (state, action) => {
             state.items = action.payload
@@ -34,6 +37,6 @@ const cartSlice = createSlice({
     }
 });
 
-export const {updateRestrauntInfo, populateCart, addItem, updateItem, removeItem, clearCart} = cartSlice.actions;
+export const {updateRestrauntInfo, populateCart, populateRestaurant, addItem, updateItem, removeItem, clearCart} = cartSlice.actions;
 
 export default cartSlice.reducer;

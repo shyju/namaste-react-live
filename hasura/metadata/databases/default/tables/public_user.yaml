@@ -2,6 +2,13 @@ table:
   name: user
   schema: public
 array_relationships:
+  - name: addresses
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: addresses
+          schema: public
   - name: carts
     using:
       foreign_key_constraint_on:
@@ -9,3 +16,14 @@ array_relationships:
         table:
           name: cart
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - auth_id
+        - firstname
+        - lastname
+        - id
+      filter:
+        auth_id:
+          _eq: X-Hasura-User-Id

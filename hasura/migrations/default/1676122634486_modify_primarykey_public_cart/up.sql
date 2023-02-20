@@ -1,6 +1,0 @@
-BEGIN TRANSACTION;
-ALTER TABLE "public"."cart" DROP CONSTRAINT "cart_pkey";
-
-ALTER TABLE "public"."cart"
-    ADD CONSTRAINT "cart_pkey" PRIMARY KEY ("id");
-COMMIT TRANSACTION;

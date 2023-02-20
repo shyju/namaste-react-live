@@ -9,3 +9,11 @@ array_relationships:
         table:
           name: restaurant_offer
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - coupon_code
+        - description
+        - id
+      filter: {}
