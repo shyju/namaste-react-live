@@ -41,11 +41,64 @@ a {
     text-align: end;
 }
 
+.restraunt-list {
+    display: flex;;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 210px;
+}
+
+.search-container {
+    padding: 10px;
+    margin: 0 210px;
+}
+
+.search-container > input:focus {
+    outline: none;
+}
+
+.search-container > input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid lightgray;
+    padding: 0 5px;
+    font-weight: bold;
+}
+
+.search-container > .buttons {
+    margin-top: 40px;
+    text-align: center;
+    width: 100%;
+}
+
+.search-container > .buttons > button {
+    width: 100px;
+    margin-right: 5px;
+    background-color: #5d8ed5;
+    color: white;
+    padding: 10px;
+    outline:none;
+    border: none;
+}
+
 @media (max-width: 925px) {
    .restraunt-list {
     display: flex;
     justify-content: center;
     margin: 10px;
    }
+
+   .search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 180px;
+    margin-left: 0;
+    margin-right: 0;
+}
+.search-container > .buttons {
+    display: flex;
+    justify-content: center;
+}
 }
 

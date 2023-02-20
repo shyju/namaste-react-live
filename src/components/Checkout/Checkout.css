@@ -346,4 +346,80 @@
 }
 
 
+@media (max-width: 925px) {
+
+    .checkout-container {
+        height: fit-content;
+        width: fit-content;
+        margin-top: 150px;
+        margin-right: 0;
+    }
+
+    .checkout {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        margin-left: 20px;
+        margin-right: 30px;
+        align-items: center;
+    }
+
+    .address-section {
+        padding: 35px 0;
+        background-color: #fff;
+        margin-right: -20px;
+        margin-left: -20px;
+    }
+
+    .payment-section {
+        padding: 35px 20px;
+        background-color: #fff;
+        margin-right: -20px;
+        margin-left: -20px;
+    }
+    
+    .address-header {
+        margin-left: 20px;
+        margin-bottom: 40px;   
+        font-size: 12px; 
+    }
+    
+    .address-header > span {
+        display: block;
+        font-size: 12px;
+        color: #7e808c;
+        font-weight: 400;
+    }    
+
+    .address-list {
+        flex-direction: column;
+    }
+
+    .checkout-left-section {
+        margin: 20px;
+        margin-bottom: -100px;
+    }
+
+    .checkout-right-section {
+        width: auto;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 50px;
+    }
+
+    .address, .add-new-address {
+        width: auto !important;
+        margin-bottom: 20px
+    }
+
+    .delivery-checkbox > input {
+        margin-top: 10px;
+    }
+
+    .address > .description > div, .add-new-address > .description {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
 

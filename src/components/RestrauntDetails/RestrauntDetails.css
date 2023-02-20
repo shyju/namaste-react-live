@@ -508,10 +508,16 @@
 }
 
 @media (max-width: 925px) {
+
+    .restraunt-container {
+        margin-top: 50px;
+    }
     .restraunt-details {
         display: flex;
         justify-content: center;
         position: relative;
+        margin-top: 100px;
+        padding-top: 20px;
     }
     .details-header {
         flex-direction: column;
@@ -533,13 +539,33 @@
         padding: 10px 20px;
         display: flex;
     }
+
+    .restraunt-metadata > .name, .restraunt-metadata > .sub-details {
+        text-align: center;
+    }
+
+    .restraunt-metadata > .ratings-time-cost > div:first-child {
+        padding-left: 35px;
+        padding-right: 35px ;
+    }
+
+    .restraunt-metadata > .ratings-time-cost > div {
+        align-items: center;
+        text-align: center;
+    }
+
+    .restraunt-metadata > .ratings-time-cost > div > span:last-child {
+        text-align: center;
+        font-size: 10px;
+    }
+
     .menu {
         flex-direction: column;
         margin: 10px;
         width:inherit;
         padding: 25px;
         justify-content: flex-start;
-        /* flex-wrap: wrap; */
+        top: 600px;
         padding: 0
     }
 
@@ -598,12 +624,13 @@
     }
     .menu-items > .buttons > .add-button {
         bottom: 0px;
+        margin-left: 24px;
         /* left: 32%; */
     }
 
-    /* .menu-items > .buttons > .cart-increment-decrement {
+    .menu-items > .buttons > .cart-increment-decrement {
         margin-left: 52px;
-    } */
+    }
 
     .mini-cart, .mini-cart-scroll {
         display: none;

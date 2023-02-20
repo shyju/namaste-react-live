@@ -58,10 +58,14 @@
 
 @media (max-width: 925px) {
     .header {
-        margin: 0 20px;
-        position: sticky;
-        /* position: fixed; */
-        /* flex-direction: column; */
+        width: 100vw;
+        margin-left: 0;
+        z-index: 3;
+        position: fixed;
+        justify-content: space-between;
+        margin: 0 10px 0 -15px;
+        background-color: #fff;
+        display: flex;
     }
 
     .header-right {
@@ -70,10 +74,6 @@
         align-items: end;
     }
 
-    /* .header-right > .nav-items {
-        align-items: end;
-    } */
-
     .header-right > .nav-items {
         display: none;
         transition: display 5s tranform 2s;
@@ -81,7 +81,8 @@
         position: absolute;
         width: 100vw;
         justify-content: center;
-        bottom: -30px;
+        bottom: -40px;
+        background-color: #fff;
     }
 
     .header-right > .nav-items > ul {
@@ -93,7 +94,6 @@
     }
 
     .profile-pic > img {
-        /* display: flex; */
         display: none;
         margin-bottom: 20px;
     }
