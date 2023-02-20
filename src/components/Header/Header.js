@@ -8,9 +8,9 @@ import Logo from '../../assets/img/foodvilla.png'
 import './Header.css'
 import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getCartItems} from '../../services/fetch.service';
-import { Logout, User } from '../../redux/userSlice';
-import { AuthLogout, handleAuthentication } from '../../auth/auth-config';
-import MenuIcon from '../../assets/img/Hamburger.png';
+import { Logout } from '../../redux/userSlice';
+import { AuthLogout } from '../../auth/auth-config';
+// import MenuIcon from '../../assets/img/Hamburger.png';
 
 const Title = () => (
     <Link to='/'>
