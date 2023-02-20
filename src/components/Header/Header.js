@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as _ from 'lodash';
@@ -10,7 +10,7 @@ import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getCartItems} from '../../services/fetch.service';
 import { Logout } from '../../redux/userSlice';
 import { AuthLogout } from '../../auth/auth-config';
-// import MenuIcon from '../../assets/img/Hamburger.png';
+import MenuIcon from '../../assets/img/hamburger.png';
 
 const Title = () => (
     <Link to='/'>
@@ -28,10 +28,27 @@ export const HeaderComponent = ({name}) => {
     const user_id = useSelector(store => store.user?.user?.id);
     const picture = useSelector(store => store.user?.user?.picture);
 
+    const [showNavMenu, setShowNavMenu] = useState(true);
+    const [width, setWidth] = useState(window.innerWidth);
+
+    const handleResize = () => {
+        const {innerWidth, innerHeight} =  window;
+        if (width > 925) {
+            setShowNavMenu(true);
+        } else if (width <= 925) {
+            setShowNavMenu(false)
+        }
+        setWidth(innerWidth);
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize)
+    }, [width])
+
     useEffect(() => {
         getCartList();
     }, [user_id]);
-
 
     const getCartList = async () => {
         const {restaurant, cart} = await getCartItems(user_id);
@@ -44,10 +61,10 @@ export const HeaderComponent = ({name}) => {
         dispatch(Logout())
     }
    return (
-    <div className="header">
+    <div className="header" style={{marginBottom: showNavMenu && width <= 925 ? '30px' : ''}}>
         <Title/>
         <div className='header-right'>
-            <div className="nav-items">
+            <div className="nav-items" style={{display: showNavMenu && (width <= 925 || width > 925) ? 'flex' : 'none'}}>
                 <ul>
                     <li>
                         <Link to="/" className='text-link'>Home</Link>
@@ -71,9 +88,9 @@ export const HeaderComponent = ({name}) => {
             <div className='profile-pic'>
                 <img src={picture} alt="" />
             </div>
-            {/* <div className='menu-icon'>
+            <div className='menu-icon' onClick={() => setShowNavMenu(!showNavMenu)}>
                 <img src={MenuIcon} />
-            </div> */}
+            </div>
         </div>
     </div>
    )

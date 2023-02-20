@@ -41,7 +41,7 @@ a {
     text-align: end;
 }
 
-@media (max-width: 1041px) {
+@media (max-width: 925px) {
    .restraunt-list {
     display: flex;
     justify-content: center;
