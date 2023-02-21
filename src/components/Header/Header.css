@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 220px;
+    z-index: inherit;
 }
 
 
@@ -58,7 +59,7 @@
 
 @media (max-width: 925px) {
     .header {
-        width: 100vw;
+        width: 104vw;
         margin-left: 0;
         z-index: 3;
         position: fixed;
@@ -75,7 +76,6 @@
     }
 
     .header-right > .nav-items {
-        display: none;
         transition: display 5s tranform 2s;
         transition-delay: 1s;
         position: absolute;
@@ -94,8 +94,8 @@
     }
 
     .profile-pic > img {
-        display: none;
         margin-bottom: 20px;
+        margin-right: 20px;
     }
 
     .menu-icon {

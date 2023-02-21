@@ -29,22 +29,6 @@ export const HeaderComponent = ({name}) => {
     const picture = useSelector(store => store.user?.user?.picture);
 
     const [showNavMenu, setShowNavMenu] = useState(true);
-    const [width, setWidth] = useState(window.innerWidth);
-
-    const handleResize = () => {
-        const {innerWidth, innerHeight} =  window;
-        if (width > 925) {
-            setShowNavMenu(true);
-        } else if (width <= 925) {
-            setShowNavMenu(false)
-        }
-        setWidth(innerWidth);
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize)
-    }, [width])
 
     useEffect(() => {
         getCartList();
@@ -61,10 +45,10 @@ export const HeaderComponent = ({name}) => {
         dispatch(Logout())
     }
    return (
-    <div className="header" style={{marginBottom: showNavMenu && width <= 925 ? '30px' : ''}}>
+    <div className="header">
         <Title/>
         <div className='header-right'>
-            <div className="nav-items" style={{display: showNavMenu && (width <= 925 || width > 925) ? 'flex' : 'none'}}>
+            <div className="nav-items">
                 <ul>
                     <li>
                         <Link to="/" className='text-link'>Home</Link>
@@ -87,9 +71,6 @@ export const HeaderComponent = ({name}) => {
             </div>
             <div className='profile-pic'>
                 <img src={picture} alt="" />
-            </div>
-            <div className='menu-icon' onClick={() => setShowNavMenu(!showNavMenu)}>
-                <img src={MenuIcon} />
             </div>
         </div>
     </div>

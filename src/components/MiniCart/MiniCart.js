@@ -7,7 +7,7 @@ import EmptyCart from '../../assets/img/EmptyCart.jpeg';
 import { CartItem } from '../CartItem/CartItem';
 import StripeCheckout from 'react-stripe-checkout';
 
-export const MiniCart = ({name}) => {
+export const MiniCart = ({name, cartStyle}) => {
 
     const [subTotal, setSubTotal] = useState(0);
     const navigate = useNavigate();

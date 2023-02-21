@@ -3,20 +3,17 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import { Button } from 'react-bootstrap/Button';
+import { useDispatch, useSelector } from 'react-redux';
 
+import './Checkout.css';
 import WorkIcon from '../../assets/img/work.png';
 import AddressIcon from '../../assets/img/address.png'
 import OfferIcon from '../../assets/img/offer.png'
 import EmptyCart from '../../assets/img/EmptyCart.jpeg'
-import { useDispatch, useSelector } from 'react-redux';
 import { CartItem } from '../CartItem/CartItem';
 import { IMG_CDN_URL } from '../../constants';
-import './Checkout.css';
 import { createPaymentIntent, getAddresses } from '../../services/fetch.service';
 import { populateAddress } from '../../redux/addressSlice';
-
 import { Payment } from '../Payment/Payment';
 import { Address } from '../Modals/AddressModal/Address';
 import { ToggleAddresssModal } from '../../redux/uiSlice';

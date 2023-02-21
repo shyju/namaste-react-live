@@ -108,7 +108,7 @@ export const RestrauntMenu = () => {
                             </div>
                         </div>
                         <div className={cartStyle}>
-                            <MiniCart key="asda" name={restraunt?.name}></MiniCart>
+                            <MiniCart key="asda" cartStyle={cartStyle} name={restraunt?.name}></MiniCart>
                         </div>
                     </div>
                 </div>

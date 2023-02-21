@@ -4,10 +4,11 @@
     --radius: 6px;
     --form-width: 343px;
   }
-  * {
+  *, html {
     /* box-sizing: border-box; */
     /* color: initial; */
     text-decoration: inherit !important;
+    scroll-behavior: smooth !important;
   }
 body {
     margin: 0;
@@ -17,7 +18,8 @@ body {
     font-family: var(--body-font-family);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
-    height: 100vh;
+    height: fit-content;
+    scroll-behavior: smooth;
 }
 
 a {

@@ -1,7 +1,7 @@
 .checkout-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: auto;
     width: 100vw;
     background-color: #e9ecee;
 }
@@ -160,7 +160,7 @@
     border: 1px solid #60b246;
     color: #60b246;
     background: #fff;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .address > .description > .address-info , .add-new-address > .description > .address-info{
@@ -351,7 +351,7 @@
     .checkout-container {
         height: fit-content;
         width: fit-content;
-        margin-top: 150px;
+        margin-top: 180px;
         margin-right: 0;
     }
 

@@ -1,6 +1,8 @@
 .restraunt-container {
     display: flex;
     flex-direction: column;
+    scroll-behavior: smooth;
+    transition: scroll-behaviour 1s;
 }
 
 .restraunt-details {
@@ -8,8 +10,7 @@
     position: sticky;
     top: 0;
     z-index: 2;
-    /* margin: 0 -40px; */
-    /* width: 100%; */
+    transition: position  1s;
 }
 
 .details-header {
@@ -23,7 +24,8 @@
 .details-header > img {
     margin: 30px 0;
     height: 206px;
-    /* width: 300px; */
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .restraunt-metadata {
@@ -350,6 +352,7 @@
     margin-top: -100px;
     margin-left: -250px;
     height: 100vh;
+    transition: margin-top 1s;
 }
 
 .widget::-webkit-scrollbar, .widget-scroll::-webkit-scrollbar {
@@ -387,7 +390,7 @@
     width: 330px;
     position: fixed;
     right: 217px;
-    margin-top: 6px;
+    margin-top: -23px;
 }
 
 .mini-cart-scroll {
@@ -397,7 +400,8 @@
     width: 330px;
     position: fixed;
     right: 400px;
-    margin-top: -100px;
+    margin-top: -126px;
+    transition: margin-top 1s;
 }
 
 .mini-cart > .empty-cart {
@@ -526,9 +530,9 @@
         justify-content: center;
     }
     .details-header > img {
-        width: 200px;
-        height: 150px;
+        object-fit: cover;
         margin: 0 auto;
+        border-radius: 15px;
     }
 
     .restraunt-metadata {
@@ -585,7 +589,10 @@
     .widget > ul, .widget-scroll > ul {
         display: flex;
         flex-direction: row;
-        margin-left: 90px;
+        margin-left: 0px;
+        overflow: scroll;
+        /* border-bottom: 1px solid; */
+        padding-left: 0;
     }
 
     .widget > ul > li , .widget-scroll > ul > li {
@@ -594,11 +601,10 @@
         margin-bottom: 10px;
         text-align: end;
         font-weight: 500;
-        font-size: 15px;
+        font-size: 10px;
         opacity: .7;
         white-space: nowrap;
         min-width: 0;
-        
     }
 
     .menu-section {
@@ -624,12 +630,6 @@
     }
     .menu-items > .buttons > .add-button {
         bottom: 0px;
-        margin-left: 24px;
-        /* left: 32%; */
-    }
-
-    .menu-items > .buttons > .cart-increment-decrement {
-        margin-left: 52px;
     }
 
     .mini-cart, .mini-cart-scroll {
