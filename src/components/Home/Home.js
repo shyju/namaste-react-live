@@ -21,48 +21,64 @@ export const Home = () => {
         getAllRestraunts();
     }, []);
 
+    useEffect(() => {
+
+        setTimeout(() => {
+            getFilteredRestaurants();
+        }, 1000)
+
+        return () => clearInterval();
+    }, [searchTxt])
+
+    async function getFilteredRestaurants() {
+        const data = await filterData(searchTxt, allRestraunts);
+        setFilteredRestraunts(data);
+    }
+
     async function getAllRestraunts() {
         const restaurantList = await getRestaurants();
         setFilteredRestraunts(restaurantList);
         dispatch(updateRestrauntList(restaurantList));
     }
 
-    return (filteredRestraunts?.length === 0) 
-    ? <Shimmer></Shimmer> 
-    :(
+
+    return (
         <>
-        <div className='search-container'>
-            <input 
-                type='text' 
-                placeholder='Search for Restraunts' 
-                value={searchTxt} 
-                onChange={(e) => setSearchTxt(e.target.value)} />
-            <div className='buttons'>
-                <button 
-                    className='search-btn' 
-                    onClick={async () => {
-                        const data = await filterData(searchTxt, allRestraunts);
-                        setFilteredRestraunts(data);
-                    }}>
-                    Search
-                </button>
-                <button 
-                    className='clear-btn' 
-                    onClick={() => {
-                        setSearchTxt('');
-                        setFilteredRestraunts(allRestraunts);
-                    }}>
-                    Clear
-                </button>
+            <div className='search-container'>
+                <input 
+                    type='text' 
+                    placeholder='Search for Restraunts' 
+                    value={searchTxt} 
+                    onChange={(e) => setSearchTxt(e.target.value)} />
+                <div className='buttons'>
+                    {/* <button 
+                        className='search-btn' 
+                        onClick={async () => {
+                            const data = await filterData(searchTxt, allRestraunts);
+                            setFilteredRestraunts(data);
+                        }}>
+                        Search
+                    </button>
+                    <button 
+                        className='clear-btn' 
+                        onClick={() => {
+                            setSearchTxt('');
+                            setFilteredRestraunts(allRestraunts);
+                        }}>
+                        Clear
+                    </button> */}
+                </div>
             </div>
-        </div>
-        <div className='restraunt-list'>
             {
-                filteredRestraunts?.map((restraunt, index) => (
-                    <RestrauntCard  {...restraunt} key={restraunt.id} />
-                ))
+                filteredRestraunts?.length && <div className='restraunt-list'>
+                {
+                    filteredRestraunts?.map((restraunt) => (
+                        <RestrauntCard  {...restraunt} key={restraunt.id} />
+                    ))
+                }
+                </div>    
             }
-        </div>
+            
         </>
     )
 }

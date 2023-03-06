@@ -38,6 +38,8 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    border: 0.5px solid rgb(211, 208, 208);
+    box-shadow: 12px 10px 9px 0px #dadce699;
     /* border: 1px solid black; */
 }
 
@@ -49,7 +51,8 @@
 }
 
 .card-item > .quick-view {
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     width: 100%;
     padding-top: 10px;
     font-size: 14px;
@@ -61,14 +64,14 @@
     border-top: 0.5px solid rgb(218, 212, 212);
 }
 
-.card-item:hover {
+/* .card-item:hover {
     border: 0.5px solid rgb(211, 208, 208);
     box-shadow: 0 4px 7px 0 rgb(218 220 230 / 60%)#eee;
-}
+} */
 
-.card-item:hover .quick-view {
+/* .card-item:hover .quick-view {
     visibility: visible;
-}
+} */
 
 .card-item > .restraunt-name {
     margin-bottom: 10px;

@@ -10,7 +10,6 @@ import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getCartItems} from '../../services/fetch.service';
 import { Logout } from '../../redux/userSlice';
 import { AuthLogout } from '../../auth/auth-config';
-import MenuIcon from '../../assets/img/hamburger.png';
 
 const Title = () => (
     <Link to='/'>
@@ -25,10 +24,7 @@ const Title = () => (
 export const HeaderComponent = ({name}) => {
 
     const dispatch = useDispatch();
-    const user_id = useSelector(store => store.user?.user?.id);
-    const picture = useSelector(store => store.user?.user?.picture);
-
-    const [showNavMenu, setShowNavMenu] = useState(true);
+    const {id: user_id, picture, nickname} = useSelector(store => store.user?.user);
 
     useEffect(() => {
         getCartList();
@@ -70,7 +66,7 @@ export const HeaderComponent = ({name}) => {
                 </ul>
             </div>
             <div className='profile-pic'>
-                <img src={picture} alt="" />
+                <img src={picture} alt="" title={nickname.toUpperCase()}/>
             </div>
         </div>
     </div>
