@@ -1,9 +1,8 @@
 import {RestrauntCard} from '../RestrauntCard/RestrauntCard';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import * as _ from 'lodash';
-import { Shimmer } from '../Shimmer/Shimmer';
+
 import { updateRestrauntList } from '../../redux/restrauntSlice';
 import { getRestaurants } from '../../services/fetch.service';
 

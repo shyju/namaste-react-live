@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import * as _ from 'lodash';
@@ -117,6 +117,11 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
 
+    useEffect(() => {
+        setUsername('');
+        setPassword('');
+    }, [isSignUp])
+
     const handleLogin = async () => {
         if (_.isEmpty(username) && _.isEmpty(password)) {
             toast.warn('Enter username and password');
@@ -152,11 +157,6 @@ export const Login = () => {
     }
 
     const particlesInit = async (main) => {
-        console.log(main);
-    
-        // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
-        // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-        // starting from v2 you can add only the features you need reducing the bundle size
         await loadFull(main);
       };
 

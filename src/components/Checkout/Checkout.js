@@ -116,7 +116,7 @@ export const Checkout = () => {
                                     </div>
                                     <div className='description'>
                                         <h3>Add New Address</h3>
-                                        <span className='address-info'>kinfra film and video park,chantavila,near asinine school, 695585, India</span>
+                                        <span className='address-info'></span>
                                         <button onClick={() => dispatch(ToggleAddresssModal())}>ADD NEW</button>
                                     </div>
                                 </div>

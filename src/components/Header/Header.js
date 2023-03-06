@@ -24,7 +24,7 @@ const Title = () => (
 export const HeaderComponent = ({name}) => {
 
     const dispatch = useDispatch();
-    const {id: user_id, picture, nickname} = useSelector(store => store.user?.user);
+    const {id: user_id = '', picture = '', nickname = ''} = useSelector(store => store.user?.user) ?? {};
 
     useEffect(() => {
         getCartList();
