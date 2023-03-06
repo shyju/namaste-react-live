@@ -62,7 +62,7 @@ export const Payment = () => {
                 </span>
             </button>
             {/* Show any error or success messages */}
-            {message && <div className="payment-message">{message}</div>}
+            {/* {message && <div className="payment-message">{message}</div>} */}
         </form>
     )
 }
