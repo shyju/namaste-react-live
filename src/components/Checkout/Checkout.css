@@ -76,15 +76,23 @@
 }
 
 .payment-section {
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     margin-top: 20px;
     padding: 35px 60px 39px;
+    min-height: 200px;
 }
 
 .payment-section > span {
     color: #93959f;
     font-size: 20px;
     font-weight: bold;
+}
+
+.payment-section > img {
+    object-fit: contain;
+    height: 200px;
 }
 
 .payment-section > .payment {
@@ -371,6 +379,8 @@
     }
 
     .payment-section {
+        display: flex;
+        flex-direction: column;
         padding: 35px 20px;
         background-color: #fff;
         margin-right: -20px;

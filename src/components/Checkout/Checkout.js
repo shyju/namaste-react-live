@@ -9,7 +9,8 @@ import './Checkout.css';
 import WorkIcon from '../../assets/img/work.png';
 import AddressIcon from '../../assets/img/address.png'
 import OfferIcon from '../../assets/img/offer.png'
-import EmptyCart from '../../assets/img/EmptyCart.jpeg'
+import EmptyCart from '../../assets/img/EmptyCart.jpeg';
+import Loading from '../../assets/img/loading.gif';
 import { CartItem } from '../CartItem/CartItem';
 import { IMG_CDN_URL } from '../../constants';
 import { createPaymentIntent, getAddresses } from '../../services/fetch.service';
@@ -124,6 +125,8 @@ export const Checkout = () => {
                         </div>
                         <div className='payment-section'>
                             <span>Payment</span>
+
+                            {addressSelected && (!clientSecret || !stripePromise) && <img src={Loading} />}
                             {clientSecret && stripePromise && addressSelected && (
                                 <Elements stripe={stripePromise} options={{clientSecret}}>
                                     <Payment className='payment' />
