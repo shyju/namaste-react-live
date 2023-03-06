@@ -7,7 +7,7 @@ import { Shimmer } from '../Shimmer/Shimmer';
 import { updateRestrauntList } from '../../redux/restrauntSlice';
 import { getRestaurants } from '../../services/fetch.service';
 
-const filterData = (searchText, restaurants) => restaurants.filter((restraunt) => restraunt?.data?.name.includes(searchText));
+const filterData = (searchText, restaurants) => restaurants.filter((restraunt) => restraunt?.name.toUpperCase().includes(searchText.toUpperCase()));
 
 
 export const Home = () => {
@@ -40,8 +40,8 @@ export const Home = () => {
             <div className='buttons'>
                 <button 
                     className='search-btn' 
-                    onClick={() => {
-                        const data = filterData(searchTxt, allRestraunts);
+                    onClick={async () => {
+                        const data = await filterData(searchTxt, allRestraunts);
                         setFilteredRestraunts(data);
                     }}>
                     Search

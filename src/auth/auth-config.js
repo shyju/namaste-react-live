@@ -47,7 +47,9 @@ export const AuthSignUp = (email, password) => {
     connection: 'Username-Password-Authentication'
   }, (err, response) => {
     if (err?.statusCode === 400) {
-      toast.warn('Email already exists. Try a different email');
+      const {message, error} = err?.original?.response?.body;
+      console.log(`err: ${JSON.stringify(err)}`)
+      toast.warn(message ?? error);
       return;
     } 
 
