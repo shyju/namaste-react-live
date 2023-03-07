@@ -22,11 +22,11 @@ export const Home = () => {
 
     useEffect(() => {
 
-        setTimeout(() => {
+        const searchInterval = setTimeout(() => {
             getFilteredRestaurants();
         }, 1000)
 
-        return () => clearInterval();
+        return () => clearInterval(searchInterval);
     }, [searchTxt])
 
     async function getFilteredRestaurants() {
