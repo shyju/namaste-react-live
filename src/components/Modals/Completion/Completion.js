@@ -21,12 +21,16 @@ export const Completion = () => {
     const isModalOpen = useSelector(store => store.ui.isPaymentSuccessModalOpen);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+
+    const modalhandler = () => {
+        dispatch(TogglePaymentSuccessModal());
+        navigate('/checkout');
+    };
+
     return (
-        <Modal show={isModalOpen} onHide={() => {
-            dispatch(TogglePaymentSuccessModal());
-            navigate('/checkout');
-        }} centered size="sm">
-            <Modal.Header closeButton style={{border: 'none'}}>
+        <Modal show={isModalOpen} onHide={modalhandler} centered size="sm">
+            <Modal.Header closeButton style={{border: 'none'}} onClick={modalhandler}>
             <Modal.Title></Modal.Title>
             </Modal.Header>
             <Modal.Body contentClassName='modal' style={bodyStyle}>

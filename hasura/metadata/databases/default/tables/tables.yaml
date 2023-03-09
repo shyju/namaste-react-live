@@ -3,6 +3,8 @@
 - "!include public_cuisines.yaml"
 - "!include public_menus.yaml"
 - "!include public_offers.yaml"
+- "!include public_order_details.yaml"
+- "!include public_order_items.yaml"
 - "!include public_restaurant_menu.yaml"
 - "!include public_restaurant_offer.yaml"
 - "!include public_restaurant_widget.yaml"

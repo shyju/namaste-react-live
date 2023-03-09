@@ -28,6 +28,8 @@ import { AuthLogout, handleAuthentication, renewSession, renewSession } from './
 import { Logout, User } from './redux/userSlice';
 import { getUser } from './services/fetch.service';
 import { Completion } from './components/Modals/Completion/Completion';
+import { Order } from './components/Orders/Order';
+import { MyAccount } from './components/MyAccount/MyAccount';
 
 const persistor = persistStore(store)
 
@@ -121,6 +123,10 @@ const appRouter = createBrowserRouter([
             {
                 path: '/completion',
                 element: <Completion />
+            },
+            {
+                path: '/my-account',
+                element: <MyAccount />
             }
         ]
     }

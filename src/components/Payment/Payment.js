@@ -1,17 +1,21 @@
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
+import * as _ from 'lodash';
 
 import { populateCart, populateRestaurant } from "../../redux/cartSlice";
-import { clearCart, getCartItems } from "../../services/fetch.service";
+import { clearCart, createOrder, getAllOrders, getCartItems, insertOrderItems } from "../../services/fetch.service";
 import './Payment.css';
 import { TogglePaymentSuccessModal } from "../../redux/uiSlice";
 import { useNavigate } from "react-router-dom";
+import { populateOrders } from "../../redux/orderSlice";
 
 export const Payment = () => {
 
     const [message, setMessage] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
+    const cartItems = useSelector(store => store.cart?.items);
+    const restaurantDetails = useSelector(store => store.cart?.restraunt);
     const stripe = useStripe();
     const elements = useElements();
 
@@ -42,8 +46,23 @@ export const Payment = () => {
             setMessage(error.message);
         } else if (paymentIntent && paymentIntent.status === 'succeeded') {
             setMessage(`Payment status: ${paymentIntent.status}`);
+            const createOrderPayload = {
+                payment_id: paymentIntent.id,
+                total: 0,
+                user_id: userId,
+                restaurant_id: restaurantDetails.id
+            }
+            const createOrderResponse = await createOrder(createOrderPayload, userId);
+            const orderItems = _.map(cartItems, ({menu_id, quantity}) => ({
+                order_id: createOrderResponse.id,
+                product_id: menu_id,
+                quantity
+            }))
+            await insertOrderItems({orderItems}, userId);
             await clearCart(userId);
             const {restaurant, cart} = await getCartItems(userId);
+            const orders = await getAllOrders(userId);
+            dispatch(populateOrders(orders));
             dispatch(TogglePaymentSuccessModal());
             dispatch(populateCart(cart));
             dispatch(populateRestaurant(restaurant));

@@ -7,9 +7,10 @@ import addressSlice from "./addressSlice";
 import cartSlice from "./cartSlice";
 import restrauntSlice from "./restrauntSlice";
 import userSlice from "./userSlice";
+import uiSlice from './uiSlice';
 import persistReducer from 'redux-persist/es/persistReducer';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-import uiSlice from './uiSlice';
+import orderSlice from './orderSlice';
 
 
 const persistConfig = {
@@ -23,7 +24,8 @@ export const rootReducers = combineReducers({
     user: userSlice,
     restraunt: restrauntSlice,
     cart: cartSlice,
-    address: addressSlice
+    address: addressSlice,
+    order: orderSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

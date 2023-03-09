@@ -1,0 +1,9 @@
+.order-container {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-between;
+    padding: 20px;
+}
+

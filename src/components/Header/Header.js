@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as _ from 'lodash';
@@ -7,9 +7,10 @@ import * as _ from 'lodash';
 import Logo from '../../assets/img/foodvilla.png'
 import './Header.css'
 import { populateCart, populateRestaurant } from '../../redux/cartSlice';
-import {getCartItems} from '../../services/fetch.service';
+import {getAllOrders, getCartItems} from '../../services/fetch.service';
 import { Logout } from '../../redux/userSlice';
 import { AuthLogout } from '../../auth/auth-config';
+import { populateOrders } from '../../redux/orderSlice';
 
 const Title = () => (
     <Link to='/'>
@@ -28,12 +29,18 @@ export const HeaderComponent = ({name}) => {
 
     useEffect(() => {
         getCartList();
+        getMyOrders();
     }, [user_id]);
 
     const getCartList = async () => {
         const {restaurant, cart} = await getCartItems(user_id);
         dispatch(populateCart(cart));
         dispatch(populateRestaurant(restaurant));
+    }
+
+    const getMyOrders = async () => {
+        const orders = await getAllOrders(user_id);
+        dispatch(populateOrders(orders));
     }
 
     const handleLogout = async() => {
@@ -55,6 +62,9 @@ export const HeaderComponent = ({name}) => {
                     <li>
                         <Link to="/contact" className='text-link'>Contact</Link>
                     </li> */}
+                    <li>
+                        <Link to="/my-account" className='text-link'>My Account</Link>
+                    </li>
                     <li>
                         <Link to="/checkout" className='text-link'>Cart</Link>
                     </li>

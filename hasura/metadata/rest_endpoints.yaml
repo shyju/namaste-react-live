@@ -74,6 +74,15 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: createOrder
+  methods:
+    - POST
+  name: createOrder
+  url: createOrder
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: getCartItems
   methods:
     - GET
@@ -88,6 +97,24 @@
     - GET
   name: getUser
   url: getUser
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: insertOrderItems
+  methods:
+    - POST
+  name: insertOrderItems
+  url: insertOrderItems
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getAllOrders
+  methods:
+    - GET
+  name: getAllOrders
+  url: orders
 - comment: ""
   definition:
     query:

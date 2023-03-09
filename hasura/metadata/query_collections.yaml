@@ -181,3 +181,44 @@
               state
             }
           }
+      - name: insertOrderItems
+        query: |
+          mutation createOrderItems ($orderItems: [order_items_insert_input!]!) {
+            insert_order_items(objects: $orderItems) {
+              affected_rows
+            }
+          }
+      - name: createOrder
+        query: |
+          mutation createOrder ($payment_id: String, $total: float8, $user_id: uuid, $restaurant_id: uuid) {
+            insert_order_details(objects: {payment_id:$payment_id,total:$total,user_id:$user_id,restaurant_id:$restaurant_id}) {
+              returning {
+                id
+              }
+            }
+          }
+      - name: getAllOrders
+        query: |
+          query getAllOrders {
+            order_details {
+              id
+              total
+              created_at
+              restaurant {
+                id
+                name
+                image_id
+                area
+              }
+              order_items {
+                id
+                product_id
+                quantity
+                menu {
+                  id
+                  name
+                  price
+                }
+              }
+            }
+          }

@@ -164,6 +164,48 @@ export const editAddress = async(addressId, userId, payload) => {
     return await response.json();
 }
 
+export const createOrder = async(payload, userId) => {
+    const response = await fetch(`${BASE_URL}createOrder`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    });
+    const jsonData =  await response.json();
+    return {id: jsonData?.insert_order_details?.returning[0]?.id};
+}
+
+export const insertOrderItems = async(payload, userId) => {
+    const response = await fetch(`${BASE_URL}insertOrderItems`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    })
+    return await response.json()
+}
+
+export const getAllOrders = async(userId) => {
+    const response = await fetch(`${BASE_URL}orders`, {
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    })
+   const jsonData = await response.json();
+   return jsonData?.order_details;
+}
+
 
 
 export const createPaymentIntent = async options => {
