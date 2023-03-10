@@ -25,7 +25,7 @@ export const RestrauntCard = (restaurant) => {
                 <div className="details">
                     <div className="rating" style={rating >= 4 ? {backgroundColor: "#48c479"} : {}}>{rating} *</div>
                     <div>{delivery_time + ' MINS'}</div>
-                    <div>{price}</div>
+                    <div>{ '₹ ' + price}</div>
                 </div>
                 <div className="quick-view">
                     <span>QUICK VIEW</span>
