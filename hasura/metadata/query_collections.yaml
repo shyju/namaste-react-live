@@ -222,3 +222,39 @@
               }
             }
           }
+      - name: addToFavourites
+        query: |
+          mutation addToFavourites ($restaurant_id: uuid!, $userId: uuid!) {
+            insert_favourites_one(object: {restaurant_id:$restaurant_id,user_id:$userId}) {
+              id
+            }
+          }
+      - name: getAllFavourites
+        query: |
+          query getAllFavourites {
+            favourites {
+              id
+              restaurant {
+                id
+                image_id
+                name
+                rating
+                price
+                delivery_time
+                veg
+                promoted
+                restraunt_cuisines {
+                  cuisine {
+                    name
+                  }
+                }
+              }
+            }
+          }
+      - name: removeFavourite
+        query: |
+          mutation removeFavourite ($favouriteId: uuid!) {
+            delete_favourites_by_pk(id: $favouriteId) {
+              id
+            }
+          }

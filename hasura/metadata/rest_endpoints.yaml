@@ -83,6 +83,15 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: getAllFavourites
+  methods:
+    - GET
+  name: getAllFavourites
+  url: favourites
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: getCartItems
   methods:
     - GET
@@ -124,6 +133,24 @@
     - GET
   name: getRestraunt
   url: restraunt/:id/getRestraunt
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: removeFavourite
+  methods:
+    - DELETE
+  name: removeFavourite
+  url: user/:favouriteId/removeFavourite
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: addToFavourites
+  methods:
+    - POST
+  name: addToFavourites
+  url: user/:userId/addToFavourites
 - comment: ""
   definition:
     query:

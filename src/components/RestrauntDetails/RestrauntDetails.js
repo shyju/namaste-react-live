@@ -9,12 +9,19 @@ import { Widget } from "../Widget/Widget";
 import {MiniCart} from '../MiniCart/MiniCart';
 import { useDispatch, useSelector } from "react-redux";
 import { updateRestrauntDetails } from "../../redux/restrauntSlice";
-import { getRestaurantById } from "../../services/fetch.service";
+import { addToFavourites, getAllFavourites, getRestaurantById, removeFavourite } from "../../services/fetch.service";
+import FavWhite from '../../assets/img/favourite-white.png';
+import FavRed from '../../assets/img/favourite-red.png';
 import './RestrauntDetails.css';
+import { populateFavourites } from "../../redux/favouriteSlice";
 
 export const RestrauntMenu = () => {
 
     const {id} = useParams();
+    const isRestaurantFavourite = useSelector(store => _.findIndex(store.favourite?.favourites, ({restaurant: {id: restaurant_id}}) => restaurant_id === id) > -1) ?? false;
+    const favouriteId = useSelector(store => _.find(store.favourite?.favourites, ({restaurant: {id}}) => id))?.id ?? '';
+    const [isFavourite, setIsFavourite] = useState(isRestaurantFavourite);
+    const userId = useSelector(store => store.user.user?.id);
 
     useEffect(() => {
         getRestrauntDetails();
@@ -43,6 +50,15 @@ export const RestrauntMenu = () => {
           window.removeEventListener('scroll', listenScrollEvent);
       }, []);
 
+      const handleFavourite = async () => {
+        isFavourite 
+            ? await removeFavourite(favouriteId, userId) 
+            : await addToFavourites(id, userId);
+        setIsFavourite((prev) => !(prev));
+        const favourites = await getAllFavourites(userId);
+        dispatch(populateFavourites(favourites));
+      }
+
     async function getRestrauntDetails() {
         const restaurant = await getRestaurantById(id);
         dispatch(updateRestrauntDetails(restaurant));
@@ -60,7 +76,10 @@ export const RestrauntMenu = () => {
                         <div className="details-header">
                             <img src={IMG_CDN_URL + restraunt?.image_id} />
                             <div className="restraunt-metadata">
-                                <div className="name">{restraunt?.name}</div>
+                                <div className="name">
+                                    {restraunt?.name}
+                                    <img src={isFavourite ? FavRed : FavWhite} onClick={handleFavourite} />
+                                </div>
                                 {/* <div className="sub-details">{restraunt?.restraunt_cuisinescuisines?.join(', ')}</div> */}
                                 <div className="sub-details">{restraunt?.area}</div>
                                 <div className="ratings-time-cost">

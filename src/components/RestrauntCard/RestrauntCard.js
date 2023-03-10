@@ -2,12 +2,17 @@ import { Link } from "react-router-dom"
 import { IMG_CDN_URL } from "../../constants"
 import './RestrauntCard.css';
 
+import FavWhite from '../../assets/img/Heart_Icon_White.png';
+
 import * as _ from 'lodash';
+import { useSelector } from "react-redux";
 
 export const RestrauntCard = (restaurant) => {
     
     const {id, name, image_id , promoted, rating, delivery_time, price, restraunt_cuisines} = restaurant;
     const cuisines =_.map(restraunt_cuisines, ({ cuisine: { name } }) => name);
+
+    const isFavourite = useSelector(store => _.findIndex(store.favourite?.favourites, ({restaurant: {id: restaurant_id}}) => restaurant_id === id) > -1) ?? false;
      return (
         <Link to={'/restraunt/' + id} key={id} className='restraunt-card'>
             {
@@ -26,6 +31,13 @@ export const RestrauntCard = (restaurant) => {
                     <span>QUICK VIEW</span>
                 </div>
             </div>
+            {
+                isFavourite 
+                ? <div className="favourite">
+                    <img src={FavWhite} />
+                </div> 
+                : <></>
+            }
         </Link>
     )
 }

@@ -30,6 +30,36 @@
     border-width: 9px 0 0 9px;
 }
 
+.restraunt-card > .favourite {
+    color: #d22b3b;
+    max-width: 50%;
+    text-transform: uppercase;
+    background: #fa4a5b;
+    border-color: #1e2023 #0000;
+    padding: 5px 9px 4px;
+    font-size: 15px;
+    font-weight: 500;
+    position: absolute;
+    top: 30px;
+    right: 22px;
+    z-index: 1;
+}
+
+.restraunt-card > .favourite > img {
+    height: 20px;
+}
+
+.restraunt-card > .favourite::before {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    width: 0;
+    height: 0;
+    right: 0;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #d22b3b;
+}
+
 .card-item {
     width: 295px;
     padding: 20px;

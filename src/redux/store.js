@@ -11,6 +11,7 @@ import uiSlice from './uiSlice';
 import persistReducer from 'redux-persist/es/persistReducer';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import orderSlice from './orderSlice';
+import favouriteSlice from './favouriteSlice';
 
 
 const persistConfig = {
@@ -25,7 +26,8 @@ export const rootReducers = combineReducers({
     restraunt: restrauntSlice,
     cart: cartSlice,
     address: addressSlice,
-    order: orderSlice
+    order: orderSlice,
+    favourite: favouriteSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

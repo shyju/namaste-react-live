@@ -1,4 +1,5 @@
 import { Tab, Tabs } from "react-bootstrap"
+import { Favourites } from "../Favourites/Favourites";
 import { Order } from "../Orders/Order"
 
 import './MyAccount.css';
@@ -6,12 +7,12 @@ import './MyAccount.css';
 export const MyAccount = () => {
     return (
         <div className="my-account">
-            <Tabs>
+            <Tabs className="mb-3" justify>
                 <Tab eventKey="orders" title="Orders">
-                    <Order/ >
+                    <Order/>
                 </Tab>
-                <Tab eventKey="favourites" title="Favourites" disabled>
-                    
+                <Tab eventKey="favourites" title="Favourites">
+                    <Favourites/>
                 </Tab>
             </Tabs>
         </div>

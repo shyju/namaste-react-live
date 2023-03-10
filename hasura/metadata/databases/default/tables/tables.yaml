@@ -1,6 +1,7 @@
 - "!include public_addresses.yaml"
 - "!include public_cart.yaml"
 - "!include public_cuisines.yaml"
+- "!include public_favourites.yaml"
 - "!include public_menus.yaml"
 - "!include public_offers.yaml"
 - "!include public_order_details.yaml"

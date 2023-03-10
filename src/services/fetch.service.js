@@ -206,6 +206,46 @@ export const getAllOrders = async(userId) => {
    return jsonData?.order_details;
 }
 
+export const addToFavourites = async(restaurant_id, userId) => {
+    const response = await fetch(`${BASE_URL}user/${userId}/addToFavourites`, {
+        method: 'POST',
+        body: JSON.stringify({restaurant_id}),
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    })
+    return await response.json()
+}
+
+export const getAllFavourites = async(userId) => {
+    const response = await fetch(`${BASE_URL}favourites`, {
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    })
+   const jsonData = await response.json();
+   return jsonData?.favourites;
+}
+
+export const removeFavourite = async(favouriteId, userId) => {
+    const response = await fetch(`${BASE_URL}user/${favouriteId}/removeFavourite`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+            'X-Hasura-role': 'user',
+            'X-Hasura-User-Id': userId
+        }
+    })
+    return await response.json()
+}
+
 
 
 export const createPaymentIntent = async options => {

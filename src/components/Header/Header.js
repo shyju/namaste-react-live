@@ -7,10 +7,11 @@ import * as _ from 'lodash';
 import Logo from '../../assets/img/foodvilla.png'
 import './Header.css'
 import { populateCart, populateRestaurant } from '../../redux/cartSlice';
-import {getAllOrders, getCartItems} from '../../services/fetch.service';
+import {getAllFavourites, getAllOrders, getCartItems} from '../../services/fetch.service';
 import { Logout } from '../../redux/userSlice';
 import { AuthLogout } from '../../auth/auth-config';
 import { populateOrders } from '../../redux/orderSlice';
+import { populateFavourites } from '../../redux/favouriteSlice';
 
 const Title = () => (
     <Link to='/'>
@@ -30,6 +31,7 @@ export const HeaderComponent = ({name}) => {
     useEffect(() => {
         getCartList();
         getMyOrders();
+        getMyFavourites();
     }, [user_id]);
 
     const getCartList = async () => {
@@ -41,6 +43,11 @@ export const HeaderComponent = ({name}) => {
     const getMyOrders = async () => {
         const orders = await getAllOrders(user_id);
         dispatch(populateOrders(orders));
+    }
+
+    const getMyFavourites = async () => {
+        const favourites = await getAllFavourites(user_id);
+        dispatch(populateFavourites(favourites));
     }
 
     const handleLogout = async() => {
