@@ -1,0 +1,6 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE VIEW order_count_by_time AS
+-- SELECT created_at, COUNT(id) as total_orders
+-- FROM order_details
+-- GROUP BY created_at;

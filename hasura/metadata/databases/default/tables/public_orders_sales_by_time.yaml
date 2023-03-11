@@ -1,0 +1,3 @@
+table:
+  name: orders_sales_by_time
+  schema: public

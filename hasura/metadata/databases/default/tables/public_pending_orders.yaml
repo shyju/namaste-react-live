@@ -1,0 +1,3 @@
+table:
+  name: pending_orders
+  schema: public

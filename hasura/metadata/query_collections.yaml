@@ -197,31 +197,6 @@
               }
             }
           }
-      - name: getAllOrders
-        query: |
-          query getAllOrders {
-            order_details {
-              id
-              total
-              created_at
-              restaurant {
-                id
-                name
-                image_id
-                area
-              }
-              order_items {
-                id
-                product_id
-                quantity
-                menu {
-                  id
-                  name
-                  price
-                }
-              }
-            }
-          }
       - name: addToFavourites
         query: |
           mutation addToFavourites ($restaurant_id: uuid!, $userId: uuid!) {
@@ -256,5 +231,48 @@
           mutation removeFavourite ($favouriteId: uuid!) {
             delete_favourites_by_pk(id: $favouriteId) {
               id
+            }
+          }
+      - name: getAllOrders
+        query: |
+          query getAllOrders {
+            order_details {
+              id
+              total
+              created_at
+              order_status
+              restaurant {
+                id
+                name
+                image_id
+                area
+              }
+              order_items {
+                id
+                product_id
+                quantity
+                menu {
+                  id
+                  name
+                  price
+                }
+              }
+            }
+          }
+      - name: getStatistics
+        query: |
+          query getStatistics {
+            foodvilla_statistics {
+              metric_name
+              metric_value
+            }
+          }
+      - name: graphStatistics
+        query: |
+          query graphStatistics {
+            foodvilla_graph_Stats: orders_sales_by_time {
+              orders_count
+              sales_count
+              created_at
             }
           }

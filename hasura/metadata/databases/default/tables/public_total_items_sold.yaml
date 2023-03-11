@@ -1,0 +1,3 @@
+table:
+  name: total_items_sold
+  schema: public

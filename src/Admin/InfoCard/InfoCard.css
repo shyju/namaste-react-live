@@ -1,0 +1,36 @@
+.info-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 200px;
+    box-shadow: 12px 10px 9px 0px rgb(236, 223, 223);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px;
+    min-width: 300px;
+    border: 2px solid #eee;
+}
+
+.info-card-container > .info-header {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+
+.info-card-container > .info-header > h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.info-card-container > .info-header > img {
+    height: 30px;
+    border-radius: 50%;
+}
+
+.info-card-container > .info-footer {
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}

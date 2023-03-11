@@ -1,0 +1,3 @@
+table:
+  name: cancelled_orders
+  schema: public

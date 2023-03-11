@@ -110,6 +110,15 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: graphStatistics
+  methods:
+    - GET
+  name: graphStatistics
+  url: graphStatistics
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: insertOrderItems
   methods:
     - POST
@@ -133,6 +142,15 @@
     - GET
   name: getRestraunt
   url: restraunt/:id/getRestraunt
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getStatistics
+  methods:
+    - GET
+  name: getStatistics
+  url: statistics
 - comment: ""
   definition:
     query:
