@@ -87,8 +87,8 @@ export const renewSession = () => {
   return new Promise((resolve, reject) => {
     auth.checkSession({}, (err, authResult) => {
       console.log('Renew:', authResult);
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        return resolve({token: authResult.idToken});
+      if (authResult && authResult.accessToken && authResult.idTokenPayload) {
+        return resolve(authResult.idTokenPayload);
       } else if (err) {
         // alert(`Could not get a new token (${err.error})`);
         return reject();

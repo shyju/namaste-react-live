@@ -39,36 +39,21 @@ const AppLayout = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const userRole = useSelector(store => store.user?.user?.role[0]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState(userRole);
+    
 
     useEffect(() => {
         const getAuthDetails = async () => {
             try {
                 const response = await handleAuthentication();
-                const { sub: auth_id, nickname, picture, email, hasura_user_role } = response;
-                const id = await getUser(auth_id);
-                console.log("Header:", JSON.stringify(response));
-                setIsLoggedIn(true);
-                const user = {
-                    id,
-                    auth_id,
-                    nickname,
-                    picture,
-                    email,
-                    role: hasura_user_role,
-                    isLoggedIn: true,
-                };
-                setRole(hasura_user_role[0]);
-                dispatch(User(user));
+                updateUserSession(response);
                 toast.success(`Welcome ${nickname}`);
             } catch {
                 try {
                     const renewSessionResponse = await renewSession();
-                    if (renewSessionResponse && renewSessionResponse.token) {
-                        setIsLoggedIn(true);
-                    }
+                    updateUserSession(renewSessionResponse);
                     console.log('renewSession', renewSessionResponse);
                 } catch {
                     setIsLoggedIn(false);
@@ -78,7 +63,25 @@ const AppLayout = () => {
             }
         };
         getAuthDetails();
-      }, []);
+      }, [userRole]);
+
+      const updateUserSession = async (authResponse) => {
+        const { sub: auth_id, nickname, picture, email, hasura_user_role } = authResponse;
+        const id = await getUser(auth_id);
+        console.log("Header:", JSON.stringify(authResponse));
+        setIsLoggedIn(true);
+        const user = {
+            id,
+            auth_id,
+            nickname,
+            picture,
+            email,
+            role: hasura_user_role,
+            isLoggedIn: true,
+        };
+        setRole(hasura_user_role[0]);
+        dispatch(User(user));
+      }
 
     return (
        <>

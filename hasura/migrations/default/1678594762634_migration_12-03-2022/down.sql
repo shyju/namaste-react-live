@@ -1,0 +1,4 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- ALTER TABLE order_details
+-- ADD COLUMN order_state order_state_enum DEFAULT 'PENDING'::order_state_enum;

@@ -38,6 +38,7 @@ select_permissions:
       columns:
         - created_at
         - id
+        - order_state
         - payment_id
         - restaurant_id
         - total

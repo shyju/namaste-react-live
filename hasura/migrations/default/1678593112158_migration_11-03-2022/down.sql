@@ -1,0 +1,5 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- DROP RULE IF EXISTS _RETURN ON public.total_items_sold CASCADE;
+-- DROP VIEW IF EXISTS public.total_items_sold CASCADE;
+-- DROP RULE IF EXISTS _RETURN ON public.cancelled_orders CASCADE;

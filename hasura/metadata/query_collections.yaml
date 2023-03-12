@@ -233,6 +233,23 @@
               id
             }
           }
+      - name: getStatistics
+        query: |
+          query getStatistics {
+            foodvilla_statistics {
+              metric_name
+              metric_value
+            }
+          }
+      - name: graphStatistics
+        query: |
+          query graphStatistics {
+            foodvilla_graph_Stats: orders_sales_by_time {
+              orders_count
+              sales_count
+              created_at
+            }
+          }
       - name: getAllOrders
         query: |
           query getAllOrders {
@@ -240,7 +257,7 @@
               id
               total
               created_at
-              order_status
+              order_state
               restaurant {
                 id
                 name
@@ -257,22 +274,5 @@
                   price
                 }
               }
-            }
-          }
-      - name: getStatistics
-        query: |
-          query getStatistics {
-            foodvilla_statistics {
-              metric_name
-              metric_value
-            }
-          }
-      - name: graphStatistics
-        query: |
-          query graphStatistics {
-            foodvilla_graph_Stats: orders_sales_by_time {
-              orders_count
-              sales_count
-              created_at
             }
           }
