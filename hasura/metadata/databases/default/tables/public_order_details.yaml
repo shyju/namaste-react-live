@@ -2,9 +2,6 @@ table:
   name: order_details
   schema: public
 object_relationships:
-  - name: orderStatusByOrderStatus
-    using:
-      foreign_key_constraint_on: order_status
   - name: restaurant
     using:
       foreign_key_constraint_on: restaurant_id
