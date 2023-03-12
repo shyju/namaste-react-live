@@ -46,3 +46,23 @@ select_permissions:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+event_triggers:
+  - name: complete_order
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 90
+    webhook: http://192.168.0.5:3000/completeOrder
+    request_transform:
+      body:
+        action: transform
+        template: |-
+          {
+            "order_id": {{$body.event.data.new.id}}
+          }
+      template_engine: Kriti
+      version: 2

@@ -5,9 +5,10 @@ import moment from 'moment';
 
 import { IMG_CDN_URL } from '../../constants';
 import CompleteIcon from '../../assets/img/accept.png';
+import PendingIcon from '../../assets/img/time.png';
 import './OrderList.css';
 
-export const OrderList = ({restaurant: {id, name, image_id, area}, order_items, created_at, index}) => {
+export const OrderList = ({restaurant: {id, name, image_id, area}, order_items, created_at, order_state, index}) => {
 
     const [itemString, setItemString] = useState('');
     const [total, setTotal] = useState('');
@@ -46,8 +47,22 @@ export const OrderList = ({restaurant: {id, name, image_id, area}, order_items, 
                         <span>{`#00012345${index} | ${orderTime}`}</span>
                     </div>
                 </div>
-                <h4>{'Delivered on ' + deliveryTime}</h4>
-                <img className='checked-icon' src={CompleteIcon} />
+                {
+                    order_state === 'COMPLETED' 
+                    ? (
+                        <>
+                            <h4>{`DELIVERED ON ${deliveryTime}`}</h4>
+                            <img className='checked-icon' src={CompleteIcon} />
+                        </>
+                    )
+                    : (
+                        <>
+                            <h4>{order_state}</h4>
+                            <img className='checked-icon' src={PendingIcon} />
+                        </>
+                    )
+                }
+
             </div>
             {
                 <div className='cart'>

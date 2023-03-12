@@ -60,13 +60,7 @@ export const AuthLogout = () => {
   auth.logout({
       clientID: clientId,
       returnTo: logoutRedirectUri
-    }, (err, response) => {
-      if (err) {
-        toast.warn('Logout unsuccessful')
-      } else {
-        toast.success('Logout successful')
-      }
-    })
+  })
 }
 
 export const handleAuthentication = () => {

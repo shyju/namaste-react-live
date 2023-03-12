@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import * as _ from 'lodash';
 
 import Logo from '../../assets/img/foodvilla.png'
+import DownArrow from '../../assets/img/down-arrow.png';
 import './Header.css'
 import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getAllFavourites, getAllOrders, getCartItems} from '../../services/fetch.service';
@@ -12,6 +13,7 @@ import { Logout } from '../../redux/userSlice';
 import { AuthLogout } from '../../auth/auth-config';
 import { populateOrders } from '../../redux/orderSlice';
 import { populateFavourites } from '../../redux/favouriteSlice';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 const Title = () => (
     <Link to='/'>
@@ -75,15 +77,35 @@ export const HeaderComponent = ({name}) => {
                     <li>
                         <Link to="/checkout" className='text-link'>Cart</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="/" className='text-link' onClick={handleLogout}>
                             Logout
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
             <div className='profile-pic'>
                 <img src={picture} alt="" title={nickname.toUpperCase()}/>
+                <OverlayTrigger 
+                        trigger='click'
+                        key='bottom'
+                        placement='bottom'
+                        arrowOffset={20}
+                        rootClose={true}
+                        arrowProps={{ style: { backgroundColor: 'white' } }}
+                        overlay={
+                            <Popover style={{ padding: '10px' }}>
+                            <Popover.Body>
+                                <strong style={{cursor: 'pointer'}} onClick={handleLogout}>Logout</strong>
+                            </Popover.Body>
+                            </Popover>
+                        }
+                        >
+                        <div style={{marginLeft: '5px', fontWeight: '500', cursor: 'pointer'}}>
+                            <span>Hey, {nickname} !</span>
+                            <img style={{height: '20px',  'marginLeft': '5px'}} src={DownArrow} />
+                        </div>
+                    </OverlayTrigger>
             </div>
         </div>
     </div>

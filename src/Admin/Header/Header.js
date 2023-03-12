@@ -17,9 +17,11 @@ const Title = () => (
 export const AdminHeader = () => {
     const {nickname = '', picture = ''} = useSelector(store => store.user?.user) ?? {};
     const dispatch = useDispatch();
+    
     const handleLogout = async () => {
-        await AuthLogout;
-        dispatch(Logout())
+        const response = await AuthLogout();
+        dispatch(Logout());
+        
     }
 
     return (

@@ -155,6 +155,15 @@
   definition:
     query:
       collection_name: allowed-queries
+      query_name: updateOrderState
+  methods:
+    - PUT
+  name: updateOrderState
+  url: updateOrderState
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
       query_name: removeFavourite
   methods:
     - DELETE

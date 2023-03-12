@@ -45,6 +45,11 @@
     width: 130px;
 }
 
+.profile-pic {
+    display: flex;
+    align-items: center;
+}
+
 .profile-pic  > img {
     display: flex;
     border-radius: 50%;

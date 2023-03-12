@@ -39,7 +39,7 @@ const AppLayout = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const userRole = useSelector(store => store.user?.user?.role[0]);
+    const userRole = useSelector(store => _.head(store.user?.user?.role) ?? '');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState(userRole);
     
@@ -79,7 +79,7 @@ const AppLayout = () => {
             role: hasura_user_role,
             isLoggedIn: true,
         };
-        setRole(hasura_user_role[0]);
+        setRole(_.head(hasura_user_role) ?? '');
         dispatch(User(user));
       }
 
