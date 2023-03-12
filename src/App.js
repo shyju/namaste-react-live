@@ -10,6 +10,7 @@ import persistStore from 'redux-persist/es/persistStore';
 import { useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as _ from 'lodash';
 
 import {HeaderComponent} from './components/Header/Header';
 import {Home} from './components/Home/Home';
