@@ -241,15 +241,6 @@
               metric_value
             }
           }
-      - name: graphStatistics
-        query: |
-          query graphStatistics {
-            foodvilla_graph_Stats: orders_sales_by_time {
-              orders_count
-              sales_count
-              created_at
-            }
-          }
       - name: getAllOrders
         query: |
           query getAllOrders {
@@ -281,5 +272,14 @@
           mutation updateOrderState ($order_id: uuid!, $order_state: order_state_enum!) {
             response: update_order_details_by_pk(pk_columns: {id:$order_id}, _set: {order_state:$order_state}) {
               id
+            }
+          }
+      - name: graphStatistics
+        query: |
+          query graphStatistics {
+            foodvilla_graph_Stats: orders_sales_by_time(order_by: {created_at:asc}) {
+              orders_count
+              sales_count
+              created_at
             }
           }
