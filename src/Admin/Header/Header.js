@@ -5,6 +5,7 @@ import DownArrow from '../../assets/img/down-arrow.png';
 import { AuthLogout } from '../../auth/auth-config';
 import { Logout } from '../../redux/userSlice';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 const Title = () => (
     <img 
@@ -28,6 +29,16 @@ export const AdminHeader = () => {
         <div className="admin-header">
             <Title/>
             <div className='header-right'>
+            <div className="nav-items">
+                <ul>
+                    <li>
+                        <Link to="/" className='text-link'>Dashboard</Link>
+                    </li>
+                    <li>
+                        <Link to="/users" className='text-link'>Users</Link>
+                    </li>
+                </ul>
+            </div>
                 <div className='profile-pic' style={{display: 'flex', alignItems: 'center'}}>
                     <img src={picture} alt=""/>
                     <OverlayTrigger 
