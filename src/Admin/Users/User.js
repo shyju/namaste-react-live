@@ -1,35 +1,39 @@
+import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 
+import { getUsers } from '../service/admin-fetch.service';
+
 export const  User = () => {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+      const getAllUsers = async () => {
+        const {users} = await getUsers();
+        setUsers(users);
+      }
+      getAllUsers();
+  }, [])
   return (
-    <div style={{padding: '20px'}}>
+    <div style={{padding: '60px'}}>
         <Table striped bordered hover>
         <thead>
             <tr>
             <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Username</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            </tr>
-            <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            </tr>
-            <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-            </tr>
+           {
+            users?.map(({id, firstname, lastname}, index) => (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{firstname}</td>
+                <td>{lastname}</td>
+              </tr>
+            ))
+           }
         </tbody>
     </Table>
     </div>

@@ -11,6 +11,7 @@ import './Admin.css';
 import { BumpChart } from "./Charts/BumpChart/BumpChart";
 import { useEffect, useState } from "react";
 import { getGraphStatistics, getStatistics } from "./service/admin-fetch.service";
+import { LineChart } from "./Charts/LineChart/LineChart";
 export const Admin = () => {
 
     const infoCards = ['RESTAURANTS', 'ORDERS', 'CANCELLED ORDERS', 'COMPLETED ORDERS', 'ITEMS SOLD']
@@ -57,12 +58,12 @@ export const Admin = () => {
 
     const buildGraphData = (data) => {
         return {
-            orders_graph_data: [{id: 'Orders', data: _.map(data, ({orders_count, created_at}) => ({
-                x: moment.utc(created_at).local().format('MM-DD-YY'), 
+            orders_graph_data: [{id: 'Orders', data: _.map(data, ({orders_count, order_date}) => ({
+                x: moment.utc(order_date).local().format('MMM'), 
                 y: orders_count
             }))}],
-            sales_graph_data: [{id: 'Sales', data: _.map(data, ({sales_count, created_at}) => ({
-                x: moment.utc(created_at).local().format('MM-DD-YY'), y: sales_count
+            sales_graph_data: [{id: 'Sales', data: _.map(data, ({sales_count, order_date}) => ({
+                x: moment.utc(order_date).local().format('MM-DD-YY'), y: sales_count
             }))}]
         }
     }
@@ -81,11 +82,11 @@ export const Admin = () => {
                 <div style={{display: 'flex', width: 'auto'}}>
                     <div className="bump-chart">
                         <h3>Orders across time period</h3>
-                        <BumpChart data={orderStatistics} legends= {{xlegend: 'Date & Time', ylegend: 'orders'}} />
+                        <LineChart data={orderStatistics} legends= {{xlegend: 'Date & Time', ylegend: 'orders'}} />
                     </div>
                     <div className="bump-chart">
                         <h3>Sales across time period</h3>
-                        <BumpChart data={saleStatistics} legends= {{xlegend: 'Date & Time', ylegend: 'sales'}}/>
+                        <LineChart data={saleStatistics} legends= {{xlegend: 'Date & Time', ylegend: 'sales'}}/>
                     </div>
                 </div>
                 {/* <div className="pie-chart">

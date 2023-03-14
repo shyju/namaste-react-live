@@ -26,12 +26,14 @@ import store from './redux/store';
 import { toast, ToastContainer } from 'react-toastify';
 import { Login } from './components/Login/Login';
 import { AuthLogout, handleAuthentication, renewSession, renewSession } from './auth/auth-config';
-import { Logout, User } from './redux/userSlice';
+import { Logout } from './redux/userSlice';
 import { getUser } from './services/fetch.service';
 import { Completion } from './components/Modals/Completion/Completion';
 import { MyAccount } from './components/MyAccount/MyAccount';
 import { Admin } from './Admin/Admin';
 import { AdminHeader } from './Admin/Header/Header';
+import {User} from './Admin/Users/User';
+import {User as UserAction} from './redux/userSlice';
 
 const persistor = persistStore(store)
 
@@ -39,7 +41,6 @@ const AppLayout = () => {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const userRole = useSelector(store => _.head(store.user?.user?.role) ?? '');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState(userRole);
@@ -64,7 +65,7 @@ const AppLayout = () => {
             }
         };
         getAuthDetails();
-      }, [userRole]);
+      }, []);
 
       const updateUserSession = async (authResponse) => {
         const { sub: auth_id, nickname, picture, email, hasura_user_role } = authResponse;
@@ -80,8 +81,10 @@ const AppLayout = () => {
             role: hasura_user_role,
             isLoggedIn: true,
         };
-        setRole(_.head(hasura_user_role) ?? '');
-        dispatch(User(user));
+        const userRole = _.head(hasura_user_role) ?? '';
+        setRole(userRole);
+        dispatch(UserAction(user));
+        userRole === 'admin' ? navigate('/admin') : navigate('/home');
       }
 
     return (
@@ -98,7 +101,7 @@ const AppLayout = () => {
             {isLoggedIn && role === 'admin' && (
                <>
                 <AdminHeader />
-                <Admin/>
+                <Outlet />
                </>
             )}
        </>
@@ -113,10 +116,24 @@ const appRouter = createBrowserRouter([
     {
         path: '/',
         element: <AppLayout />,
+        children: [
+            {
+                path: '/admin',
+                element: <Admin />
+            },
+            {
+                path: '/users',
+                element: <User />
+            }
+        ]
+    },
+    {
+        path: '/',
+        element: <AppLayout />,
         errorElement: <Error  />,
         children: [
             {
-                path: '/',
+                path: '/home',
                 element: <Home />,
             },
             {

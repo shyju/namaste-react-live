@@ -8,11 +8,13 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 
 const Title = () => (
-    <img 
-        className='logo' 
-        alt="Logo" 
-        src={Logo}>
-    </img>
+    <Link to='/admin'>
+        <img 
+            className='logo' 
+            alt="Logo" 
+            src={Logo}>
+        </img>
+    </Link>
 )
 
 export const AdminHeader = () => {
@@ -32,7 +34,7 @@ export const AdminHeader = () => {
             <div className="nav-items">
                 <ul>
                     <li>
-                        <Link to="/" className='text-link'>Dashboard</Link>
+                        <Link to="/admin" className='text-link'>Dashboard</Link>
                     </li>
                     <li>
                         <Link to="/users" className='text-link'>Users</Link>

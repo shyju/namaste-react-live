@@ -1,0 +1,3 @@
+table:
+  name: sales_count_by_date
+  schema: public

@@ -187,3 +187,12 @@
     - GET
   name: getAddresses
   url: user/:userId/getAddresses
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getAllUsers
+  methods:
+    - GET
+  name: getAllUsers
+  url: users

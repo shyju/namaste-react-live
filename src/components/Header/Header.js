@@ -16,7 +16,7 @@ import { populateFavourites } from '../../redux/favouriteSlice';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 const Title = () => (
-    <Link to='/'>
+    <Link to='/home'>
         <img 
             className='logo' 
             alt="Logo" 
@@ -63,7 +63,7 @@ export const HeaderComponent = ({name}) => {
             <div className="nav-items">
                 <ul>
                     <li>
-                        <Link to="/" className='text-link'>Home</Link>
+                        <Link to="/home" className='text-link'>Home</Link>
                     </li>
                     {/* <li>
                         <Link to="/about" className='text-link'>About</Link>

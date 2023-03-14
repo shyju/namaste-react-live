@@ -80,13 +80,6 @@
               total
             }
           }
-      - name: getUser
-        query: |
-          query getUser {
-            user {
-              id
-            }
-          }
       - name: getRestraunt
         query: |
           query getRestraunt ($id: uuid!) {
@@ -274,12 +267,32 @@
               id
             }
           }
+      - name: getAllUsers
+        query: |
+          query getAllUsers {
+            users: user {
+              id
+              auth_id
+              lastname
+              firstname
+            }
+          }
+      - name: getUser
+        query: |
+          query getAllUsers {
+            user {
+              id
+              auth_id
+              lastname
+              firstname
+            }
+          }
       - name: graphStatistics
         query: |
           query graphStatistics {
-            foodvilla_graph_Stats: orders_sales_by_time(order_by: {created_at:asc}) {
+            foodvilla_graph_Stats: orders_sales_by_date(order_by: {order_date:asc}) {
               orders_count
               sales_count
-              created_at
+              order_date
             }
           }

@@ -20,3 +20,14 @@ export const getGraphStatistics = async () => {
     });
     return await response.json()
 }
+
+export const getUsers = async () => {
+    const response = await fetch(`${BASE_URL}users`, {
+        headers: {
+            'content-type': 'application/json',
+            'x-hasura-admin-secret': ADMIN_SECRET
+        }
+    });
+
+    return await response.json();
+}
