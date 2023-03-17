@@ -28,6 +28,7 @@ services:
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      WEBHOOK_URL: "http://localhost:3000"
 volumes:
   db_data:
 

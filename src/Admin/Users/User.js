@@ -14,6 +14,7 @@ export const  User = () => {
       }
       getAllUsers();
   }, [])
+  
   return (
     <div style={{padding: '60px'}}>
         <Table striped  hover>

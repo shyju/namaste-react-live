@@ -31,29 +31,20 @@ export const HeaderComponent = ({name}) => {
     const {id: user_id = '', picture = '', nickname = ''} = useSelector(store => store.user?.user) ?? {};
 
     useEffect(() => {
-        getCartList();
-        getMyOrders();
-        getMyFavourites();
+        Promise.all([
+            getCartItems(user_id),
+            getAllOrders(user_id),
+            getAllFavourites(user_id)
+        ]).then(([{restaurant, cart}, orders, favourites]) => {
+            dispatch(populateCart(cart));
+            dispatch(populateRestaurant(restaurant));
+            dispatch(populateOrders(orders));
+            dispatch(populateFavourites(favourites));
+        })
     }, [user_id]);
 
-    const getCartList = async () => {
-        const {restaurant, cart} = await getCartItems(user_id);
-        dispatch(populateCart(cart));
-        dispatch(populateRestaurant(restaurant));
-    }
-
-    const getMyOrders = async () => {
-        const orders = await getAllOrders(user_id);
-        dispatch(populateOrders(orders));
-    }
-
-    const getMyFavourites = async () => {
-        const favourites = await getAllFavourites(user_id);
-        dispatch(populateFavourites(favourites));
-    }
-
     const handleLogout = async() => {
-        const response = await AuthLogout();
+        await AuthLogout();
         dispatch(Logout())
     }
    return (

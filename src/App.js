@@ -47,7 +47,7 @@ const AppLayout = () => {
     
 
     useEffect(() => {
-        const getAuthDetails = async () => {
+        const handleAuth = async () => {
             try {
                 const response = await handleAuthentication();
                 updateUserSession(response);
@@ -64,7 +64,7 @@ const AppLayout = () => {
                 }
             }
         };
-        getAuthDetails();
+        handleAuth();
       }, []);
 
       const updateUserSession = async (authResponse) => {

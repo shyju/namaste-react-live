@@ -56,7 +56,7 @@ event_triggers:
       interval_sec: 10
       num_retries: 0
       timeout_sec: 90
-    webhook: http://172.27.32.1:3000/completeOrder
+    webhook: '{{WEBHOOK_URL}}/completeOrder'
     request_transform:
       body:
         action: transform

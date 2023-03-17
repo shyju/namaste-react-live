@@ -8,7 +8,6 @@ import OrderCompletedIcon from './../assets/img/package-delivered.png';
 import OrderCancelledIcon from './../assets/img/order-cancelled.png';
 import SoldIcon from './../assets/img/sold.png';
 import './Admin.css';
-import { BumpChart } from "./Charts/BumpChart/BumpChart";
 import { useEffect, useState } from "react";
 import { getGraphStatistics, getStatistics } from "./service/admin-fetch.service";
 import { LineChart } from "./Charts/LineChart/LineChart";
@@ -28,19 +27,16 @@ export const Admin = () => {
     const [orderStatistics, setOrderStatistics] = useState([]);
     const [saleStatistics, setSaleStatistics] = useState([]);
     useEffect (() => {
-        const getStatisticsData = async () => {
-            const {foodvilla_statistics} = await getStatistics();
+        Promise.all([
+            getStatistics(),
+            getGraphStatistics()
+          ]).then(([{foodvilla_statistics}, {foodvilla_graph_Stats}]) => {
             const generatedData = buildData(foodvilla_statistics);
-            setStatistics(generatedData);
-        }
-        const getGraphStatisticsData = async () => {
-            const {foodvilla_graph_Stats} = await getGraphStatistics();
             const {orders_graph_data, sales_graph_data} = buildGraphData(foodvilla_graph_Stats);
+            setStatistics(generatedData);
             setOrderStatistics(orders_graph_data);
             setSaleStatistics(sales_graph_data);
-        }
-        getStatisticsData();
-        getGraphStatisticsData();
+          });
     }, [])
 
     const buildData = (data) => {
@@ -89,9 +85,6 @@ export const Admin = () => {
                         <LineChart data={saleStatistics} legends= {{xlegend: 'Date & Time', ylegend: 'sales'}}/>
                     </div>
                 </div>
-                {/* <div className="pie-chart">
-                    <PieChart data={pieData} />
-                </div> */}
             </div>
             
         </div>
