@@ -22,9 +22,7 @@ export const AdminHeader = () => {
     const dispatch = useDispatch();
     
     const handleLogout = async () => {
-        const response = await AuthLogout();
-        dispatch(Logout());
-        
+        AuthLogout().then(() => dispatch(Logout()));
     }
 
     return (

@@ -293,7 +293,7 @@
     border: 1px solid #d4d5d9; 
     line-height: 36px;
     text-align: center;
-    width: 97px;
+    width: 100px;
     color: #60b246;
     font-size: 18px;
     font-weight: bolder;
@@ -327,7 +327,7 @@
 .menu-items > .buttons > .cart-increment-decrement > span {
     border: none;
     background-color: #fff;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 /* .menu-items > .add-button {
@@ -488,7 +488,7 @@
     display: flex;
     justify-content: space-between;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .mini-cart > .non-empty-cart >.cart-details > .cart-footer {

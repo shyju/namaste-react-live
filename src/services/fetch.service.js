@@ -1,54 +1,67 @@
 import * as _ from 'lodash';
+import axios from 'axios';
 
 const BASE_URL = process.env.BASE_URL;
 const NODE_BASE_URL = process.env.NODE_URL;
 
+axios.interceptors.response.use(response => {
+    return response;
+  }, error => {
+    // Add your error handling logic here
+    console.log(error);
+    return Promise.reject(error?.message);
+  });
+
 export const getUser = async (auth_id) => {
-    const data = await fetch(`${BASE_URL}getUser`, {
+    const requestConfig = {
+        url: `${BASE_URL}getUser`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': auth_id
         }
-    })
-    const json = await data.json();
-    return json.user[0]?.id;
+    }
+    const {data} = await axios(requestConfig);
+    return data?.user[0]?.id;
 }
 
 export const getRestaurants = async() => {
-    const data = await fetch(`${BASE_URL}allRestraunts`, {
+    const requestConfig = {
+        url: `${BASE_URL}allRestraunts`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
         }
-    });
-    const json = await data.json();
-    const restaurantList = json.restaurants;
-    return restaurantList;
+    }
+    const {data} = await axios(requestConfig);
+    return data?.restaurants;
 }
 
 export const getRestaurantById =  async(id) => {
-    const data = await fetch(`${BASE_URL}restraunt/${id}/getRestraunt`, {
+    const requestConfig = {
+        url: `${BASE_URL}restraunt/${id}/getRestraunt`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
         }
-    })
-    const json = await data.json();
-    return json.restaurants_by_pk;
+    }
+    const {data} = await axios(requestConfig);
+    return data?.restaurants_by_pk;
 }
 
 export const getCartItems = async(user_id) => {
-    const response = await fetch(`${BASE_URL}getCartItems`, {
+    const requestConfig = {
+        url: `${BASE_URL}getCartItems`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'x-hasura-role': 'user',
             'X-Hasura-User-Id': user_id
         }
-    });
-    const {cart} =  await response.json();
+    };
+
+    const {data: {cart}} = await axios(requestConfig);
     const {restaurant_id, restaurant_name, restaurant_image_id} = (cart?.length && _.head(cart)) ?? {};
 
     const cartItems = _.map(cart, ({id, price, quantity, total, menu}) => ({
@@ -73,199 +86,249 @@ export const getCartItems = async(user_id) => {
 }
 
 export const getAddresses = async(userId) => {
-    const response = await fetch(`${BASE_URL}user/${userId}/getAddresses`, {
+    const requestConfig = {
+        url: `${BASE_URL}user/${userId}/getAddresses`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
         }
-    });
-    return await response.json();
+    }
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const addMenuItemToCart = async(payload) => {
-    const response = await fetch(`${BASE_URL}addToCart`, {
+    const requestConfig = {
         method: 'POST',
-        body: JSON.stringify(payload),
+        url: `${BASE_URL}addToCart`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET
-        }
-    });
-    return await response.json();
+        },
+        data: payload
+    };
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const updateCartById = async(cartId, userId, payload) => {
-    const response = await fetch(`${BASE_URL}cart/${cartId}/updateCartById`, {
+    const requestConfig = {
         method: 'PUT',
-        body: JSON.stringify(payload),
+        url: `${BASE_URL}cart/${cartId}/updateCartById`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
-        }
-    });
-    return await response.json();
+        },
+        data: payload
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const deleteCartById = async(cartId, userId) => {
-    const response = await fetch(`${BASE_URL}cart/${cartId}/deleteCartById`, {
+    const requestConfig = {
         method: 'DELETE',
+        url: `${BASE_URL}cart/${cartId}/deleteCartById`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
-        }
-    });
-    return await response.json();
+        },
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const clearCart = async (userId) => {
-    const response = await fetch(`${BASE_URL}cart/${userId}/clearCart`, {
+    const requestConfig = {
         method: 'DELETE',
+        url: `${BASE_URL}cart/${userId}/clearCart`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
         }
-    });
-    return await response.json();
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const addNewAddress = async(userId, payload) => {
-    const response = await fetch(`${BASE_URL}address/${userId}/newAddress`, {
+    const requestConfig = {
         method: 'POST',
-        body: JSON.stringify(payload),
+        url: `${BASE_URL}address/${userId}/newAddress`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
-        }
-    })
-    return await response.json();
+        },
+        data: payload
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const editAddress = async(addressId, userId, payload) => {
-    const response = await fetch(`${BASE_URL}address/${addressId}/updateAddress`, {
+    const requestConfig = {
         method: 'PUT',
-        body: JSON.stringify(payload),
+        url: `${BASE_URL}address/${addressId}/updateAddress`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
-        }
-    })
-    return await response.json();
+        },
+        data: payload
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const createOrder = async(payload, userId) => {
-    const response = await fetch(`${BASE_URL}createOrder`, {
+    const requestConfig = {
         method: 'POST',
-        body: JSON.stringify(payload),
+        url: `${BASE_URL}createOrder`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
-        }
-    });
-    const jsonData =  await response.json();
-    return {id: jsonData?.insert_order_details?.returning[0]?.id};
+        },
+        data: payload
+    };
+
+    const {data} = await axios(requestConfig);
+    return {id: data?.insert_order_details?.returning[0]?.id};
 }
 
 export const insertOrderItems = async(payload, userId) => {
-    const response = await fetch(`${BASE_URL}insertOrderItems`, {
+    const requestConfig = {
         method: 'POST',
-        body: JSON.stringify(payload),
+        url: `${BASE_URL}insertOrderItems`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
-        }
-    })
-    return await response.json()
+        },
+        data: payload
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const getAllOrders = async(userId) => {
-    const response = await fetch(`${BASE_URL}orders`, {
+    const requestConfig = {
+        url: `${BASE_URL}orders`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
         }
-    })
-   const jsonData = await response.json();
-   return jsonData?.order_details;
+    };
+
+    const {data} = await axios(requestConfig);
+    return data?.order_details;
 }
 
 export const addToFavourites = async(restaurant_id, userId) => {
-    const response = await fetch(`${BASE_URL}user/${userId}/addToFavourites`, {
+    const requestConfig = {
         method: 'POST',
-        body: JSON.stringify({restaurant_id}),
+        url: `${BASE_URL}user/${userId}/addToFavourites`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
-        }
-    })
-    return await response.json()
+        },
+        data: {restaurant_id}
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const getAllFavourites = async(userId) => {
-    const response = await fetch(`${BASE_URL}favourites`, {
+    const requestConfig = {
+        url: `${BASE_URL}favourites`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
         }
-    })
-   const jsonData = await response.json();
-   return jsonData?.favourites;
+    };
+
+    const {data} = await axios(requestConfig);
+    return data?.favourites;
 }
 
 export const removeFavourite = async(favouriteId, userId) => {
-    const response = await fetch(`${BASE_URL}user/${favouriteId}/removeFavourite`, {
+    const requestConfig = {
         method: 'DELETE',
+        url: `${BASE_URL}user/${favouriteId}/removeFavourite`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
             'X-Hasura-role': 'user',
             'X-Hasura-User-Id': userId
         }
-    })
-    return await response.json()
+    };
+
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 
 
 export const createPaymentIntent = async options => {
-    console.log('NODE_BASE_URL', NODE_BASE_URL)
-    console.log('BASE_URL', BASE_URL)
-    const response = await fetch(`${NODE_BASE_URL}create-payment-intent`, {
+
+    const requestConfig = {
         method: 'POST',
-        headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify(options)
-    })
-    if (!response || response.error) {
-        throw new Error('PaymentIntent API Error');
+        url: `${NODE_BASE_URL}create-payment-intent`,
+        headers: {"content-type": "application/json"},
+        data: options
+    };
+
+    try {
+        const {data} = await axios(requestConfig);
+        return data;
+    } catch (error) {
+        // Handle the error thrown by the interceptor here
+        console.log(error);
+        throw error;
     }
-    if (response.status === 200) {
-        const intent = await response.json()
-        console.log('intent', intent)
-        return intent;
-    } else {
-        return null;
-    }
+    // if (!response || response.error) {
+    //     throw new Error('PaymentIntent API Error');
+    // }
+    // if (response.status === 200) {
+    //     const intent = await response.json()
+    //     console.log('intent', intent)
+    //     return intent;
+    // } else {
+    //     return null;
+    // }
+
+    
+    // const response = await fetch(`${NODE_BASE_URL}create-payment-intent`, {
+    //     method: 'POST',
+    //     headers: {
+    //         "content-type": "application/json"
+    //     },
+    //     body: JSON.stringify(options)
+    // })
 }

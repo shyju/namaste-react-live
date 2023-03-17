@@ -2,9 +2,10 @@
     margin: 0;
     display: flex;
     height: auto;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 20px 40px;
+    gap: 40px;
 }
 
 .no-favourites {

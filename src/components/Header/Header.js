@@ -44,8 +44,9 @@ export const HeaderComponent = ({name}) => {
     }, [user_id]);
 
     const handleLogout = async() => {
-        await AuthLogout();
-        dispatch(Logout())
+        AuthLogout().then(() => {
+            dispatch(Logout());
+        })
     }
    return (
     <div className="header">

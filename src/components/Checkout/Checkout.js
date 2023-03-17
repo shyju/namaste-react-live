@@ -18,6 +18,7 @@ import { populateAddress } from '../../redux/addressSlice';
 import { Payment } from '../Payment/Payment';
 import { Address } from '../Modals/AddressModal/Address';
 import { ToggleAddresssModal } from '../../redux/uiSlice';
+import { toast } from 'react-toastify';
 
 const stripe_pk = process.env.STRIPE_PUBLIC_KEY
 const stripePromise = loadStripe(_.toString(stripe_pk));
@@ -62,9 +63,13 @@ export const Checkout = () => {
     }, [cartItems])
 
     const getClientSecret = async () => {
-        const {client_secret} = await createPaymentIntent({automatic_payment_methods: {enabled: true}});
-        console.log('client_secret', client_secret);
-        setClientSecret(client_secret);
+        try {
+            const {client_secret} = await createPaymentIntent({automatic_payment_methods: {enabled: true}});
+            console.log('client_secret', client_secret);
+            setClientSecret(client_secret);
+        } catch (error) {
+            toast.warn(error);
+        }
     }
 
     const getMyAddress = async() => {
@@ -148,7 +153,7 @@ export const Checkout = () => {
                                 cartItems?.map(cartItem => <CartItem {...cartItem} key={cartItem.id} />)
                             }
                             </div>
-                            <div className='message'>
+                            {/* <div className='message'>
                                 <strong>"</strong> <span>Any suggestions? We will pass it on...</span>
                             </div>
                             <div className='delivery-checkbox'>
@@ -168,7 +173,7 @@ export const Checkout = () => {
                             <div className='apply-coupon'>
                                 <img src={OfferIcon}></img>
                                 Apply Coupon
-                            </div>
+                            </div> */}
                             <div className='bill-section'>
                                 <span>Bill Details</span>
                                 <div className='item-total-section'>
@@ -189,7 +194,7 @@ export const Checkout = () => {
                                 <span>{grandTotal}</span>
                             </div>
                         </div>
-                        <div className='bottom-section'>
+                        {/* <div className='bottom-section'>
                             <div className='policy-details'>
                                 <strong>
                                 Review your order and address details to avoid cancellations
@@ -198,7 +203,7 @@ export const Checkout = () => {
                                 <span>Avoid cancellation as it leads to food wastage.</span>
                                 <span className='cancellation-policy'>Read cancellation policy</span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                  </div>
                 </div>

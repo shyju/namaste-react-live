@@ -28,14 +28,15 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - price
-        - total
-        - quantity
-        - restaurant_image_id
-        - restaurant_name
+        - created_at
         - id
         - menu_id
+        - price
+        - quantity
         - restaurant_id
+        - restaurant_image_id
+        - restaurant_name
+        - total
         - user_id
       filter:
         user_id:

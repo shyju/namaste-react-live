@@ -130,6 +130,7 @@
 
 .address, .add-new-address {
     display: flex;
+    justify-content: space-around;
     border: 3px solid #e9e9eb;
     padding: 30px 20px;
     margin: 0 20px;

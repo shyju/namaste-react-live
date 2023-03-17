@@ -1,0 +1,16 @@
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    width: 100vw;
+}
+
+.loader-container::backdrop {
+    position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: green;
+}
