@@ -16,7 +16,7 @@ export const  User = () => {
   }, [])
   return (
     <div style={{padding: '60px'}}>
-        <Table striped bordered hover>
+        <Table striped  hover>
         <thead>
             <tr>
             <th>#</th>

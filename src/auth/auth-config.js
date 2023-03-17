@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js';
+import { SHA256 } from 'crypto-js';
 import { toast } from 'react-toastify';
 
 const domain = process.env.AUTH_DOMAIN;
@@ -15,7 +16,8 @@ const auth = new auth0.WebAuth({
 })
 
 export const Authlogin = (username, password) => {
-   auth.login({username, password} , (err, response) => {
+  const hashedPassword = SHA256(password).toString();
+   auth.login({username, password: hashedPassword} , (err, response) => {
     if (err)  {
       toast.warn(`${err.error_description}`)
     } else {
@@ -38,9 +40,10 @@ export const FacebookLogin = () => {
 }
 
 export const AuthSignUp = (email, password) => {
+  const hashedPassword = SHA256(password).toString();
   auth.signup({
     email,
-    password,
+    password: hashedPassword,
     connection: 'Username-Password-Authentication'
   }, (err, response) => {
     if (err?.statusCode === 400) {

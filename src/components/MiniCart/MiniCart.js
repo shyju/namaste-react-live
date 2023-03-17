@@ -1,24 +1,22 @@
-import { useEffect, useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { useMemo } from 'react';
+import {useNavigate} from 'react-router-dom';
 import * as _ from 'lodash';
 import { useSelector } from 'react-redux';
 
 import EmptyCart from '../../assets/img/EmptyCart.jpeg';
 import { CartItem } from '../CartItem/CartItem';
-import StripeCheckout from 'react-stripe-checkout';
 
-export const MiniCart = ({name, cartStyle}) => {
+export const MiniCart = () => {
 
-    const [subTotal, setSubTotal] = useState(0);
     const navigate = useNavigate();
-    const cartItems = useSelector(store => store.cart.items);
-    useEffect(() => {
-        const calculatedTotal =  _.reduce(cartItems, (sum, {price, quantity}) => {
+    const cartItems = useSelector(store => store.cart?.items);
+    const {name} =  useSelector(store => store.cart?.restraunt);
+
+    const subTotal = useMemo(() => 
+        _.reduce(cartItems, (sum, {price, quantity}) => {
             sum = sum + ((price * quantity) / 100)
             return sum;
-        }, 0)
-        setSubTotal(calculatedTotal.toFixed(2));
-    }, [cartItems])
+    }, 0), [cartItems])
 
     return (
         <>

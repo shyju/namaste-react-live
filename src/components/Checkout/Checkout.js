@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './Checkout.css';
@@ -49,15 +49,14 @@ export const Checkout = () => {
         if (addressSelected) getClientSecret();
     }, [addressSelected])
 
+    const total = useMemo(() => _
+    .chain(cartItems)
+    .map(({total}) => total)
+    .sum()
+    .value());
+
     useEffect(() => {
-        const total = _
-        .chain(cartItems)
-        .map(({total}) => total)
-        .sum()
-        .value() 
-
         const totalAmount = total + 33 + 11.45;
-
         setItemTotal(total)
         setGrandTotal(totalAmount)
     }, [cartItems])
