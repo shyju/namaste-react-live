@@ -39,8 +39,6 @@
 }
 
 .checkout {
-    /* max-width: 1400px;
-    min-width: 1400px; */
     position: relative;
     margin: 0 210px;
     display: -ms-flexbox;
@@ -49,18 +47,11 @@
     margin-bottom: 150px;
 }
 .checkout-left-section {
-    /* margin-right: 40px; */
-    /* max-width: 1400px;
-    min-width: 1000px; */
     flex: 1;
     position: relative;
-    /* background-color: #fff; */
-    /* margin-left: 25px; */
-    /* width: 60%; */
 }
 
 .checkout-right-section {
-    /* margin-right: 172px; */
     width: 400px;
     margin-left: 40px;
     margin-right: -10px;

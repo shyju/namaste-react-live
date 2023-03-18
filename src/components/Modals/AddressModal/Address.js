@@ -11,16 +11,7 @@ import { addNewAddress, editAddress, getAddresses } from '../../../services/fetc
 import { populateAddress } from '../../../redux/addressSlice';
 
 
-export const Address = ({pageType, addressId}) => {
-    const groupStyle = {display: 'flex', justifyContent: 'space-between', width: '90%', marginRight: '10px'};
-    const labelStyle = {fontSize: '15px', marginRight: '10px', width: '300px', textAlign: 'center' , alignSelf: 'center'};
-    const buttonStyle = {backgroundColor: '#60b246', fontSize: 'bold' , border: 'none', width: '200px'};
-    
-    const isModalOpen = useSelector(store => store.ui.isAddressModalOpen);
-    const userId = useSelector(store => store.user.user?.id);
-    const {id, address_line_1, address_line_2, address_type, city: editCity, state: editState, pincode: editPincode} 
-    = useSelector(store => _.find(store.address.addresses, {id: addressId})) ?? {};
-    
+export const Address = ({pageType, addressId}) => {    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -30,9 +21,19 @@ export const Address = ({pageType, addressId}) => {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [pincode, setPincode] = useState('');
+    
+    const isModalOpen = useSelector(store => store.ui.isAddressModalOpen);
+    const userId = useSelector(store => store.user.user?.id);
+    const {address_line_1, address_line_2, address_type, city: editCity, state: editState, pincode: editPincode} 
+    = useSelector(store => _.find(store.address.addresses, {id: addressId})) ?? {};
+
+    const groupStyle = {display: 'flex', justifyContent: 'space-between', width: '90%', marginRight: '10px'};
+    const labelStyle = {fontSize: '15px', marginRight: '10px', width: '300px', textAlign: 'center' , alignSelf: 'center'};
+    const buttonStyle = {backgroundColor: '#60b246', fontSize: 'bold' , border: 'none', width: '200px'};
+
 
     useEffect(() => {
-        setFormData();
+        setFormData()
     }, [pageType])
 
     const setFormData = () => {
@@ -57,9 +58,9 @@ export const Address = ({pageType, addressId}) => {
             isPrimary: false
         }
 
-        const response = pageType === 'new' 
-        ? await addNewAddress(userId, address)
-        : await editAddress(addressId, userId, address);
+        pageType === 'new' 
+            ? await addNewAddress(userId, address)
+            : await editAddress(addressId, userId, address);
         
         const {addresses} = await getAddresses(userId);
         dispatch(populateAddress(addresses));

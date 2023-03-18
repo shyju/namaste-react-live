@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 import * as _ from 'lodash';
 import moment from 'moment';
 
@@ -7,23 +8,21 @@ import { IMG_CDN_URL } from '../../constants';
 import CompleteIcon from '../../assets/img/accept.png';
 import PendingIcon from '../../assets/img/time.png';
 import './OrderList.css';
-import { useMemo } from 'react';
 
 export const OrderList = ({restaurant: {id, name, image_id, area}, order_items, created_at, order_state, index}) => {
+    const navigate = useNavigate();
 
     const [itemString, setItemString] = useState('');
     const [total, setTotal] = useState('');
     const [orderTime, setOrderTime] = useState('');
     const [deliveryTime, setDeliveryTime] = useState('');
 
-    const navigate = useNavigate();
     useMemo(() => {
         const itemString = _.reduce(order_items, (sum, {quantity, menu: {name}}, index) => {
             sum = sum + name + ' X ' + quantity + (index < order_items.length - 1 ? ', ': '');
             return sum;
         }, '');
         
-
         const total =  _.reduce(order_items, (sum, {quantity, menu: {price}}) => {
             sum = sum + ((price * quantity) / 100)
             return sum;

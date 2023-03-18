@@ -1,7 +1,7 @@
 import { Tab, Tabs } from "react-bootstrap"
+
 import { Favourites } from "../Favourites/Favourites";
 import { Order } from "../Orders/Order"
-
 import './MyAccount.css';
 
 export const MyAccount = () => {

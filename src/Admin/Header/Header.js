@@ -1,11 +1,12 @@
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Logo from '../../assets/img/foodvilla.png';
-import DownArrow from '../../assets/img/down-arrow.png';
+import { Link } from 'react-router-dom';
+
 import { AuthLogout } from '../../auth/auth-config';
 import { Logout } from '../../redux/userSlice';
+import Logo from '../../assets/img/foodvilla.png';
+import DownArrow from '../../assets/img/down-arrow.png';
 import './Header.css';
-import { Link } from 'react-router-dom';
 
 const Title = () => (
     <Link to='/admin'>
@@ -18,12 +19,11 @@ const Title = () => (
 )
 
 export const AdminHeader = () => {
-    const {nickname = '', picture = ''} = useSelector(store => store.user?.user) ?? {};
+
     const dispatch = useDispatch();
+    const {nickname = '', picture = ''} = useSelector(store => store.user?.user) ?? {};
     
-    const handleLogout = async () => {
-        AuthLogout().then(() => dispatch(Logout()));
-    }
+    const handleLogout = () => AuthLogout().then(() => dispatch(Logout()));
 
     return (
         <div className="admin-header">

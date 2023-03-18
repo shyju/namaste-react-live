@@ -87,7 +87,6 @@ export const renewSession = () => {
       if (authResult && authResult.accessToken && authResult.idTokenPayload) {
         return resolve(authResult.idTokenPayload);
       } else if (err) {
-        // alert(`Could not get a new token (${err.error})`);
         return reject();
       }
     })

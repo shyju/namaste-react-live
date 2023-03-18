@@ -3,12 +3,13 @@ import {useNavigate} from 'react-router-dom';
 import * as _ from 'lodash';
 import { useSelector } from 'react-redux';
 
-import EmptyCart from '../../assets/img/EmptyCart.jpeg';
 import { CartItem } from '../CartItem/CartItem';
+import EmptyCart from '../../assets/img/EmptyCart.jpeg';
 
 export const MiniCart = () => {
 
     const navigate = useNavigate();
+    
     const cartItems = useSelector(store => store.cart?.items);
     const {name} =  useSelector(store => store.cart?.restraunt);
 

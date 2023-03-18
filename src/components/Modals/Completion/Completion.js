@@ -1,14 +1,19 @@
 
 import Modal from 'react-bootstrap/Modal';
 import { Button } from "react-bootstrap";
-
-import PaymentSuccess from '../../../assets/img/PaymentSuccess.gif';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { TogglePaymentSuccessModal } from '../../../redux/uiSlice';
+import PaymentSuccess from '../../../assets/img/PaymentSuccess.gif';
 
 
 export const Completion = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const isModalOpen = useSelector(store => store.ui.isPaymentSuccessModalOpen);
+
     const bodyStyle = { 
         display: 'flex',
         flexDirection: 'column',
@@ -18,11 +23,7 @@ export const Completion = () => {
         opacity: '0.8',
         height: '350px',
     };
-    const isModalOpen = useSelector(store => store.ui.isPaymentSuccessModalOpen);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-
+    
     const modalhandler = () => {
         dispatch(TogglePaymentSuccessModal());
         navigate('/checkout');
@@ -38,14 +39,7 @@ export const Completion = () => {
                 <p>Payment Successful</p>
                 <Button style={{backgroundColor:'#60b246', fontSize: '17px', border: 'none'}} onClick={() => navigate('/')}>Continue Shopping</Button>
             </Modal.Body>
-            <Modal.Footer style={{border: 'none'}}>
-            {/* <Button variant="secondary" onClick={() => dispatch(TogglePaymentSuccessModal())}>
-                Close
-            </Button>
-            <Button variant="primary" onClick={() => dispatch(TogglePaymentSuccessModal())}>
-                Save Changes
-            </Button> */}
-            </Modal.Footer>
+            <Modal.Footer style={{border: 'none'}} />
         </Modal>
     )
 }

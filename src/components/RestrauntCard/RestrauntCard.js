@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom"
-import { IMG_CDN_URL } from "../../constants"
-import './RestrauntCard.css';
-
-import FavWhite from '../../assets/img/Heart_Icon_White.png';
-
 import * as _ from 'lodash';
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom"
+
+import { IMG_CDN_URL } from "../../constants"
+import FavWhite from '../../assets/img/Heart_Icon_White.png';
+import './RestrauntCard.css';
+
 
 export const RestrauntCard = (restaurant) => {
     

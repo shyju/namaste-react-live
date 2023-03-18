@@ -4,9 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import * as _ from 'lodash';
 
-import Logo from '../../assets/img/foodvilla.png'
-import DownArrow from '../../assets/img/down-arrow.png';
-import './Header.css'
 import { populateCart, populateRestaurant } from '../../redux/cartSlice';
 import {getAllFavourites, getAllOrders, getCartItems} from '../../services/fetch.service';
 import { Logout } from '../../redux/userSlice';
@@ -14,6 +11,9 @@ import { AuthLogout } from '../../auth/auth-config';
 import { populateOrders } from '../../redux/orderSlice';
 import { populateFavourites } from '../../redux/favouriteSlice';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
+import Logo from '../../assets/img/foodvilla.png'
+import DownArrow from '../../assets/img/down-arrow.png';
+import './Header.css'
 
 const Title = () => (
     <Link to='/home'>
@@ -28,6 +28,7 @@ const Title = () => (
 export const HeaderComponent = ({name}) => {
 
     const dispatch = useDispatch();
+    
     const {id: user_id = '', picture = '', nickname = ''} = useSelector(store => store.user?.user) ?? {};
 
     useEffect(() => {
@@ -57,23 +58,12 @@ export const HeaderComponent = ({name}) => {
                     <li>
                         <Link to="/home" className='text-link'>Home</Link>
                     </li>
-                    {/* <li>
-                        <Link to="/about" className='text-link'>About</Link>
-                    </li>
-                    <li>
-                        <Link to="/contact" className='text-link'>Contact</Link>
-                    </li> */}
                     <li>
                         <Link to="/my-account" className='text-link'>My Account</Link>
                     </li>
                     <li>
                         <Link to="/checkout" className='text-link'>Cart</Link>
                     </li>
-                    {/* <li>
-                        <Link to="/" className='text-link' onClick={handleLogout}>
-                            Logout
-                        </Link>
-                    </li> */}
                 </ul>
             </div>
             <div className='profile-pic'>

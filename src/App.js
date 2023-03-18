@@ -3,11 +3,12 @@
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import {createBrowserRouter, RouterProvider, Outlet, useNavigate, Navigate} from 'react-router-dom';
+import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from 'react-router-dom';
 import { Provider, useDispatch, useSelector} from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import persistStore from 'redux-persist/es/persistStore';
 import { useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as _ from 'lodash';
@@ -17,13 +18,10 @@ import {Home} from './components/Home/Home';
 import {Footer} from './components/Footer/Footer';
 import { About } from './components/About/About';
 import { Contact } from './components/Contact/Contact';
-
-import '/index.css'
 import { Error } from './components/Error/Error';
 import { RestrauntMenu } from './components/RestrauntDetails/RestrauntDetails';
 import { Checkout } from './components/Checkout/Checkout';
 import store from './redux/store';
-import { toast, ToastContainer } from 'react-toastify';
 import { Login } from './components/Login/Login';
 import { AuthLogout, handleAuthentication, renewSession, renewSession } from './auth/auth-config';
 import { Logout } from './redux/userSlice';
@@ -34,6 +32,7 @@ import { Admin } from './Admin/Admin';
 import { AdminHeader } from './Admin/Header/Header';
 import {User} from './Admin/Users/User';
 import {User as UserAction} from './redux/userSlice';
+import '/index.css'
 
 const persistor = persistStore(store)
 

@@ -1,27 +1,25 @@
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as _ from 'lodash';
 
 import { populateCart, populateRestaurant } from "../../redux/cartSlice";
 import { clearCart, createOrder, getAllOrders, getCartItems, insertOrderItems } from "../../services/fetch.service";
-import './Payment.css';
 import { TogglePaymentSuccessModal } from "../../redux/uiSlice";
-import { useNavigate } from "react-router-dom";
 import { populateOrders } from "../../redux/orderSlice";
+import './Payment.css';
 
 export const Payment = () => {
-
-    const [message, setMessage] = useState(null);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const cartItems = useSelector(store => store.cart?.items);
-    const restaurantDetails = useSelector(store => store.cart?.restraunt);
     const stripe = useStripe();
     const elements = useElements();
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [isProcessing, setIsProcessing] = useState(false);
+
+    const cartItems = useSelector(store => store.cart?.items);
+    const restaurantDetails = useSelector(store => store.cart?.restraunt);
     const userId = useSelector(store => store.user?.user?.id);
 
     const handleSubmit = async (e) => {
@@ -80,8 +78,6 @@ export const Payment = () => {
                     {isProcessing ? "Processing ... " : "Pay now"}
                 </span>
             </button>
-            {/* Show any error or success messages */}
-            {/* {message && <div className="payment-message">{message}</div>} */}
         </form>
     )
 }

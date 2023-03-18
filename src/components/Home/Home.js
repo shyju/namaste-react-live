@@ -1,27 +1,27 @@
-import {RestrauntCard} from '../RestrauntCard/RestrauntCard';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as _ from 'lodash';
 
 import { updateRestrauntList } from '../../redux/restrauntSlice';
 import { getRestaurants } from '../../services/fetch.service';
+import {RestrauntCard} from '../RestrauntCard/RestrauntCard';
 
 const filterData = (searchText, restaurants) => restaurants.filter((restraunt) => restraunt?.name.toUpperCase().includes(searchText.toUpperCase()));
 
 
 export const Home = () => {
+    const dispatch = useDispatch();
+
     const [filteredRestraunts, setFilteredRestraunts] = useState([]);
     const [searchTxt, setSearchTxt] = useState("");
 
     const allRestraunts = useSelector(store => store.restraunt.restrauntList);
-    const dispatch = useDispatch();
 
     useEffect(() => {
-        getAllRestraunts();
+        getAllRestraunts()
     }, []);
 
     useEffect(() => {
-
         const searchInterval = setTimeout(() => {
             getFilteredRestaurants();
         }, 1000)
@@ -50,22 +50,6 @@ export const Home = () => {
                     value={searchTxt} 
                     onChange={(e) => setSearchTxt(e.target.value)} />
                 <div className='buttons'>
-                    {/* <button 
-                        className='search-btn' 
-                        onClick={async () => {
-                            const data = await filterData(searchTxt, allRestraunts);
-                            setFilteredRestraunts(data);
-                        }}>
-                        Search
-                    </button>
-                    <button 
-                        className='clear-btn' 
-                        onClick={() => {
-                            setSearchTxt('');
-                            setFilteredRestraunts(allRestraunts);
-                        }}>
-                        Clear
-                    </button> */}
                 </div>
             </div>
             {

@@ -4,13 +4,9 @@ import { Elements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
-import './Checkout.css';
-import WorkIcon from '../../assets/img/work.png';
-import AddressIcon from '../../assets/img/address.png'
-import OfferIcon from '../../assets/img/offer.png'
-import EmptyCart from '../../assets/img/EmptyCart.jpeg';
-import Loading from '../../assets/img/loading.gif';
+
 import { CartItem } from '../CartItem/CartItem';
 import { IMG_CDN_URL } from '../../constants';
 import { createPaymentIntent, getAddresses } from '../../services/fetch.service';
@@ -18,15 +14,20 @@ import { populateAddress } from '../../redux/addressSlice';
 import { Payment } from '../Payment/Payment';
 import { Address } from '../Modals/AddressModal/Address';
 import { ToggleAddresssModal } from '../../redux/uiSlice';
-import { toast } from 'react-toastify';
+import WorkIcon from '../../assets/img/work.png';
+import AddressIcon from '../../assets/img/address.png'
+import EmptyCart from '../../assets/img/EmptyCart.jpeg';
+import Loading from '../../assets/img/loading.gif';
+import './Checkout.css';
 
 const stripe_pk = process.env.STRIPE_PUBLIC_KEY
 const stripePromise = loadStripe(_.toString(stripe_pk));
-export const Checkout = () => {
 
-    
+export const Checkout = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [clientSecret, setClientSecret] = useState('');
-    const [nocdOpted, setNocdOpted] = useState(false);
     const [addressSelected, setAddressSelected] = useState(false);
     const [itemTotal, setItemTotal] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
@@ -35,19 +36,17 @@ export const Checkout = () => {
 
     const userId = useSelector(store => store.user.user?.id);
     const cartItems = useSelector(store => store.cart.items);
-    const {name, area, restaurantImageId} = useSelector(store => store.cart.restraunt);
     const {addresses} = useSelector(store => store.address);
+    const {name, area, restaurantImageId} = useSelector(store => store.cart.restraunt);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-
-    useEffect(() => {
-        getMyAddress();
+    useEffect(() => { 
+        getMyAddress()
     },[])
 
     useEffect(() => {
-        if (addressSelected) getClientSecret();
+        if (addressSelected) { 
+            getClientSecret() 
+        }
     }, [addressSelected])
 
     const total = useMemo(() => _

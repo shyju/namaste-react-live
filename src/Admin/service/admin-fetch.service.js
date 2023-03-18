@@ -1,33 +1,40 @@
+import axios from 'axios';
+
 const BASE_URL = process.env.BASE_URL;
 const ADMIN_SECRET = process.env.HASURA_ADMIN_SECRET;
 
 export const getStatistics = async () => {
-    const response = await fetch(`${BASE_URL}statistics`, {
+    const requestConfig = {
+        url: `${BASE_URL}statistics`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': ADMIN_SECRET
         }
-    });
-    return await response.json()
+    };
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const getGraphStatistics = async () => {
-    const response = await fetch(`${BASE_URL}graphStatistics`, {
+    const requestConfig = {
+        url: `${BASE_URL}graphStatistics`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': ADMIN_SECRET
         }
-    });
-    return await response.json()
+    };
+    const {data} = await axios(requestConfig);
+    return data;
 }
 
 export const getUsers = async () => {
-    const response = await fetch(`${BASE_URL}users`, {
+    const requestConfig = {
+        url: `${BASE_URL}users`,
         headers: {
             'content-type': 'application/json',
             'x-hasura-admin-secret': ADMIN_SECRET
         }
-    });
-
-    return await response.json();
+    };
+    const {data} = await axios(requestConfig);
+    return data;
 }

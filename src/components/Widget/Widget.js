@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
+
 import './Widget.css'
 
 export const Widget = ({restaurant_widgets, widgetIndex, clickFunction}) => {
     const [widgetStyle, setWidgetStyle] = useState("widget");
 
-    const listenScrollEvent = (event) => {
+    const listenScrollEvent = () => {
         if (window.scrollY < 73) {
-            // setCartStyle("mini-cart");
             setWidgetStyle("widget");
             return; 
         } else if (window.scrollY > 70) {
-            // setCartStyle("mini-cart-scroll");
             setWidgetStyle("widget-scroll");
             return; 
         }
@@ -22,6 +21,7 @@ export const Widget = ({restaurant_widgets, widgetIndex, clickFunction}) => {
         return () =>
           window.removeEventListener('scroll', listenScrollEvent);
       }, []);
+      
     return (
         <div className={widgetStyle}>
         <ul>

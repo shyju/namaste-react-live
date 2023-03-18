@@ -1,16 +1,17 @@
-import { InfoCard } from "./InfoCard/InfoCard";
 import * as _ from 'lodash';
 import moment from 'moment';
+import { useEffect, useState } from "react";
 
+import { getGraphStatistics, getStatistics } from "./service/admin-fetch.service";
+import { LineChart } from "./Charts/LineChart/LineChart";
+import { InfoCard } from "./InfoCard/InfoCard";
 import RestaurantIcon from './../assets/img/restaurant.png';
 import OrderIcon from './../assets/img/checklist.png';
 import OrderCompletedIcon from './../assets/img/package-delivered.png';
 import OrderCancelledIcon from './../assets/img/order-cancelled.png';
 import SoldIcon from './../assets/img/sold.png';
 import './Admin.css';
-import { useEffect, useState } from "react";
-import { getGraphStatistics, getStatistics } from "./service/admin-fetch.service";
-import { LineChart } from "./Charts/LineChart/LineChart";
+
 export const Admin = () => {
 
     const infoCards = ['RESTAURANTS', 'ORDERS', 'CANCELLED ORDERS', 'COMPLETED ORDERS', 'ITEMS SOLD']

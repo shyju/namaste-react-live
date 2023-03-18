@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { populateOrders } from "../../redux/orderSlice";
-import { getAllOrders } from "../../services/fetch.service";
+import { useSelector } from "react-redux";
+
 import { OrderList } from "../OrderList/OrderList";
 import './Order.css';
 

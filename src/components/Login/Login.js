@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-import * as _ from 'lodash';
-
-import Logo from '../../assets/img/foodvilla.png'
-import './Login.css';
-import { Authlogin, AuthSignUp, FacebookLogin, GoogleLogin } from "../../auth/auth-config";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
+import * as _ from 'lodash';
+
+
+import { Authlogin, AuthSignUp, FacebookLogin, GoogleLogin } from "../../auth/auth-config";
+import Logo from '../../assets/img/foodvilla.png'
+import './Login.css';
 
 export const Login = () => {
     
@@ -112,7 +113,6 @@ export const Login = () => {
         "retina_detect": true
     }
     
-    const dispatch = useDispatch();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
@@ -136,29 +136,16 @@ export const Login = () => {
             toast.warn('Enter password');
             return;    
         }
-        
-        
-        const loginResponse = Authlogin(username, password);
-        // dispatch(login());
-
+        Authlogin(username, password);
     }
 
-    const handleGoogleLogin = () => {
-        GoogleLogin();
-    }
+    const handleGoogleLogin = () =>  GoogleLogin();
 
-    const handleFacebookLogin = () => {
-        FacebookLogin()
-    }
+    const handleFacebookLogin = () => FacebookLogin();
 
-    const handleSignUp = async() => {
-        AuthSignUp(username, password);
-        // dispatch(login())
-    }
+    const handleSignUp = async() => AuthSignUp(username, password);
 
-    const particlesInit = async (main) => {
-        await loadFull(main);
-      };
+    const particlesInit = async (main) => await loadFull(main);;
 
     return (
         <>

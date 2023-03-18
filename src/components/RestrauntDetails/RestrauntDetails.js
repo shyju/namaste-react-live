@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import * as _ from 'lodash';
 
 import {IMG_CDN_URL} from '../../constants';
-import * as _ from 'lodash';
 import { Menu } from "../Menu/Menu";
 import { Offers } from "../Offers/Offers";
 import { Widget } from "../Widget/Widget";
@@ -10,28 +10,28 @@ import {MiniCart} from '../MiniCart/MiniCart';
 import { useDispatch, useSelector } from "react-redux";
 import { updateRestrauntDetails } from "../../redux/restrauntSlice";
 import { addToFavourites, getAllFavourites, getRestaurantById, removeFavourite } from "../../services/fetch.service";
+import { populateFavourites } from "../../redux/favouriteSlice";
 import FavWhite from '../../assets/img/favourite-white.png';
 import FavRed from '../../assets/img/favourite-red.png';
 import './RestrauntDetails.css';
-import { populateFavourites } from "../../redux/favouriteSlice";
 
 export const RestrauntMenu = () => {
 
     const {id} = useParams();
-    const isRestaurantFavourite = useSelector(store => _.findIndex(store.favourite?.favourites, ({restaurant: {id: restaurant_id}}) => restaurant_id === id) > -1) ?? false;
-    const favouriteId = useSelector(store => _.find(store.favourite?.favourites, ({restaurant: {id}}) => id))?.id ?? '';
-    const [isFavourite, setIsFavourite] = useState(isRestaurantFavourite);
-    const userId = useSelector(store => store.user.user?.id);
-
-    useEffect(() => {
-        getRestrauntDetails();
-    }, [id])
+    const dispatch = useDispatch();
 
     const [widgetIndex, setWidgetIndex] = useState(0);
     const [cartStyle, setCartStyle] = useState("mini-cart");
 
+    const isRestaurantFavourite = useSelector(store => _.findIndex(store.favourite?.favourites, ({restaurant: {id: restaurant_id}}) => restaurant_id === id) > -1) ?? false;
+    const favouriteId = useSelector(store => _.find(store.favourite?.favourites, ({restaurant: {id}}) => id))?.id ?? '';
+    const [isFavourite, setIsFavourite] = useState(isRestaurantFavourite);
+    const userId = useSelector(store => store.user.user?.id);
     const restraunt = useSelector(store => store.restraunt.restrauntDetails);
-    const dispatch = useDispatch();
+
+    useEffect(() => {
+        getRestrauntDetails()
+    }, [id])
 
     const listenScrollEvent = (event) => {
         if (window.scrollY < 73) {
@@ -103,21 +103,12 @@ export const RestrauntMenu = () => {
                             <Offers key={restraunt?.id} {...restraunt}></Offers>
                         </div>
                     </div>
-                    {/* <div className="search-filter">
-                        <input type="search" placeholder="Search for dishes..."></input>
-                        <div>
-                            <span>Veg Only</span>
-                        </div>
-                        <div><span>Favourite</span></div>
-                    </div> */}
                     <div className="menu">
 
                         <Widget {...restraunt} widgetIndex = {widgetIndex} clickFunction={onWidgetClicked}></Widget>
                         <div className="menu-section">
                             <div className="menu-list">
                                 <div className="selected-widget">
-                                    {/* <span>{restraunt?.menu?.widgets[widgetIndex]?.name}</span>
-                                    <span>{restraunt?.menu?.widgets[widgetIndex]?.entities?.length} ITEMS</span> */}
                                 </div>
                                 {
                                     _.values(restraunt?.restaurant_menus)?.map((item, index) => (

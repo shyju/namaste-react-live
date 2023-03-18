@@ -7,7 +7,6 @@ const NODE_BASE_URL = process.env.NODE_URL;
 axios.interceptors.response.use(response => {
     return response;
   }, error => {
-    // Add your error handling logic here
     console.log(error);
     return Promise.reject(error?.message);
   });
