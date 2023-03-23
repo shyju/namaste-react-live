@@ -10,7 +10,7 @@ export const Order = () => {
         <div className="order-container"> 
 
             {
-                orders?.length && orders?.map((order, index) => <OrderList {...order} key={index} index={index + 1}/>)
+                orders?.length > 0 && orders?.map((order, index) => <OrderList {...order} key={index} index={index + 1}/>)
             }
             
         </div>

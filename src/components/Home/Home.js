@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as _ from 'lodash';
 
@@ -11,14 +11,18 @@ const filterData = (searchText, restaurants) => restaurants.filter((restraunt) =
 
 export const Home = () => {
     const dispatch = useDispatch();
+    const inputElement = useRef();
 
     const [filteredRestraunts, setFilteredRestraunts] = useState([]);
     const [searchTxt, setSearchTxt] = useState("");
 
     const allRestraunts = useSelector(store => store.restraunt.restrauntList);
 
+    const focusInput = () => inputElement.current.focus();
+
     useEffect(() => {
-        getAllRestraunts()
+        focusInput();
+        getAllRestraunts();
     }, []);
 
     useEffect(() => {
@@ -45,6 +49,7 @@ export const Home = () => {
         <>
             <div className='search-container'>
                 <input 
+                    ref={inputElement}
                     type='text' 
                     placeholder='Search for Restraunts' 
                     value={searchTxt} 
@@ -53,7 +58,7 @@ export const Home = () => {
                 </div>
             </div>
             {
-                filteredRestraunts?.length && <div className='restraunt-list'>
+                filteredRestraunts?.length > 0 && <div className='restraunt-list'>
                 {
                     filteredRestraunts?.map((restraunt) => (
                         <RestrauntCard  {...restraunt} key={restraunt.id} />

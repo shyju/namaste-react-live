@@ -9,7 +9,7 @@ export const Favourites = () => {
     return (
         <div className="favourite-container">
             {
-                favourites?.length 
+                favourites?.length > 0
                 ? favourites?.map(({restaurant, id}) => (
                     <RestrauntCard {...restaurant} key={id} />
                   ))
