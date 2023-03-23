@@ -88,21 +88,22 @@ const AppLayout = () => {
 
     return (
        <>
-            {isLoggedIn && role === 'user' && (
-                <>
-                    <ToastContainer position='top-center' className='toast-message' />
-                    <HeaderComponent />
-                    <Outlet />
-                    <Footer />
-                </>
-            )}
-
-            {isLoggedIn && role === 'admin' && (
+            {isLoggedIn && role === 'admin' 
+            ? (
                <>
                 <AdminHeader />
                 <Outlet />
+               </>)
+            : <>
+                <ToastContainer position='top-center' className='toast-message' />
+                <HeaderComponent />
+                <Outlet />
+                <Footer />
                </>
-            )}
+            }
+           
+
+            
        </>
     )
 }
