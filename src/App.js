@@ -80,31 +80,30 @@ const AppLayout = () => {
             role: hasura_user_role,
             isLoggedIn: true,
         };
-        const userRole = _.head(hasura_user_role) ?? '';
+        const userRole = _.head(hasura_user_role) ?? 'user';
         setRole(userRole);
         dispatch(UserAction(user));
         userRole === 'admin' ? navigate('/admin') : navigate('/home');
       }
 
     return (
-       <>
-            {isLoggedIn && role === 'admin' 
-            ? 
-              <Suspense fallback={<h1>Loading...</h1>}>
+        <>
+            {isLoggedIn && role === 'user' && (
+                <>
+                    <ToastContainer position='top-center' className='toast-message' />
+                    <HeaderComponent />
+                    <Outlet />
+                    <Footer />
+                </>
+            )}
+
+            {isLoggedIn && role === 'admin' && (
+            <>
                 <AdminHeader />
                 <Outlet />
-              </Suspense>
-            : <Suspense fallback={<h1>Loading...</h1>}>
-                <ToastContainer position='top-center' className='toast-message' />
-                <HeaderComponent />
-                <Outlet />
-                <Footer />
-              </Suspense>
-            }
-           
-
-            
-       </>
+            </>
+            )}
+        </>
     )
 }
 
