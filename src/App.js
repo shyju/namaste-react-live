@@ -1,7 +1,7 @@
 // import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from 'react-router-dom';
 import { Provider, useDispatch, useSelector} from 'react-redux';
@@ -89,17 +89,17 @@ const AppLayout = () => {
     return (
        <>
             {isLoggedIn && role === 'admin' 
-            ? (
-               <>
+            ? 
+              <Suspense fallback={<h1>Loading...</h1>}>
                 <AdminHeader />
                 <Outlet />
-               </>)
-            : <>
+              </Suspense>
+            : <Suspense fallback={<h1>Loading...</h1>}>
                 <ToastContainer position='top-center' className='toast-message' />
                 <HeaderComponent />
                 <Outlet />
                 <Footer />
-               </>
+              </Suspense>
             }
            
 
