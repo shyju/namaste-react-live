@@ -212,7 +212,7 @@ export const Checkout = () => {
                         <img src={EmptyCart} />
                         <p>Your cart is empty</p>
                         <span>You can go to home page to view more restaurants</span>
-                        <button onClick={() => navigate('/')}>See Restaurants near you</button>
+                        <button onClick={() => navigate('/home')}>See Restaurants near you</button>
                 </div> 
             </>
         }

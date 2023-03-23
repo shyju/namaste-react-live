@@ -23,7 +23,6 @@ export const Payment = () => {
     const userId = useSelector(store => store.user?.user?.id);
 
     const handleSubmit = async (e) => {
-        setMessage('');
         e.preventDefault();
 
         if (!stripe || !elements) {
@@ -34,16 +33,15 @@ export const Payment = () => {
 
         const { error, paymentIntent } = await stripe.confirmPayment({
             elements,
-            confirmParams: {
-                return_url: `${window.location.origin}/completion`,
-            },
+            // confirmParams: {
+            //     return_url: `${window.location.origin}/completion`,
+            // },
             redirect: 'if_required'
         });
         console.log('paymentIntent:', JSON.stringify(paymentIntent));
         if (error) {
-            setMessage(error.message);
+            toast.warn(error.message);
         } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-            setMessage(`Payment status: ${paymentIntent.status}`);
             const createOrderPayload = {
                 payment_id: paymentIntent.id,
                 total: 0,
