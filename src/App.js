@@ -77,7 +77,7 @@ const AppLayout = () => {
             nickname,
             picture,
             email,
-            role: hasura_user_role,
+            role: !_.isEmpty(hasura_user_role) ? hasura_user_role : ['user'],
             isLoggedIn: true,
         };
         const userRole = _.head(hasura_user_role) ?? 'user';

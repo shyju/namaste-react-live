@@ -35,7 +35,7 @@ export const Completion = () => {
             <Modal.Title></Modal.Title>
             </Modal.Header>
             <Modal.Body contentClassName='modal' style={bodyStyle}>
-                <img src={PaymentSuccess} style= {{width: '200px'}}/>
+                <img src={PaymentSuccess} style= {{width: '200px'}} preload="true"/>
                 <p>Payment Successful</p>
                 <Button style={{backgroundColor:'#60b246', fontSize: '17px', border: 'none'}} onClick={() => navigate('/home')}>Continue Shopping</Button>
             </Modal.Body>
