@@ -56,7 +56,7 @@ export const Admin = () => {
     const buildGraphData = (data) => {
         return {
             orders_graph_data: [{id: 'Orders', data: _.map(data, ({orders_count, order_date}) => ({
-                x: moment.utc(order_date).local().format('MMM'), 
+                x: moment.utc(order_date).local().format('MM-DD-YY'), 
                 y: orders_count
             }))}],
             sales_graph_data: [{id: 'Sales', data: _.map(data, ({sales_count, order_date}) => ({
