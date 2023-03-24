@@ -62,7 +62,7 @@ export const Payment = () => {
             dispatch(TogglePaymentSuccessModal());
             dispatch(populateCart(cart));
             dispatch(populateRestaurant(restaurant));
-            navigate('/completion');
+            navigate('/my-account');
         }
 
         setIsProcessing(false);
