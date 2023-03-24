@@ -26,7 +26,7 @@ export const MiniCart = () => {
                     (!cartItems?.length) 
                     ? <div className='empty-cart'>
                         <span>Cart Empty</span>
-                        <img src={EmptyCart} />
+                        <img src={EmptyCart}  preload="true"/>
                         <p>Good food is always cooking! Go ahead, order some yummy items from the menu.</p>
                     </div> 
                     : <div className='non-empty-cart'>

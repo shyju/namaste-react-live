@@ -7,7 +7,7 @@ export const Shimmer = () => {
 
                 Array(10).fill("").map((e, index) => (
                     <div className='card' >
-                    <img src={Blank} />
+                    <img src={Blank} preload="true" />
                     <div className="restraunt-name"></div>
                     <div className="restraunt-cuisines"></div>
                     <div className="details">

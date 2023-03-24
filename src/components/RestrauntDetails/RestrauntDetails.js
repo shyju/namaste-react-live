@@ -74,11 +74,11 @@ export const RestrauntMenu = () => {
                 <div className="restraunt-container">
                     <div className="restraunt-details">
                         <div className="details-header">
-                            <img src={IMG_CDN_URL + restraunt?.image_id} />
+                            <img src={IMG_CDN_URL + restraunt?.image_id} preload="true" />
                             <div className="restraunt-metadata">
                                 <div className="name">
                                     {restraunt?.name}
-                                    <img src={isFavourite ? FavRed : FavWhite} onClick={handleFavourite} />
+                                    <img src={isFavourite ? FavRed : FavWhite} onClick={handleFavourite} preload="true" />
                                 </div>
                                 {/* <div className="sub-details">{restraunt?.restraunt_cuisinescuisines?.join(', ')}</div> */}
                                 <div className="sub-details">{restraunt?.area}</div>

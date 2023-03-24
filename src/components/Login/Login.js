@@ -159,7 +159,7 @@ export const Login = () => {
             >
             </Particles>
             <div className="login">
-                <img src={Logo} />
+                <img src={Logo}  preload="true"/>
                 <input type="text" placeholder="Email" value={username} onChange={(e) => setUsername(e.target.value)}></input>
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 <div style={{display: isSignUp ? 'none' : ''}}>

@@ -19,7 +19,7 @@ export const RestrauntCard = (restaurant) => {
                 promoted ? <div className="promoted">promoted</div> : <></>
             }
             <div className='card-item' >
-                <img src={IMG_CDN_URL + image_id} />
+                <img src={IMG_CDN_URL + image_id} preload="true" />
                 <div className="restraunt-name">{name}</div>
                 <div className="restraunt-cuisines">{cuisines.join(', ')}</div>
                 <div className="details">
@@ -34,7 +34,7 @@ export const RestrauntCard = (restaurant) => {
             {
                 isFavourite 
                 ? <div className="favourite">
-                    <img src={FavWhite} />
+                    <img src={FavWhite}  preload="true"/>
                 </div> 
                 : <></>
             }

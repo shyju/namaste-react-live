@@ -94,7 +94,7 @@ export const Checkout = () => {
                                     addresses?.map(({id, address_line_1, address_line_2, city, state, pincode, address_type}) => (
                                     <div className="address" style={{width: addressSelected ? '100%' : ''}}>
                                         <div className='icon'>
-                                            <img src={WorkIcon}></img>
+                                            <img src={WorkIcon} preload="true"></img>
                                         </div>
                                         <div className="description">
                                             <h3 style={{textTransform:'capitalize'}}>{address_type}</h3>
@@ -116,7 +116,7 @@ export const Checkout = () => {
                                 
                                 <div className="add-new-address" style={{display: addressSelected ? 'none' : 'flex'}}>
                                     <div className='icon'>
-                                        <img src={AddressIcon}></img>
+                                        <img src={AddressIcon} preload="true"></img>
                                     </div>
                                     <div className='description'>
                                         <h3>Add New Address</h3>
@@ -129,7 +129,7 @@ export const Checkout = () => {
                         <div className='payment-section'>
                             <span>Payment</span>
 
-                            {addressSelected && (!clientSecret || !stripePromise) && <img src={Loading} />}
+                            {addressSelected && (!clientSecret || !stripePromise) && <img src={Loading}  preload="true"/>}
                             {clientSecret && stripePromise && addressSelected && (
                                 <Elements stripe={stripePromise} options={{clientSecret}}>
                                     <Payment className='payment' />
@@ -140,7 +140,7 @@ export const Checkout = () => {
                     <div className="checkout-right-section">
                         <div className='top-section'>
                             <div className='restraunt-info'>
-                                <img src={IMG_CDN_URL + restaurantImageId}></img>
+                                <img src={IMG_CDN_URL + restaurantImageId} preload="true"></img>
                                 <div>
                                     <span>{name}</span>
                                     <span>{area}</span>
@@ -209,7 +209,7 @@ export const Checkout = () => {
             )
             : <>
                 <div className='empty-cart' id="emptycart">
-                        <img src={EmptyCart} />
+                        <img src={EmptyCart}  preload="true"/>
                         <p>Your cart is empty</p>
                         <span>You can go to home page to view more restaurants</span>
                         <button onClick={() => navigate('/home')}>See Restaurants near you</button>

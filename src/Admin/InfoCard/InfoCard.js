@@ -6,7 +6,7 @@ export const InfoCard = ({name, img_src, count}) => {
         <div className="info-card-container">
             <div className="info-header">
                 <h3>{name}</h3>
-                <img src={img_src}/>
+                <img src={img_src} preload="true"/>
             </div>
             <div className="info-footer">
                 {count}

@@ -3,7 +3,7 @@ import './Loader.css';
 export const Loader = () => {
     return (
         <div className='loader-container'>
-            <img src={Spinner}  style={{height: '100px'}}/>
+            <img src={Spinner}  style={{height: '100px'}} preload="true"/>
         </div>
     )
 }

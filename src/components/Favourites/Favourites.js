@@ -14,7 +14,7 @@ export const Favourites = () => {
                     <RestrauntCard {...restaurant} key={id} />
                   ))
                 : <div className="no-favourites">
-                    <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_207/empty_favorites_2x_sdbuxy" />
+                    <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_207/empty_favorites_2x_sdbuxy"  preload="true"/>
                     <h3>Where is the love?</h3>
                     <span>Once you favourite a restaurant, it will appear here.</span>
                   </div>

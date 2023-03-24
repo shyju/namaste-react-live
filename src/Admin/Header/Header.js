@@ -13,7 +13,7 @@ const Title = () => (
         <img 
             className='logo' 
             alt="Logo" 
-            src={Logo}>
+            src={Logo} preload="true">
         </img>
     </Link>
 )
@@ -40,7 +40,7 @@ export const AdminHeader = () => {
                 </ul>
             </div>
                 <div className='profile-pic' style={{display: 'flex', alignItems: 'center'}}>
-                    <img src={picture} alt=""/>
+                    <img src={picture} alt="" preload="true"/>
                     <OverlayTrigger 
                         trigger='click'
                         key='bottom'
@@ -58,7 +58,7 @@ export const AdminHeader = () => {
                         >
                         <div style={{marginLeft: '5px', fontWeight: '500', cursor: 'pointer'}}>
                             <span>Hey, {nickname} !</span>
-                            <img style={{height: '20px',  'marginLeft': '5px'}} src={DownArrow} />
+                            <img style={{height: '20px',  'marginLeft': '5px'}} src={DownArrow} preload="true" />
                         </div>
                     </OverlayTrigger>
                     

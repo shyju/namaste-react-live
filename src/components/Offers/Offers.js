@@ -8,7 +8,7 @@ export const Offers = ({restaurant_offers}) => {
                     {
                         restaurant_offers?.map(({offer}, index) =>  (
                             <div className="offer-metadata" key={index}>
-                                <img src={offer_logo}></img>
+                                <img src={offer_logo} preload="true"></img>
                                 {/* <FontAwesomeIcon icon={faIdBadge} /> */}
                                 <div>{offer?.description + ' | USE ' + offer?.coupon_code}</div>
                             </div>

@@ -6,7 +6,7 @@ import './CartItem.css';
 export const CartItem = ({id, isVeg, name, quantity, price}) => (
     <div className="cart-list" key={id}>
         <div>
-            <img src={isVeg === 1 ? VegLogo : NonVegLogo}></img>
+            <img src={isVeg === 1 ? VegLogo : NonVegLogo} preload="true"></img>
             <span>{name}</span>
         </div>
         <div className='quantity'>{quantity}</div>

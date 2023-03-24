@@ -20,7 +20,7 @@ const Title = () => (
         <img 
             className='logo' 
             alt="Logo" 
-            src={Logo}>
+            src={Logo} preload="true">
         </img>
     </Link>
 )
@@ -67,7 +67,7 @@ export const HeaderComponent = ({name}) => {
                 </ul>
             </div>
             <div className='profile-pic'>
-                <img src={picture} alt="" title={nickname.toUpperCase()}/>
+                <img src={picture} alt="" title={nickname.toUpperCase()} preload="true"/>
                 <OverlayTrigger 
                         trigger='click'
                         key='bottom'
@@ -85,7 +85,7 @@ export const HeaderComponent = ({name}) => {
                         >
                         <div style={{marginLeft: '5px', fontWeight: '500', cursor: 'pointer'}}>
                             <span>Hey, {nickname} !</span>
-                            <img style={{height: '20px',  'marginLeft': '5px'}} src={DownArrow} />
+                            <img style={{height: '20px',  'marginLeft': '5px'}} src={DownArrow}  preload="true"/>
                         </div>
                     </OverlayTrigger>
             </div>

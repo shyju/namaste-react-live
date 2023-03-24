@@ -41,7 +41,7 @@ export const OrderList = ({restaurant: {id, name, image_id, area}, order_items, 
         <div className='order-list-container'>
             <div className='restaurant'>
                 <div className='restaurant-details'>
-                    <img src={IMG_CDN_URL + image_id} onClick={()=> navigate(`/restraunt/${id}`)}/>
+                    <img src={IMG_CDN_URL + image_id} onClick={()=> navigate(`/restraunt/${id}`)} preload="true"/>
                     <div className='restaurant-info'>
                         <h3 style={{cursor: 'pointer'}} onClick={() => navigate(`/restraunt/${id}`)}>{name}</h3>
                         <span>{area}</span>
@@ -53,13 +53,13 @@ export const OrderList = ({restaurant: {id, name, image_id, area}, order_items, 
                     ? (
                         <>
                             <h4>{`DELIVERED ON ${deliveryTime}`}</h4>
-                            <img className='checked-icon' src={CompleteIcon} />
+                            <img className='checked-icon' src={CompleteIcon}  preload="true"/>
                         </>
                     )
                     : (
                         <>
                             <h4>{order_state}</h4>
-                            <img className='checked-icon' src={PendingIcon} />
+                            <img className='checked-icon' src={PendingIcon}  preload="true"/>
                         </>
                     )
                 }
