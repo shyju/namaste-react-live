@@ -34,9 +34,9 @@ export const AdminHeader = () => {
                     <li>
                         <Link to="/admin" className='text-link'>Dashboard</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="/users" className='text-link'>Users</Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
                 <div className='profile-pic' style={{display: 'flex', alignItems: 'center'}}>
